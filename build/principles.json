@@ -1,0 +1,563 @@
+{
+  "principles_version": "2026-11",
+  "profile": "sos-2026-11",
+  "mark_categories": [
+    {
+      "id": "fingering",
+      "title": "Fingering",
+      "description": "Finger numbers and similar hand-position indications printed in the source.",
+      "default_treatment": "unsupported",
+      "treatment": "unsupported",
+      "reclassified": false,
+      "reason": "Fingering is outside the remit of some basic encoding formats."
+    }
+  ],
+  "rules": [
+    {
+      "id": "stance.faithful-reading",
+      "domain": "stance",
+      "domain_title": "Stance",
+      "theme": "aims",
+      "theme_title": "Aims",
+      "kind": "obligation",
+      "title": "Faithful reading",
+      "statement": "Reproduce what the source prints, as exactly as the encoding allows. A transcription reads; it does not edit.",
+      "strength": "MUST",
+      "relations": {
+        "tension-with": [
+          "stance.meaning-over-appearance"
+        ]
+      },
+      "aliases": [
+        "TP1"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "stance.meaning-over-appearance",
+      "domain": "stance",
+      "domain_title": "Stance",
+      "theme": "aims",
+      "theme_title": "Aims",
+      "kind": "obligation",
+      "title": "Meaning over appearance",
+      "statement": "Encode musical meaning in a form that converts, plays back and survives tool changes. Where an exact visual copy conflicts with a standard encoding, use the standard encoding, only through the registered normalisations, and report them.",
+      "strength": "MUST",
+      "relations": {
+        "requires": [
+          "normalise.closed-list",
+          "declare.report-deviations"
+        ]
+      },
+      "aliases": [
+        "TP2"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "stance.judgement-stays-out",
+      "domain": "stance",
+      "domain_title": "Stance",
+      "theme": "aims",
+      "theme_title": "Aims",
+      "kind": "obligation",
+      "title": "Judgement stays out",
+      "statement": "Do not choose between readings, correct, complete or interpret. A transcription records; judgement belongs elsewhere.",
+      "strength": "MUST",
+      "relations": {},
+      "aliases": [
+        "TP4"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "stance.doubt-means-preserve",
+      "domain": "stance",
+      "domain_title": "Stance",
+      "theme": "boundary",
+      "theme_title": "Boundary",
+      "kind": "obligation",
+      "title": "In doubt, preserve",
+      "statement": "When it is unclear which tier a decision falls in, treat it as editorial. Keep what the source prints, flag the point and ask a reviewer.",
+      "strength": "MUST",
+      "relations": {
+        "refines": [
+          "stance.judgement-stays-out"
+        ]
+      },
+      "aliases": [],
+      "status": "active"
+    },
+    {
+      "id": "read.preserve-distinctions",
+      "domain": "read",
+      "domain_title": "Reading the source",
+      "theme": "fidelity",
+      "theme_title": "Fidelity",
+      "kind": "obligation",
+      "title": "Preserve the distinctions the source makes",
+      "statement": "Where the source uses different notations for what might seem the same, keep the difference (for example common time, cut time and 4/4; ties and slurs; acciaccatura and appoggiatura; key signatures as given).",
+      "strength": "MUST",
+      "relations": {},
+      "aliases": [
+        "TP3"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "read.consistency-by-equivalence",
+      "domain": "read",
+      "domain_title": "Reading the source",
+      "theme": "fidelity",
+      "theme_title": "Fidelity",
+      "kind": "obligation",
+      "title": "Consistency means equivalence only",
+      "statement": "Encode notations that mean the same thing the same way. Preserve any divergence that might be musical (a different articulation in one part, a different pitch in a repeated passage); do not harmonise it.",
+      "strength": "MUST",
+      "relations": {
+        "refines": [
+          "stance.judgement-stays-out"
+        ]
+      },
+      "aliases": [
+        "TP5"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "read.preserve-errors",
+      "domain": "read",
+      "domain_title": "Reading the source",
+      "theme": "fidelity",
+      "theme_title": "Fidelity",
+      "kind": "obligation",
+      "title": "Source errors are preserved",
+      "statement": "Transcribe an evident source error as printed and flag it for whoever maintains corrections. Never fix it silently in the transcription.",
+      "strength": "MUST",
+      "relations": {
+        "refines": [
+          "stance.judgement-stays-out"
+        ],
+        "see-also": [
+          "declare.report-deviations"
+        ]
+      },
+      "aliases": [
+        "TP7"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "read.record-source-marks",
+      "domain": "read",
+      "domain_title": "Reading the source",
+      "theme": "fidelity",
+      "theme_title": "Fidelity",
+      "kind": "obligation",
+      "title": "Record the source's own editorial marks",
+      "statement": "Brackets and similar marks printed in the source signal an intervention by that edition. Keep the element, record each such mark in the report, and drop the printed mark from the encoding only if the standard encoding requires it.",
+      "strength": "MUST",
+      "relations": {
+        "see-also": [
+          "declare.report-deviations"
+        ]
+      },
+      "aliases": [
+        "TP11"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "read.transcribe-all-marks",
+      "domain": "read",
+      "domain_title": "Reading the source",
+      "theme": "scope",
+      "theme_title": "Scope of marks",
+      "kind": "obligation",
+      "title": "Transcribe every printed mark",
+      "statement": "Transcribe pitches, rhythms and every printed mark, within what the encoding can express. A category of mark that is classed as editorial or unsupported (see mark_categories; a profile may reclassify a category) is left out systematically and stated once in each report.",
+      "strength": "MUST",
+      "relations": {
+        "requires": [
+          "declare.report-deviations"
+        ]
+      },
+      "aliases": [
+        "TP6"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "read.source-language",
+      "domain": "read",
+      "domain_title": "Reading the source",
+      "theme": "text",
+      "theme_title": "Terms and text",
+      "kind": "obligation",
+      "title": "Keep the source language",
+      "statement": "Keep musical terms and other text in the source language. Translations are additions.",
+      "strength": "MUST",
+      "relations": {
+        "tension-with": [
+          "read.standard-instructions"
+        ],
+        "see-also": [
+          "declare.mark-additions",
+          "normalise.terms"
+        ]
+      },
+      "aliases": [
+        "TP9"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "read.standard-instructions",
+      "domain": "read",
+      "domain_title": "Reading the source",
+      "theme": "text",
+      "theme_title": "Terms and text",
+      "kind": "obligation",
+      "title": "Standard encodings for instructions",
+      "statement": "Transcribe printed techniques, strings, mutes and harmonics using the standard encoding where one exists, even where that changes the printed wording.",
+      "strength": "MUST",
+      "relations": {},
+      "aliases": [
+        "TP10"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "read.composer-led-grouping",
+      "domain": "read",
+      "domain_title": "Reading the source",
+      "theme": "notation",
+      "theme_title": "Notation",
+      "kind": "obligation",
+      "title": "Preserve composer-led grouping",
+      "statement": "Preserve beaming, rest and similar grouping that carries musical meaning (the composer's own choice for a passage). Grouping that is only the source edition's habit is a presentation matter. If the two cannot be told apart, ask a reviewer and report the decision.",
+      "strength": "SHOULD",
+      "relations": {
+        "exception-of": [
+          "normalise.beam-grouping",
+          "normalise.rest-grouping"
+        ]
+      },
+      "aliases": [
+        "TP8"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "read.ornaments-as-printed",
+      "domain": "read",
+      "domain_title": "Reading the source",
+      "theme": "notation",
+      "theme_title": "Notation",
+      "kind": "obligation",
+      "title": "Ornaments as printed",
+      "statement": "Copy ornaments as printed, including the difference between acciaccatura and appoggiatura and the position before or after the main note. Where the tool cannot represent a detail, use the nearest available form in this order - type of ornament, then number of beams or strokes, then other indications.",
+      "strength": "MUST",
+      "relations": {},
+      "aliases": [
+        "TP12"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "encode.real-objects",
+      "domain": "encode",
+      "domain_title": "Encoding",
+      "theme": "objects",
+      "theme_title": "Musical objects",
+      "kind": "obligation",
+      "title": "Real objects, not drawings or text",
+      "statement": "Encode ties, slurs, hairpins, spanning lines, tuplets, tremolo and grace notes as the musical objects they are, so that playback and export work. Do not draw them or type them as text.",
+      "strength": "MUST",
+      "relations": {},
+      "aliases": [
+        "TP13"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "encode.defaults-not-overrides",
+      "domain": "encode",
+      "domain_title": "Encoding",
+      "theme": "defaults",
+      "theme_title": "Defaults",
+      "kind": "obligation",
+      "title": "Defaults, not manual overrides",
+      "statement": "Use the tool's defaults for placement, stem direction, accidentals and similar. Avoid manual position offsets and flips.",
+      "strength": "SHOULD",
+      "relations": {
+        "refines": [
+          "stance.meaning-over-appearance"
+        ]
+      },
+      "aliases": [
+        "TP14"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "encode.layout-as-data",
+      "domain": "encode",
+      "domain_title": "Encoding",
+      "theme": "layout",
+      "theme_title": "Source layout",
+      "kind": "obligation",
+      "title": "Source layout is removable data",
+      "statement": "Record the source's system and page breaks where possible, never split a bar across them, and keep them separable from the musical content so that they can be removed in one step. Where a source has no usable layout, omit them and say so.",
+      "strength": "SHOULD",
+      "relations": {
+        "see-also": [
+          "normalise.page-geometry"
+        ]
+      },
+      "aliases": [
+        "TP16"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "normalise.closed-list",
+      "domain": "normalise",
+      "domain_title": "Normalisation",
+      "theme": "framework",
+      "theme_title": "The closed list",
+      "kind": "obligation",
+      "title": "Normalisations are a closed list",
+      "statement": "Presentation normalisations are limited to those registered in this domain. A profile chooses which are permitted or required; local notes may not add to them. Each applied normalisation is stated once per transcription in the report.",
+      "strength": "MUST",
+      "relations": {
+        "refines": [
+          "stance.meaning-over-appearance"
+        ],
+        "requires": [
+          "declare.report-deviations"
+        ]
+      },
+      "aliases": [
+        "TP15"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "normalise.beam-grouping",
+      "domain": "normalise",
+      "domain_title": "Normalisation",
+      "theme": "rhythm",
+      "theme_title": "Grouping and rhythm",
+      "kind": "permission",
+      "title": "Beam grouping",
+      "statement": "Beam grouping follows the time-signature default, except where grouping is composer-led.",
+      "strength": "MUST",
+      "relations": {},
+      "aliases": [
+        "TP15.1"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "normalise.rest-grouping",
+      "domain": "normalise",
+      "domain_title": "Normalisation",
+      "theme": "rhythm",
+      "theme_title": "Grouping and rhythm",
+      "kind": "permission",
+      "title": "Rest grouping",
+      "statement": "Rest grouping follows the time-signature default, except where grouping is composer-led.",
+      "strength": "MUST",
+      "relations": {},
+      "aliases": [
+        "TP15.2"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "normalise.tuplet-brackets",
+      "domain": "normalise",
+      "domain_title": "Normalisation",
+      "theme": "rhythm",
+      "theme_title": "Grouping and rhythm",
+      "kind": "permission",
+      "title": "Tuplet brackets",
+      "statement": "Tuplet brackets use a single standard form. Repeated tuplet numbers in a long group may be hidden but are kept in the data.",
+      "strength": "MUST",
+      "relations": {},
+      "aliases": [
+        "TP15.3"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "normalise.tremolo",
+      "domain": "normalise",
+      "domain_title": "Normalisation",
+      "theme": "rhythm",
+      "theme_title": "Grouping and rhythm",
+      "kind": "permission",
+      "title": "Tremolo",
+      "statement": "A measured tremolo may use any semantically equivalent notation.",
+      "strength": "MAY",
+      "relations": {},
+      "aliases": [
+        "TP15.10"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "normalise.stem-placement",
+      "domain": "normalise",
+      "domain_title": "Normalisation",
+      "theme": "signs",
+      "theme_title": "Signs and placement",
+      "kind": "permission",
+      "title": "Stem and placement",
+      "statement": "Stem direction and similar placement is automatic.",
+      "strength": "MUST",
+      "relations": {},
+      "aliases": [
+        "TP15.4"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "normalise.accidental-conventions",
+      "domain": "normalise",
+      "domain_title": "Normalisation",
+      "theme": "signs",
+      "theme_title": "Signs and placement",
+      "kind": "permission",
+      "title": "Accidental conventions",
+      "statement": "Courtesy accidentals and cancelling naturals follow the default.",
+      "strength": "MUST",
+      "relations": {},
+      "aliases": [
+        "TP15.5"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "normalise.clef",
+      "domain": "normalise",
+      "domain_title": "Normalisation",
+      "theme": "signs",
+      "theme_title": "Signs and placement",
+      "kind": "permission",
+      "title": "Clefs",
+      "statement": "An unusual or obsolete clef may be replaced by its nearest modern equivalent; an octave-ambiguous clef is notated at sounding pitch; a brief clef change may be adapted for readability. Written pitch is unaffected.",
+      "strength": "SHOULD",
+      "relations": {},
+      "aliases": [
+        "TP15.6"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "normalise.terms",
+      "domain": "normalise",
+      "domain_title": "Normalisation",
+      "theme": "words",
+      "theme_title": "Words and terms",
+      "kind": "permission",
+      "title": "Standard terms and abbreviations",
+      "statement": "Standard abbreviations and equivalent terms are normalised (for example one standard form for decrescendo and diminuendo); anything ambiguous is spelled out.",
+      "strength": "SHOULD",
+      "relations": {},
+      "aliases": [
+        "TP15.7"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "normalise.spread-words",
+      "domain": "normalise",
+      "domain_title": "Normalisation",
+      "theme": "words",
+      "theme_title": "Words and terms",
+      "kind": "permission",
+      "title": "Words spread over several bars",
+      "statement": "A word spread over several bars or systems (for example cre - - scen - - do) is one spanning object with a start text and a continuation text.",
+      "strength": "MUST",
+      "relations": {},
+      "aliases": [
+        "TP15.8"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "normalise.page-geometry",
+      "domain": "normalise",
+      "domain_title": "Normalisation",
+      "theme": "page",
+      "theme_title": "Page",
+      "kind": "permission",
+      "title": "Page geometry and typography",
+      "statement": "Page geometry and typography follow defaults. The source's system and page breaks are kept as data.",
+      "strength": "MUST",
+      "relations": {
+        "see-also": [
+          "encode.layout-as-data"
+        ]
+      },
+      "aliases": [
+        "TP15.9"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "declare.mark-additions",
+      "domain": "declare",
+      "domain_title": "Declaration",
+      "theme": "additions",
+      "theme_title": "Additions",
+      "kind": "obligation",
+      "title": "Additions are rare and marked",
+      "statement": "Add only what is needed to express the source's own notational conventions in the encoding (for example accidentals that the source's convention leaves implicit). Mark every addition visibly. Translations of non-standard terms are additions. Anything that needs judgement is editorial, not an addition.",
+      "strength": "MUST",
+      "relations": {
+        "refines": [
+          "stance.judgement-stays-out"
+        ]
+      },
+      "aliases": [
+        "TP17"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "declare.report-deviations",
+      "domain": "declare",
+      "domain_title": "Declaration",
+      "theme": "reporting",
+      "theme_title": "Reporting",
+      "kind": "obligation",
+      "title": "Report every unmarked deviation",
+      "statement": "Report every deviation that is not visibly marked. Differences caused by registered normalisations are stated once per transcription; specific interventions are listed one by one. The report, with the transcription, is enough to recover what the source prints.",
+      "strength": "MUST",
+      "relations": {},
+      "aliases": [
+        "TP18"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "declare.record-provenance",
+      "domain": "declare",
+      "domain_title": "Declaration",
+      "theme": "provenance",
+      "theme_title": "Provenance",
+      "kind": "obligation",
+      "title": "Record provenance",
+      "statement": "Record the source edition and file, the pages where the transcription appears, who transcribed and reviewed it, when, which tools were used, and the versions of the Principles, profile and notes applied.",
+      "strength": "MUST",
+      "relations": {},
+      "aliases": [
+        "TP19"
+      ],
+      "status": "active"
+    }
+  ]
+}
