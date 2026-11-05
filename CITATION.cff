@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use these Principles or Notes, please cite them as below."
+title: "Scores of Scores: Transcription Principles and Notes for Transcribers"
+type: dataset
+version: "2026-11"
+authors:
+  - name: "Mark Gotham"
+#   - name: Others?
+# TODO authors, repository-code, doi (e.g. from a Zenodo deposit of a tagged release).
