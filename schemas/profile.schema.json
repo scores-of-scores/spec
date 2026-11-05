@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:scores-of-scores:schema:profile:1",
+  "title": "Profile of the Transcription Principles",
+  "description": "A project's choices over the core registry: strength of each rule, ranked aims, resolution of tensions, and scope.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profile",
+    "title",
+    "principles_version",
+    "strengths",
+    "precedence"
+  ],
+  "properties": {
+    "profile": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "principles_version": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}$"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Path or URL of the local notes."
+    },
+    "strengths": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z]+\\.[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "additionalProperties": {
+        "enum": [
+          "MUST",
+          "SHOULD",
+          "MAY",
+          "OFF"
+        ]
+      }
+    },
+    "aim_order": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "rule"
+        ],
+        "properties": {
+          "rule": {
+            "type": "string",
+            "pattern": "^[a-z]+\\.[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "precedence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "over",
+          "under",
+          "reason"
+        ],
+        "properties": {
+          "over": {
+            "type": "string",
+            "pattern": "^[a-z]+\\.[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "under": {
+            "type": "string",
+            "pattern": "^[a-z]+\\.[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "scope": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "unsupported_sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "marks": {
+          "type": "object",
+          "description": "Reclassify categories of printed mark from the core registry (mark_categories). Categories not listed keep their core default.",
+          "propertyNames": {
+            "pattern": "^[a-z]+(-[a-z]+)*$"
+          },
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "treatment"
+            ],
+            "properties": {
+              "treatment": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "encoding": {
+          "type": "string",
+          "description": "The encoding format of the version of record. Categories classed as unsupported are relative to it."
+        }
+      }
+    }
+  }
+}
