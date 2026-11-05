@@ -1,0 +1,81 @@
+# Scores of Scores profile of the Transcription Principles.
+# A profile is where a project makes its choices: how strong each rule is, which rule wins
+# when two are in tension, and what is out of scope. Another project can adopt the core
+# registry with a different profile.
+#
+# Strengths use the BCP 14 (RFC 2119 / RFC 8174) terms, in capitals:
+#   MUST    always applied
+#   SHOULD  applied unless there is a recorded reason
+#   MAY     at the transcriber's discretion
+#   OFF     not adopted (for a normalisation: not permitted)
+
+profile: sos-2026-11
+title: Scores of Scores profile
+principles_version: "2026-11"
+notes: docs/notes-for-transcribers.md
+
+strengths:
+  stance.faithful-reading: MUST
+  stance.meaning-over-appearance: MUST
+  stance.judgement-stays-out: MUST
+  stance.doubt-means-preserve: MUST
+
+  read.preserve-distinctions: MUST
+  read.consistency-by-equivalence: MUST
+  read.preserve-errors: MUST
+  read.record-source-marks: MUST
+  read.transcribe-all-marks: MUST
+  read.source-language: MUST
+  read.standard-instructions: MUST
+  read.composer-led-grouping: SHOULD
+  read.ornaments-as-printed: MUST
+
+  encode.real-objects: MUST
+  encode.defaults-not-overrides: SHOULD
+  encode.layout-as-data: SHOULD
+
+  normalise.closed-list: MUST
+  normalise.beam-grouping: MUST
+  normalise.rest-grouping: MUST
+  normalise.tuplet-brackets: MUST
+  normalise.tremolo: MAY
+  normalise.stem-placement: MUST
+  normalise.accidental-conventions: MUST
+  normalise.clef: SHOULD
+  normalise.terms: SHOULD
+  normalise.spread-words: MUST
+  normalise.page-geometry: MUST
+
+  declare.mark-additions: MUST
+  declare.report-deviations: MUST
+  declare.record-provenance: MUST
+
+# Ranked aims, highest first. Where two aims pull apart, the higher one wins
+# (more specific resolutions are in `precedence`).
+aim_order:
+  - rule: stance.judgement-stays-out
+  - rule: stance.meaning-over-appearance
+    note: Applies to appearance only (grouping, placement, typography), never to notated content.
+  - rule: stance.faithful-reading
+  - rule: read.consistency-by-equivalence
+
+# Every tension declared in the core registry must be resolved here.
+precedence:
+  - over: stance.meaning-over-appearance
+    under: stance.faithful-reading
+    scope: Appearance only (grouping, placement, typography), through the registered normalisations.
+    reason: Standard encodings convert, play back and survive tool changes; an exact visual copy does not.
+  - over: read.standard-instructions
+    under: read.source-language
+    scope: Instructions that have a standard encoding in the tool (for example arco, pizz., con sord., senza sord.).
+    reason: Standard entries drive playback, part extraction and export. Almost no other terms have this status.
+
+scope:
+  encoding: KRN
+  # Categories of printed mark take the default treatment set in the core registry (mark_categories):
+  # currently fingering is unsupported (outside what basic encoding formats express). To reclassify
+  # one, for example when the format gains support for it, add it here with a reason:
+  #   marks:
+  #     fingering: { treatment: transcribe, reason: "..." }
+  unsupported_sources:
+    - manuscript
