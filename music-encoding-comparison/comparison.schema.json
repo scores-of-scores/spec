@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:music-encoding-comparison:schema:1.0.0",
+  "title": "Music encoding comparison dataset",
+  "type": "object",
+  "required": ["schema_version", "title", "methodology", "formats", "statuses", "categories", "features", "cases", "test_plan", "sources"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "title": {"type": "string"},
+    "methodology": {
+      "type": "object",
+      "required": ["date", "scope", "emphasis", "assumptions", "evidence", "workflow", "coverage_limits"],
+      "properties": {
+        "date": {"type": "string", "format": "date"},
+        "scope": {"type": "string"}, "emphasis": {"type": "string"},
+        "assumptions": {"type": "array", "items": {"type": "string"}},
+        "evidence": {"type": "object", "additionalProperties": {"type": "string"}},
+        "workflow": {"type": "string"}, "coverage_limits": {"type": "string"}
+      }, "additionalProperties": false
+    },
+    "formats": {"type": "array", "minItems": 4, "maxItems": 4, "items": {
+      "type": "object", "required": ["id", "name", "short", "baseline", "role", "description", "sources"],
+      "properties": {
+        "id": {"enum": ["krn", "musicxml", "musescore", "mei"]},
+        "name": {"type": "string"}, "short": {"type": "string"}, "baseline": {"type": "string"},
+        "role": {"type": "string"}, "description": {"type": "string"}, "sources": {"$ref": "#/$defs/source_ids"}
+      }, "additionalProperties": false
+    }},
+    "statuses": {"type": "object", "additionalProperties": {
+      "type": "object", "required": ["label", "description"],
+      "properties": {"label": {"type": "string"}, "description": {"type": "string"}}, "additionalProperties": false
+    }},
+    "categories": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+    "features": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/feature"}},
+    "sources": {"type": "object", "additionalProperties": {"$ref": "#/$defs/source"}},
+    "cases": {"type": "array", "items": {
+      "type": "object", "required": ["id", "title", "subtitle", "rows", "introduction", "notes", "sources", "snippets"],
+      "properties": {
+        "id": {"type": "string"}, "title": {"type": "string"}, "subtitle": {"type": "string"},
+        "rows": {"type": "array", "items": {"type": "string"}}, "introduction": {"type": "string"},
+        "notes": {"type": "array", "items": {"type": "string"}}, "sources": {"$ref": "#/$defs/source_ids"},
+        "timeline": {"type": "object", "additionalProperties": {"type": "array", "items": {"type": "integer"}}},
+        "snippets": {"type": "array", "items": {"type": "object", "required": ["format", "code", "note"], "properties": {"format": {"type": "string"}, "code": {"type": "string"}, "note": {"type": "string"}}, "additionalProperties": false}}
+      }, "additionalProperties": false
+    }},
+    "test_plan": {"type": "array", "items": {
+      "type": "object", "required": ["id", "title", "acceptance", "features", "status"],
+      "properties": {"id": {"type": "string"}, "title": {"type": "string"}, "acceptance": {"type": "string"}, "features": {"type": "array", "items": {"type": "string"}}, "status": {"enum": ["not_run", "pass", "fail", "partial"]}}, "additionalProperties": false
+    }}
+  },
+  "$defs": {
+    "source_ids": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true},
+    "source": {"type": "object", "required": ["title", "url", "accessed", "type"], "properties": {"title": {"type": "string"}, "url": {"type": "string", "format": "uri"}, "accessed": {"type": "string", "format": "date"}, "type": {"const": "primary"}}, "additionalProperties": false},
+    "cell": {
+      "type": "object", "required": ["status", "summary", "mechanism", "caveat", "workaround", "evidence", "sources", "profile", "tested"],
+      "properties": {
+        "status": {"enum": ["direct", "qualified", "extension", "workaround", "unknown"]},
+        "summary": {"type": "string", "minLength": 1}, "mechanism": {"type": "string", "minLength": 1},
+        "caveat": {"type": "string"}, "workaround": {"type": "string"},
+        "evidence": {"enum": ["documented", "inference", "unverified"]},
+        "sources": {"$ref": "#/$defs/source_ids"}, "profile": {"type": "string"}, "tested": {"type": "boolean"}
+      }, "additionalProperties": false
+    },
+    "feature": {
+      "type": "object", "required": ["id", "category", "feature", "question", "tags", "importance", "cells"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9-]+$"}, "category": {"type": "string"},
+        "feature": {"type": "string"}, "question": {"type": "string"},
+        "tags": {"type": "array", "items": {"type": "string"}},
+        "importance": {"type": "integer", "minimum": 1, "maximum": 3},
+        "cells": {"type": "object", "required": ["krn", "musicxml", "musescore", "mei"], "properties": {"krn": {"$ref": "#/$defs/cell"}, "musicxml": {"$ref": "#/$defs/cell"}, "musescore": {"$ref": "#/$defs/cell"}, "mei": {"$ref": "#/$defs/cell"}}, "additionalProperties": false}
+      }, "additionalProperties": false
+    }
+  }
+}
