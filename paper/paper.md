@@ -139,7 +139,7 @@ derived from the status of a format feature in the profile's format and the exte
 
 <!-- BEGIN state-box -->
 - Principles version 2026-11: 36 rules (4 stance, 10 read, 3 encode, 11 normalise, 4 declare, 4 correct).
-- Profiles: `openscore-2026-11`, `sos-2026-11`.
+- Profiles: `openscore-2026-11` (draft), `sos-2026-11` (draft).
 - Notes for the Scores of Scores profile: 52.
 - Formats data 2026-11: 78 features in four formats (312 assessments), 21 linked to a rule, 133 primary sources.
 - Fixtures: 17, of which 5 are worked examples in this paper. Assessments with a recorded test: 0.
@@ -151,16 +151,16 @@ The features that the worked examples use, in the four formats.
 Status is a capability label, not a score, and every cell is documented, inferred or unverified.
 
 <!-- BEGIN paper-formats -->
-| Feature                                                            | KRN                  | MusicXML  | MuseScore 4 (MSCX)    | MEI    |
-|--------------------------------------------------------------------|----------------------|-----------|-----------------------|--------|
-| `fmt.phrase-slur-tie`: Ties, slurs and analytical phrases          | Direct               | Qualified | Qualified (inferred)  | Direct |
-| `fmt.spanner-geometry`: Spanner endpoints, curvature and open ties | Qualified            | Direct    | Qualified (inferred)  | Direct |
-| `fmt.beam-geometry`: Beam grouping, feathering and cross-bar beams | Qualified            | Direct    | Direct                | Direct |
-| `fmt.stem-direction`: Stem direction: explicit or automatic        | Direct               | Direct    | Direct                | Direct |
-| `fmt.irregular-measures`: Pickups and incomplete / overfull bars   | Qualified            | Direct    | Direct                | Direct |
-| `fmt.editorial-status`: Sic, interpretation and intervention       | Qualified            | Qualified | Workaround (inferred) | Direct |
-| `fmt.annotations`: Machine-readable annotations and ranges         | Qualified            | Qualified | Workaround (inferred) | Direct |
-| `fmt.fingering`: Printed fingering                                 | Extension (inferred) | Direct    | Direct                | Direct |
+| Feature | KRN | MusicXML | MuseScore 4 (MSCX) | MEI |
+|---|---|---|---|---|
+| `fmt.phrase-slur-tie`: Ties, slurs and analytical phrases | Direct | Qualified | Qualified (inferred) | Direct |
+| `fmt.spanner-geometry`: Spanner endpoints, curvature and open ties | Qualified | Direct | Qualified (inferred) | Direct |
+| `fmt.beam-geometry`: Beam grouping, feathering and cross-bar beams | Qualified | Direct | Direct | Direct |
+| `fmt.stem-direction`: Stem direction: explicit or automatic | Direct | Direct | Direct | Direct |
+| `fmt.irregular-measures`: Pickups and incomplete / overfull bars | Qualified | Direct | Direct | Direct |
+| `fmt.editorial-status`: Sic, interpretation and intervention | Qualified | Qualified | Workaround (inferred) | Direct |
+| `fmt.annotations`: Machine-readable annotations and ranges | Qualified | Qualified | Workaround (inferred) | Direct |
+| `fmt.fingering`: Printed fingering | Extension (inferred) | Direct | Direct | Direct |
 <!-- END paper-formats -->
 
 ## Two positions, one framework
@@ -172,17 +172,17 @@ The OpenScore column is a draft: it is a step towards fully formalising
 Otherwise, it takes the core defaults, and the count of unconfirmed strengths is part of the table.
 
 <!-- BEGIN two-positions -->
-| Choice                                                | OpenScore profile                                                                        | Scores of Scores profile                                                                                               |
-|-------------------------------------------------------|------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
-| Clear source error (`correct.error-test`)             | Corrected in the transcription (MUST), and recorded                                      | Kept as printed; the correction is recorded in a separate layer (MUST)                                                 |
-| Source error that is not clear                        | Kept as printed; observation recorded                                                    | Kept as printed; observation recorded                                                                                  |
-| Test for "clear"                                      | The same core test (`correct.error-test`, MUST)                                          | The same core test (`correct.error-test`, MUST)                                                                        |
-| Presentation normalisations                           | 10 of 10 registered normalisations permitted, 7 always applied                           | 10 of 10 registered normalisations permitted, 7 always applied                                                         |
-| Format of the version of record                       | MuseScore 4 (MSCX) (4.x, 4.6 family as reference)                                        | KRN (core **kern, Humdrum guide)                                                                                       |
-| Marks left out because the format cannot express them | None                                                                                     | fingering                                                                                                              |
-| Highest-ranked aim                                    | Meaning over appearance (useful to musicians first)                                      | Judgement stays out                                                                                                    |
-| Where meaning and faithful reading conflict           | Meaning over appearance wins: Appearance, and source errors that pass correct.error-test | Meaning over appearance wins: Appearance only (grouping, placement, typography), through the registered normalisations |
-| Status of the profile                                 | Draft: 7 of 36 strengths documented, 29 core defaults unconfirmed                        | Adopted                                                                                                                |
+| Choice | OpenScore profile (draft) | Scores of Scores profile |
+|---|---|---|
+| Clear source error (`correct.error-test`) | Corrected in the transcription (MUST), and recorded | Kept as printed; the correction is recorded in a separate layer (MUST) |
+| Source error that is not clear | Kept as printed; observation recorded | Kept as printed; observation recorded |
+| Test for "clear" | The same core test (`correct.error-test`, MUST) | The same core test (`correct.error-test`, MUST) |
+| Presentation normalisations | 10 of 10 registered normalisations permitted, 7 always applied | 10 of 10 registered normalisations permitted, 7 always applied |
+| Format of the version of record | MuseScore 4 (MSCX) (4.x, 4.6 family as reference) | KRN (core **kern, Humdrum guide) |
+| Marks left out because the format cannot express them | None | fingering |
+| Highest-ranked aim | Meaning over appearance (useful to musicians first) | Judgement stays out |
+| Where meaning and faithful reading conflict | Meaning over appearance wins: Appearance, and source errors that pass correct.error-test | Meaning over appearance wins: Appearance only (grouping, placement, typography), through the registered normalisations |
+| Status of the profile | Draft: 7 of 36 strengths documented, 29 core defaults unconfirmed | Draft: 0 of 36 strengths documented, 36 core defaults unconfirmed |
 <!-- END two-positions -->
 
 ## Worked examples
@@ -192,13 +192,13 @@ For each, give the tier or treatment and what is reported.
 The table is generated from the fixtures; each example is also a test fixture for the formats.
 
 <!-- BEGIN worked-examples -->
-| Example                                                             | Rules                                                                                                                       | OpenScore profile                                                                                                                                  | Scores of Scores profile                                                                                                                                                                                                                                                              |
-|---------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| A curve that may be a slur, a tie or a smudge (`fx.slur-ambiguity`) | `read.ambiguous-marks`, `read.preserve-distinctions`, `declare.observations`, `encode.defaults-not-overrides`               | The same reading rule applies. The curve follows the MuseScore default (`encode.defaults-not-overrides`).                                          | A tie if the curve joins adjacent notes of the same pitch, otherwise a slur on the notes nearest its printed endpoints (`read.ambiguous-marks`). An observation names the alternative readings (`declare.observations`). The default curve is used (`encode.defaults-not-overrides`). |
-| Beaming in 6/8: composer-led or house style (`fx.beaming-6-8`)      | `normalise.beam-grouping`, `read.composer-led-grouping`, `stance.doubt-means-preserve`                                      | The same three outcomes. The default is the MuseScore time-signature default.                                                                      | Edition-wide habit: normalised to the time-signature default and stated once (`normalise.beam-grouping`). Composer-led grouping: kept (`read.composer-led-grouping`). Cannot tell: kept as printed, with an observation (`stance.doubt-means-preserve`).                              |
-| Stem direction: default or override (`fx.stem-direction`)           | `normalise.stem-placement`, `encode.defaults-not-overrides`                                                                 | Automatic: the MuseScore stem direction stays on Auto (`normalise.stem-placement`).                                                                | Automatic (`normalise.stem-placement`): no / or \ signifier is entered in the KRN.                                                                                                                                                                                                    |
-| A bar that does not add up (`fx.bar-does-not-add-up`)               | `read.preserve-errors`, `correct.error-test`, `correct.in-place`, `correct.layer`, `correct.record`, `declare.observations` | Test fails: kept as printed, with an observation. Test passes: corrected in the transcription and recorded (`correct.in-place`, `correct.record`). | Test fails: kept as printed, with an observation. Test passes: kept as printed in the transcription (`correct.in-place` is OFF) and the correction is recorded in the separate layer (`correct.layer`, `correct.record`).                                                             |
-| Printed fingering (`fx.fingering`)                                  | `read.transcribe-all-marks`                                                                                                 | Transcribed: MuseScore expresses fingering directly (`read.transcribe-all-marks`).                                                                 | Unsupported: KRN has no fingering in its core vocabulary and this profile accepts no extension for it. The category is left out and stated once in each report (`read.transcribe-all-marks`).                                                                                         |
+| Example | Rules | OpenScore profile (draft) | Scores of Scores profile |
+|---|---|---|---|
+| A curve that may be a slur, a tie or a smudge (`fx.slur-ambiguity`) | `read.ambiguous-marks`, `read.preserve-distinctions`, `declare.observations`, `encode.defaults-not-overrides` | The same reading rule applies. The curve follows the MuseScore default (`encode.defaults-not-overrides`). | A tie if the curve joins adjacent notes of the same pitch, otherwise a slur on the notes nearest its printed endpoints (`read.ambiguous-marks`). An observation names the alternative readings (`declare.observations`). The default curve is used (`encode.defaults-not-overrides`). |
+| Beaming in 6/8: composer-led or house style (`fx.beaming-6-8`) | `normalise.beam-grouping`, `read.composer-led-grouping`, `stance.doubt-means-preserve` | The same three outcomes. The default is the MuseScore time-signature default. | Edition-wide habit: normalised to the time-signature default and stated once (`normalise.beam-grouping`). Composer-led grouping: kept (`read.composer-led-grouping`). Cannot tell: kept as printed, with an observation (`stance.doubt-means-preserve`). |
+| Stem direction: default or override (`fx.stem-direction`) | `normalise.stem-placement`, `encode.defaults-not-overrides` | Automatic: the MuseScore stem direction stays on Auto (`normalise.stem-placement`). | Automatic (`normalise.stem-placement`): no / or \ signifier is entered in the KRN. |
+| A bar that does not add up (`fx.bar-does-not-add-up`) | `read.preserve-errors`, `correct.error-test`, `correct.in-place`, `correct.layer`, `correct.record`, `declare.observations` | Test fails: kept as printed, with an observation. Test passes: corrected in the transcription and recorded (`correct.in-place`, `correct.record`). | Test fails: kept as printed, with an observation. Test passes: kept as printed in the transcription (`correct.in-place` is OFF) and the correction is recorded in the separate layer (`correct.layer`, `correct.record`). |
+| Printed fingering (`fx.fingering`) | `read.transcribe-all-marks` | Transcribed: MuseScore expresses fingering directly (`read.transcribe-all-marks`). | Unsupported: KRN has no fingering in its core vocabulary and this profile accepts no extension for it. The category is left out and stated once in each report (`read.transcribe-all-marks`). |
 <!-- END worked-examples -->
 
 - The slur: a reading ambiguity (category, attachment and geometry are three separate levels).

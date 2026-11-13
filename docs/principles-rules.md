@@ -2,7 +2,7 @@
 
 *Generated from `core/principles.yaml` (version 2026-11), the profiles in `profiles/` and the formats data in `formats/`. Do not edit by hand; edit the sources and run `python3 tools/build.py`.*
 
-Profiles shown: **OpenScore profile (draft)** (`openscore-2026-11`, draft), **Scores of Scores profile** (`sos-2026-11`, adopted). How the framework works is described in [Principles framework](principles-framework.md); what each format can express is in [Format support](format-support.md).
+Profiles shown: **OpenScore profile (draft)** (`openscore-2026-11`, draft), **Scores of Scores profile** (`sos-2026-11`, draft). How the framework works is described in [Principles framework](principles-framework.md); what each format can express is in [Format support](format-support.md).
 
 ## Tiers
 
@@ -126,7 +126,9 @@ Extensions accepted: none.
 
 ## Profile `sos-2026-11`
 
-Scores of Scores profile. Status: **adopted**.
+Scores of Scores profile. Status: **draft**.
+
+Draft: 0 of 36 strengths have a documented basis. The other 36 take the Scores of Scores strength as a core default and are not yet confirmed choices of the project.
 
 **Ranked aims** (highest first):
 
