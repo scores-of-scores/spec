@@ -1,0 +1,490 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:scores-of-scores:schema:formats:1",
+  "title": "Formats data: what each encoding format can express",
+  "description": "Schemas for formats/*.yaml. Each file is validated against one definition below. Cross-checks are done by tools/build.py.",
+  "$defs": {
+    "source_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "formats_file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "formats_version",
+        "title",
+        "methodology",
+        "formats",
+        "statuses",
+        "categories"
+      ],
+      "properties": {
+        "formats_version": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}$"
+        },
+        "title": {
+          "type": "string"
+        },
+        "methodology": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "date",
+            "scope",
+            "emphasis",
+            "assumptions",
+            "evidence",
+            "workflow",
+            "coverage_limits"
+          ],
+          "properties": {
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "scope": {
+              "type": "string"
+            },
+            "emphasis": {
+              "type": "string"
+            },
+            "assumptions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "evidence": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "workflow": {
+              "type": "string"
+            },
+            "coverage_limits": {
+              "type": "string"
+            }
+          }
+        },
+        "formats": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "name",
+              "short",
+              "version",
+              "baseline",
+              "role",
+              "description",
+              "sources"
+            ],
+            "properties": {
+              "id": {
+                "enum": [
+                  "krn",
+                  "musicxml",
+                  "musescore",
+                  "mei"
+                ]
+              },
+              "name": {
+                "type": "string"
+              },
+              "short": {
+                "type": "string"
+              },
+              "version": {
+                "type": "string"
+              },
+              "baseline": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "sources": {
+                "$ref": "#/$defs/source_ids"
+              }
+            }
+          }
+        },
+        "statuses": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label",
+              "description"
+            ],
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "title"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9-]+$"
+              },
+              "title": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "cell": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "summary",
+        "mechanism",
+        "caveat",
+        "workaround",
+        "evidence",
+        "sources",
+        "subset"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "direct",
+            "qualified",
+            "extension",
+            "workaround",
+            "unknown"
+          ]
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mechanism": {
+          "type": "string",
+          "minLength": 1
+        },
+        "caveat": {
+          "type": "string"
+        },
+        "workaround": {
+          "type": "string"
+        },
+        "evidence": {
+          "enum": [
+            "documented",
+            "inference",
+            "unverified"
+          ]
+        },
+        "sources": {
+          "$ref": "#/$defs/source_ids"
+        },
+        "subset": {
+          "type": "string",
+          "description": "The schema subset, customization, dialect or extension the cell refers to."
+        }
+      }
+    },
+    "feature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "feature",
+        "question",
+        "tags",
+        "importance",
+        "cells"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^fmt\\.[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "feature": {
+          "type": "string"
+        },
+        "question": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "importance": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        },
+        "cells": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "krn",
+            "musicxml",
+            "musescore",
+            "mei"
+          ],
+          "properties": {
+            "krn": {
+              "$ref": "#/$defs/cell"
+            },
+            "musicxml": {
+              "$ref": "#/$defs/cell"
+            },
+            "musescore": {
+              "$ref": "#/$defs/cell"
+            },
+            "mei": {
+              "$ref": "#/$defs/cell"
+            }
+          }
+        }
+      }
+    },
+    "features_file": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/feature"
+      }
+    },
+    "sources_file": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "url",
+          "accessed",
+          "type"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "accessed": {
+            "type": "string",
+            "format": "date"
+          },
+          "type": {
+            "const": "primary"
+          }
+        }
+      }
+    },
+    "cases_file": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "subtitle",
+          "rows",
+          "introduction",
+          "notes",
+          "sources",
+          "snippets"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^fmt\\.[a-z0-9]+(-[a-z0-9]+)*$"
+            }
+          },
+          "introduction": {
+            "type": "string"
+          },
+          "notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sources": {
+            "$ref": "#/$defs/source_ids"
+          },
+          "timeline": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          "snippets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "format",
+                "code",
+                "note"
+              ],
+              "properties": {
+                "format": {
+                  "type": "string"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "fixtures_file": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "acceptance",
+          "features"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^fx\\.[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "title": {
+            "type": "string"
+          },
+          "acceptance": {
+            "type": "string"
+          },
+          "features": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "pattern": "^fmt\\.[a-z0-9]+(-[a-z0-9]+)*$"
+            }
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z]+\\.[a-z0-9]+(-[a-z0-9]+)*$"
+            }
+          },
+          "paper": {
+            "type": "boolean"
+          },
+          "positions": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "expect_treatment": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "results": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "krn": {
+                "enum": [
+                  "not_run",
+                  "pass",
+                  "fail",
+                  "partial"
+                ]
+              },
+              "musicxml": {
+                "enum": [
+                  "not_run",
+                  "pass",
+                  "fail",
+                  "partial"
+                ]
+              },
+              "musescore": {
+                "enum": [
+                  "not_run",
+                  "pass",
+                  "fail",
+                  "partial"
+                ]
+              },
+              "mei": {
+                "enum": [
+                  "not_run",
+                  "pass",
+                  "fail",
+                  "partial"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,9 +1,12 @@
 # Transcription Principles: core registry.
-# Source of truth for the rules. The public table, JSON and CSV are generated from this file
-# plus a profile (see tools/build.py). Strengths (MUST/SHOULD/MAY/OFF) and priorities
+# Source of truth for the rules.
+# The public tables, JSON and CSV are generated from this file,
+# the profiles and the formats data (see tools/build.py).
+# Strengths (MUST/SHOULD/MAY/OFF) and priorities
 # are NOT set here; they belong to a profile.
 #
-# ID policy: <domain>.<slug>. IDs are permanent: never renumbered, never reused.
+# ID policy: <domain>.<slug>.
+# IDs are permanent: never renumbered, never reused.
 # A rule whose meaning changes materially gets a new ID; the old one is retired with replaced_by.
 
 principles_version: "2026-11"
@@ -47,6 +50,9 @@ domains:
   declare:
     title: Declaration
     description: What must be marked, reported and recorded.
+  correct:
+    title: Correction
+    description: The one kind of editorial intervention that a profile may allow, the test it must pass, and how it is recorded.
 
 themes:
   aims:         { domain: stance,    title: Aims }
@@ -66,17 +72,21 @@ themes:
   additions:    { domain: declare,   title: Additions }
   reporting:    { domain: declare,   title: Reporting }
   provenance:   { domain: declare,   title: Provenance }
+  observations: { domain: declare,   title: Observations }
+  test:         { domain: correct,   title: The clear-error test }
+  record:       { domain: correct,   title: Placement and record }
 
-# Categories of printed mark that are not transcribed by default, and why (see `treatments`).
-# A profile can reclassify a category (scope.marks in the profile). Any printed mark that is not
-# in a category listed here is transcribed (read.transcribe-all-marks). To add a category,
-# propose it here, as for a rule.
+# Categories of printed mark whose treatment depends on the encoding format (see `treatments`).
+# The treatment is derived from the formats data: the status of `format_feature` in the profile's
+# format (direct or qualified: transcribed; extension: transcribed only if the profile accepts it,
+# otherwise unsupported; workaround or unknown: unsupported). A profile can reclassify a category
+# (scope.marks) with a reason. Any printed mark not in a category listed here is transcribed
+# (read.transcribe-all-marks). To add a category, propose it here, as for a rule.
 mark_categories:
   fingering:
     title: Fingering
     description: Finger numbers and similar hand-position indications printed in the source.
-    default_treatment: unsupported
-    rationale: Fingering is outside the remit of some basic encoding formats.
+    format_feature: fmt.fingering
 
 rules:
   # ---------------------------------------------------------------- stance
@@ -84,6 +94,7 @@ rules:
     theme: aims
     kind: obligation
     title: Faithful reading
+    format_features: [fmt.version-profile, fmt.exact-appearance]
     statement: Reproduce what the source prints, as exactly as the encoding allows. A transcription reads; it does not edit.
     relations: { tension-with: [stance.meaning-over-appearance] }
     aliases: [TP1]
@@ -109,15 +120,16 @@ rules:
     theme: boundary
     kind: obligation
     title: In doubt, preserve
-    statement: When it is unclear which tier a decision falls in, treat it as editorial. Keep what the source prints, flag the point and ask a reviewer.
+    statement: When it is unclear which tier a decision falls in, treat it as editorial. Keep what the source prints and record the point as an observation.
     rationale: Split from the earlier TP4, whose second sentence this was.
-    relations: { refines: [stance.judgement-stays-out] }
+    relations: { refines: [stance.judgement-stays-out], requires: [declare.observations] }
 
   # ---------------------------------------------------------------- read
   - id: read.preserve-distinctions
     theme: fidelity
     kind: obligation
     title: Preserve the distinctions the source makes
+    format_features: [fmt.phrase-slur-tie, fmt.time-signature-symbol, fmt.grace-timing]
     statement: Where the source uses different notations for what might seem the same, keep the difference (for example common time, cut time and 4/4; ties and slurs; acciaccatura and appoggiatura; key signatures as given).
     aliases: [TP3]
 
@@ -133,18 +145,20 @@ rules:
     theme: fidelity
     kind: obligation
     title: Source errors are preserved
-    statement: Transcribe an evident source error as printed and flag it for whoever maintains corrections. Never fix it silently in the transcription.
-    relations: { refines: [stance.judgement-stays-out], see-also: [declare.report-deviations] }
+    format_features: [fmt.irregular-measures, fmt.annotations]
+    statement: Transcribe a source error as printed and record it as an observation. Never fix it silently in the transcription.
+    relations: { refines: [stance.judgement-stays-out], requires: [declare.observations], see-also: [declare.report-deviations, correct.error-test] }
     examples:
       - situation: A bar does not add up to the time signature.
-        handling: Keep the bar as printed, flag it, and note it as an observation so a correction can be proposed separately.
+        handling: Keep the bar as printed and record an observation. If the error passes the clear-error test (`correct.error-test`), a profile may allow a correction (`correct.in-place` or `correct.layer`).
     aliases: [TP7]
 
   - id: read.record-source-marks
     theme: fidelity
     kind: obligation
     title: Record the source's own editorial marks
-    statement: Brackets and similar marks printed in the source signal an intervention by that edition. Keep the element, record each such mark in the report, and drop the printed mark from the encoding only if the standard encoding requires it.
+    format_features: [fmt.editorial-accidentals]
+    statement: Brackets and similar marks printed in the source signal an intervention by that edition. Keep the printed mark in the encoding where the format expresses it, and record each such mark in the report. Where the format cannot express the mark, record it in the report only.
     relations: { see-also: [declare.report-deviations] }
     aliases: [TP11]
 
@@ -152,6 +166,7 @@ rules:
     theme: scope
     kind: obligation
     title: Transcribe every printed mark
+    format_features: [fmt.fingering]
     statement: Transcribe pitches, rhythms and every printed mark, within what the encoding can express. A category of mark that is classed as editorial or unsupported (see mark_categories; a profile may reclassify a category) is left out systematically and stated once in each report.
     relations: { requires: [declare.report-deviations] }
     aliases: [TP6]
@@ -179,7 +194,7 @@ rules:
     theme: notation
     kind: obligation
     title: Preserve composer-led grouping
-    statement: Preserve beaming, rest and similar grouping that carries musical meaning (the composer's own choice for a passage). Grouping that is only the source edition's habit is a presentation matter. If the two cannot be told apart, ask a reviewer and report the decision.
+    statement: Preserve beaming, rest and similar grouping that carries musical meaning (the composer's own choice for a passage). Grouping that is only the source edition's habit is a presentation matter. If the two cannot be told apart, keep the grouping as printed and record an observation.
     relations: { exception-of: [normalise.beam-grouping, normalise.rest-grouping] }
     examples:
       - situation: Bartok regroups the beams in one passage to show a metric shift.
@@ -192,14 +207,28 @@ rules:
     theme: notation
     kind: obligation
     title: Ornaments as printed
+    format_features: [fmt.grace-timing, fmt.ornament-realization]
     statement: Copy ornaments as printed, including the difference between acciaccatura and appoggiatura and the position before or after the main note. Where the tool cannot represent a detail, use the nearest available form in this order - type of ornament, then number of beams or strokes, then other indications.
     aliases: [TP12]
+
+  - id: read.ambiguous-marks
+    theme: notation
+    kind: obligation
+    title: Ambiguous marks
+    format_features: [fmt.phrase-slur-tie, fmt.spanner-geometry]
+    statement: Where a printed mark could be read in more than one way (what it is, or which notes it attaches to), encode the reading that the source's own convention fixes - a curve joining adjacent notes of the same pitch is a tie, any other curve is a slur - attached to the notes at the horizontal positions nearest the printed endpoints. Where the convention does not fix a reading, encode that nearest-endpoint reading and record an observation that names the alternatives. A mark that cannot be read as any notated object is recorded as an observation and not encoded.
+    rationale: Gives every ambiguous mark one defined outcome, so that the choice does not depend on the transcriber.
+    relations: { refines: [stance.doubt-means-preserve], see-also: [read.preserve-distinctions, declare.observations] }
+    examples:
+      - situation: A curve between two notes of different pitch has no clear end.
+        handling: Encode a slur on the notes nearest its printed endpoints and record an observation naming the alternative end notes.
 
   # ---------------------------------------------------------------- encode
   - id: encode.real-objects
     theme: objects
     kind: obligation
     title: Real objects, not drawings or text
+    format_features: [fmt.phrase-slur-tie, fmt.spanner-geometry]
     statement: Encode ties, slurs, hairpins, spanning lines, tuplets, tremolo and grace notes as the musical objects they are, so that playback and export work. Do not draw them or type them as text.
     aliases: [TP13]
 
@@ -207,6 +236,7 @@ rules:
     theme: defaults
     kind: obligation
     title: Defaults, not manual overrides
+    format_features: [fmt.stem-direction, fmt.visual-accidental]
     statement: Use the tool's defaults for placement, stem direction, accidentals and similar. Avoid manual position offsets and flips.
     relations: { refines: [stance.meaning-over-appearance] }
     aliases: [TP14]
@@ -215,6 +245,7 @@ rules:
     theme: layout
     kind: obligation
     title: Source layout is removable data
+    format_features: [fmt.page-breaks]
     statement: Record the source's system and page breaks where possible, never split a bar across them, and keep them separable from the musical content so that they can be removed in one step. Where a source has no usable layout, omit them and say so.
     relations: { see-also: [normalise.page-geometry] }
     aliases: [TP16]
@@ -232,6 +263,7 @@ rules:
     theme: rhythm
     kind: permission
     title: Beam grouping
+    format_features: [fmt.beam-geometry]
     statement: Beam grouping follows the time-signature default, except where grouping is composer-led.
     aliases: [TP15.1]
 
@@ -246,6 +278,7 @@ rules:
     theme: rhythm
     kind: permission
     title: Tuplet brackets
+    format_features: [fmt.nested-tuplets]
     statement: Tuplet brackets use a single standard form. Repeated tuplet numbers in a long group may be hidden but are kept in the data.
     aliases: [TP15.3]
 
@@ -260,6 +293,7 @@ rules:
     theme: signs
     kind: permission
     title: Stem and placement
+    format_features: [fmt.stem-direction]
     statement: Stem direction and similar placement is automatic.
     aliases: [TP15.4]
 
@@ -267,6 +301,7 @@ rules:
     theme: signs
     kind: permission
     title: Accidental conventions
+    format_features: [fmt.visual-accidental]
     statement: Courtesy accidentals and cancelling naturals follow the default.
     aliases: [TP15.5]
 
@@ -274,6 +309,7 @@ rules:
     theme: signs
     kind: permission
     title: Clefs
+    format_features: [fmt.written-sounding]
     statement: An unusual or obsolete clef may be replaced by its nearest modern equivalent; an octave-ambiguous clef is notated at sounding pitch; a brief clef change may be adapted for readability. Written pitch is unaffected.
     aliases: [TP15.6]
 
@@ -295,6 +331,7 @@ rules:
     theme: page
     kind: permission
     title: Page geometry and typography
+    format_features: [fmt.page-breaks]
     statement: Page geometry and typography follow defaults. The source's system and page breaks are kept as data.
     relations: { see-also: [encode.layout-as-data] }
     aliases: [TP15.9]
@@ -304,6 +341,7 @@ rules:
     theme: additions
     kind: obligation
     title: Additions are rare and marked
+    format_features: [fmt.editorial-accidentals]
     statement: Add only what is needed to express the source's own notational conventions in the encoding (for example accidentals that the source's convention leaves implicit). Mark every addition visibly. Translations of non-standard terms are additions. Anything that needs judgement is editorial, not an addition.
     relations: { refines: [stance.judgement-stays-out] }
     aliases: [TP17]
@@ -315,9 +353,55 @@ rules:
     statement: Report every deviation that is not visibly marked. Differences caused by registered normalisations are stated once per transcription; specific interventions are listed one by one. The report, with the transcription, is enough to recover what the source prints.
     aliases: [TP18]
 
+  - id: declare.observations
+    theme: observations
+    kind: obligation
+    title: Observations
+    format_features: [fmt.annotations]
+    statement: Record in the report, as an observation, every point that may be a source error, a divergence between parts or repeated passages, a mark with more than one reading, or a decision whose tier was unclear. An observation gives the location, what the source prints, and why it was recorded. It does not change the transcription.
+    relations: { see-also: [declare.report-deviations] }
+
   - id: declare.record-provenance
     theme: provenance
     kind: obligation
     title: Record provenance
+    format_features: [fmt.metadata, fmt.source-description]
     statement: Record the source edition and file, the pages where the transcription appears, who transcribed and reviewed it, when, which tools were used, and the versions of the Principles, profile and notes applied.
     aliases: [TP19]
+
+  # ---------------------------------------------------------------- correct
+  - id: correct.error-test
+    theme: test
+    kind: obligation
+    title: The clear-error test
+    statement: A source error is clear only if both conditions hold. (1) The printed reading is impossible under the source's own notation, for example a bar whose durations do not add up to the time signature and that is not marked as incomplete, a tie joining different pitches, or a slur that begins and never ends. (2) Exactly one minimal change makes the reading possible, and that change is found from the source alone, its own parallel passages included. An error that fails either condition is not clear and is kept as printed.
+    rationale: Gives "clear" a test that does not depend on who applies it.
+    relations: { refines: [stance.judgement-stays-out] }
+    examples:
+      - situation: A bar is one eighth note short, and the identical bar in the repeated passage has the missing note.
+        handling: Clear. Both conditions hold, and the parallel passage fixes the change.
+      - situation: A bar is one eighth note short and nothing in the source shows which note is wrong.
+        handling: Not clear. Several single changes would work. Keep the bar as printed and record an observation.
+
+  - id: correct.in-place
+    theme: record
+    kind: permission
+    title: Correct in the transcription
+    statement: A clear error (`correct.error-test`) may be corrected directly in the transcription.
+    relations: { tension-with: [read.preserve-errors], requires: [correct.error-test, correct.record] }
+
+  - id: correct.layer
+    theme: record
+    kind: obligation
+    title: Corrections in a separate layer
+    format_features: [fmt.editorial-status, fmt.annotations, fmt.persistent-addresses]
+    statement: A correction that is not made in the transcription is recorded in a layer separate from it, pinned to a transcription version, so that the printed reading and the corrected reading can each be recovered.
+    relations: { requires: [correct.error-test, correct.record] }
+
+  - id: correct.record
+    theme: record
+    kind: obligation
+    title: Record every correction
+    format_features: [fmt.editorial-status, fmt.annotations]
+    statement: Record each correction with its location, the printed reading, the corrected reading, and the part of `correct.error-test` that was met, whether the correction is made in the transcription or in a layer.
+    relations: { see-also: [declare.report-deviations] }

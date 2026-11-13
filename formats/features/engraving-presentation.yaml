@@ -1,0 +1,417 @@
+# Features in the category "Engraving & presentation". IDs are fmt.<slug> and permanent. Status vocabulary: formats.yaml. Sources: sources.yaml.
+- id: fmt.page-breaks
+  feature: Page/system breaks and spacing
+  question: Encoding a break does not guarantee identical pagination in another engine.
+  tags:
+  - engraving
+  - pagination
+  - breaks
+  - spacing
+  importance: 3
+  cells:
+    krn:
+      status: extension
+      summary: Renderer layout conventions
+      mechanism: VHV rendering conventions supplement the symbolic stream.
+      caveat: Core **kern is not a page-layout language.
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-system
+      subset: VHV rendering conventions
+    musicxml:
+      status: qualified
+      summary: print and layout defaults
+      mechanism: print supplies local page/system/staff parameters; defaults supplies score-wide choices.
+      caveat: Engravers may calculate different spacing.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-print
+      subset: ''
+    musescore:
+      status: direct
+      summary: Native layout controls
+      mechanism: System breaks and spacing controls are retained in the project.
+      caveat: Interchange may recalculate the result.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-layout
+      subset: ''
+    mei:
+      status: qualified
+      summary: Breaks and layout attributes
+      mechanism: MEI offers layout descriptions; rendering remains a separate process.
+      caveat: Source breaks and desired output breaks should be distinguished.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-shared
+      subset: ''
+- id: fmt.exact-appearance
+  feature: Exact visual reproduction
+  question: Preserving musical meaning is not a promise of pixel-identical output.
+  tags:
+  - facsimile
+  - pixel
+  - fidelity
+  - archive
+  - rendering
+  importance: 3
+  cells:
+    krn:
+      status: qualified
+      summary: Keep a reference rendering
+      mechanism: The notation output depends on the selected rendering conventions and implementation.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-system
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Layout hints, not fixed artwork
+      mechanism: Applications may reflow even when importing page/system breaks.
+      caveat: Archive PDF/SVG for the approved appearance.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-xml
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Best within matched environment
+      mechanism: Native controls preserve intent; fonts and application changes can alter output.
+      caveat: ''
+      workaround: Keep a rendered reference and record the application build.
+      evidence: inference
+      sources:
+      - ms-fonts
+      subset: ''
+    mei:
+      status: qualified
+      summary: Logical score or source facsimile
+      mechanism: Facsimiles preserve source images; semantic encoding alone does not fix all rendering choices.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-facsimile
+      subset: ''
+- id: fmt.fonts
+  feature: Music fonts, glyph identity and fallbacks
+  question: The same glyph identifier may have different metrics or visual forms.
+  tags:
+  - fonts
+  - SMuFL
+  - glyph
+  - fallback
+  importance: 2
+  cells:
+    krn:
+      status: extension
+      summary: Consumer-selected font
+      mechanism: Core stream semantics do not dictate a music-font implementation.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-system
+      subset: Consumer-selected font (outside the format)
+    musicxml:
+      status: qualified
+      summary: Font defaults and SMuFL names
+      mechanism: Font defaults and glyph identifiers carry appearance preferences.
+      caveat: Installed fonts and fallbacks still affect rendering.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-defaults
+      - mx-other-notation
+      subset: ''
+    musescore:
+      status: direct
+      summary: SMuFL fonts
+      mechanism: MuseScore 4.6 introduced loading any compatible SMuFL music font; fallback glyphs may be used.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-release
+      - ms-fonts
+      subset: ''
+    mei:
+      status: qualified
+      summary: Glyph and symbol references
+      mechanism: MEI records glyph authorities/names and custom symbols where applicable.
+      caveat: Preserve the resource and font environment.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-symbolDef
+      subset: ''
+- id: fmt.hidden-cue-small
+  feature: Hidden, cue-sized and small material
+  question: Invisible notation can still affect time, playback and spacing.
+  tags:
+  - cue
+  - hidden
+  - ossia
+  - small
+  - visibility
+  importance: 2
+  cells:
+    krn:
+      status: qualified
+      summary: Invisible core signs
+      mechanism: y can identify logically present but unprinted material; styling conventions add cue treatment.
+      caveat: Visibility and silence must not be conflated.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-core
+      subset: ''
+    musicxml:
+      status: direct
+      summary: Independent print/play controls
+      mechanism: note includes print and playback-related properties; cue notes have specific structural rules.
+      caveat: Test cue playback rather than relying on size alone.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-note
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Visibility and staff controls
+      mechanism: Staves can be hidden when empty or selectively shown.
+      caveat: Hidden does not automatically mean removed from every part or playback context.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-hidden
+      subset: ''
+    mei:
+      status: qualified
+      summary: cue / visible and staff scaling
+      mechanism: Visibility and cue properties are available in the notation model.
+      caveat: Some visibility definitions address aural as well as graphical rendering; check the consumer.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-note
+      - mei-staffDef
+      subset: ''
+- id: fmt.beam-geometry
+  feature: Beam grouping, feathering and cross-bar beams
+  question: Grouping, geometry and realised acceleration should be evaluated separately.
+  tags:
+  - beams
+  - feathered
+  - cross-bar
+  - grouping
+  importance: 2
+  cells:
+    krn:
+      status: qualified
+      summary: Core beams plus conventions
+      mechanism: '**kern records beaming; detailed placement and uncommon beam forms require renderer conventions.'
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-notation
+      subset: ''
+    musicxml:
+      status: direct
+      summary: Beam levels and fan direction
+      mechanism: beam records grouping and feathering direction; it does not alone define a performed accelerando
+        curve.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-beam
+      subset: ''
+    musescore:
+      status: direct
+      summary: Grouping and shape controls
+      mechanism: Beaming can override time-signature defaults; appearance is adjustable.
+      caveat: Check feathered playback separately.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-beams
+      subset: ''
+    mei:
+      status: direct
+      summary: beam and beamSpan
+      mechanism: Spanning beams can be encoded across barlines without forcing simple tree containment.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-beamSpan
+      subset: ''
+- id: fmt.spanner-geometry
+  feature: Spanner endpoints, curvature and open ties
+  question: A curve’s visual endpoint may differ from its musical or performance target.
+  tags:
+  - spanner
+  - curve
+  - tie
+  - laissez-vibrer
+  - endpoint
+  importance: 2
+  cells:
+    krn:
+      status: qualified
+      summary: Symbolic boundaries first
+      mechanism: Core slur/tie signifiers carry relationships; fine geometry needs added conventions.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-notation
+      subset: ''
+    musicxml:
+      status: direct
+      summary: Notated ties with geometry
+      mechanism: tied supports drawn ties, including let-ring and ties attached to one note.
+      caveat: A sound tie is a separate element.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-tied
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Native editing; export test needed
+      mechanism: Application-specific appearance controls may require adjustment after interchange.
+      caveat: Verify both anchors and shape in the target.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-xml
+      subset: ''
+    mei:
+      status: direct
+      summary: Targeted spans and curve shape
+      mechanism: Control events can carry endpoints and Bezier/bulge descriptions.
+      caveat: A renderer may not implement all geometry.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-phrase
+      subset: ''
+- id: fmt.part-layout
+  feature: Independent layout of extracted parts
+  question: Part layout is not simply a cropped view of the full score.
+  tags:
+  - parts
+  - layout
+  - linked
+  - extraction
+  importance: 2
+  cells:
+    krn:
+      status: workaround
+      summary: Separate rendering configuration
+      mechanism: Extract streams and maintain part-specific layout settings alongside them.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-guide
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Exchange part-specific files
+      mechanism: Individual part exports can carry their own layout.
+      caveat: Live linkage to the full-score project is not mandated.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-print
+      subset: ''
+    musescore:
+      status: direct
+      summary: Native part styles
+      mechanism: Parts can receive independent styles and layout treatment within the project.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-parts
+      subset: ''
+    mei:
+      status: qualified
+      summary: Part documents / relationships
+      mechanism: Part structures and linking can retain relationships; layout policy belongs to the rendering workflow.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - mei-shared
+      subset: ''
+- id: fmt.stem-direction
+  feature: 'Stem direction: explicit or automatic'
+  importance: 2
+  question: An explicit stem direction and an automatic one are different statements, and an explicit value may
+    outlast a transposition or clef change.
+  tags:
+  - stem
+  - direction
+  - default
+  - override
+  - transposition
+  - auto
+  cells:
+    krn:
+      status: direct
+      summary: Optional / and \ signifiers
+      mechanism: A / or \ signifier on a note token gives stem up or down. Stem direction is one optional component
+        of a note token.
+      caveat: Without a signifier the direction is not stated; any direction shown is then a rendering matter.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-help
+      subset: ''
+    musicxml:
+      status: direct
+      summary: 'stem: up, down, none, double'
+      mechanism: stem is an optional child of note whose values are down, up, none and double. Position attributes
+        can also set the stem end.
+      caveat: none and double are distinct statements. An absent stem element leaves the direction to the receiving
+        application.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-stem
+      subset: ''
+    musescore:
+      status: direct
+      summary: Auto, Up or Down
+      mechanism: Stem direction is a property with Auto (set by voice and context), Up and Down. Up and Down override
+        the default.
+      caveat: Community reports say an explicit Up or Down is kept after transposition while Auto is recomputed.
+        The handbook states only that Up and Down override the default; this was not tested.
+      workaround: Leave the property on Auto unless the source direction has to be kept.
+      evidence: documented
+      sources:
+      - ms-stems
+      subset: ''
+    mei:
+      status: direct
+      summary: stem.dir on note and chord
+      mechanism: stem.dir (att.stems) records stem direction on note and chord. The stem element also has a dir
+        attribute.
+      caveat: data.STEMDIRECTION has basic values (up, down) and an extended set.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-stems
+      subset: ''

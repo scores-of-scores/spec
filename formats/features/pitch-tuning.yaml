@@ -1,0 +1,357 @@
+# Features in the category "Pitch & tuning". IDs are fmt.<slug> and permanent. Status vocabulary: formats.yaml. Sources: sources.yaml.
+- id: fmt.written-sounding
+  feature: Written versus sounding pitch
+  question: Transposing parts can preserve spelling while using different pitch coordinates.
+  tags:
+  - transposing
+  - spelling
+  - concert
+  - sounding
+  importance: 3
+  cells:
+    krn:
+      status: direct
+      summary: Sounding pitch baseline
+      mechanism: '**kern records sounding pitch; *ITr describes how to produce a transposed written part.'
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-transpose
+      subset: ''
+    musicxml:
+      status: direct
+      summary: Written pitch plus transpose
+      mechanism: transpose specifies the interval added to written pitch to obtain sounding pitch.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-transpose
+      subset: ''
+    musescore:
+      status: direct
+      summary: Concert/transposed display
+      mechanism: The application provides concert-pitch and transposed views.
+      caveat: Keep instrument transposition distinct from actually transposing the notes.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-transpose
+      subset: ''
+    mei:
+      status: direct
+      summary: Written and gestural information
+      mechanism: staffDef transposition and note gestural attributes distinguish written and sounding descriptions.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-staffDef
+      - mei-note
+      subset: ''
+- id: fmt.visual-accidental
+  feature: Printed accidental versus effective pitch
+  question: A sharp in the encoding does not necessarily mean a printed sharp symbol.
+  tags:
+  - accidental
+  - courtesy
+  - cautionary
+  - sounding
+  - spelling
+  importance: 3
+  cells:
+    krn:
+      status: qualified
+      summary: Pitch explicit; display derived
+      mechanism: Every pitch carries its alteration; VHV computes visibility, with X/y display controls.
+      caveat: Suppressing a symbol must not erase its pitch alteration.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-start
+      subset: ''
+    musicxml:
+      status: direct
+      summary: alter versus accidental
+      mechanism: Pitch alteration and the actual printed accidental are distinct elements.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-alter
+      - mx-accidental
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Notation and playback properties
+      mechanism: Notation controls coexist with playback tuning and note properties.
+      caveat: Verify cautionary-symbol import separately from sounding pitch.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-noteheads
+      subset: ''
+    mei:
+      status: direct
+      summary: accid versus accid.ges
+      mechanism: Written and gestural inflections can differ.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-accid
+      subset: ''
+- id: fmt.microtones
+  feature: Microtonal pitch and accidental glyphs
+  question: A quarter-tone glyph, an exact pitch and its playback are three separate tests.
+  tags:
+  - microtone
+  - quarter-tone
+  - tuning
+  - cents
+  importance: 3
+  cells:
+    krn:
+      status: extension
+      summary: Use other pitch spines
+      mechanism: '**cents can express fractional-semitone values alongside **kern.'
+      caveat: That is Humdrum extensibility, not native microtonal **kern spelling.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-cents
+      subset: 'Humdrum extension: **cents spine'
+    musicxml:
+      status: direct
+      summary: Decimal semitone alteration
+      mechanism: alter permits decimal values; the accidental vocabulary supplies notational symbols.
+      caveat: Playback and uncommon glyph support vary.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-alter
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Symbols plus cents tuning
+      mechanism: Note properties offer playback tuning in cents.
+      caveat: Sound-engine behaviour is version-dependent and untested here; do not infer it from the symbol.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-noteheads
+      subset: ''
+    mei:
+      status: qualified
+      summary: Notated and gestural pitch
+      mechanism: Accidental vocabularies and gestural pitch support distinctions beyond ordinary semitone notation.
+      caveat: Exact tuning and glyph rendering depend on profile and consumer.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-accid
+      subset: ''
+- id: fmt.temperament
+  feature: Temperament and exact frequency
+  question: A note name alone does not determine a frequency without a tuning model.
+  tags:
+  - temperament
+  - frequency
+  - just
+  - tuning
+  importance: 2
+  cells:
+    krn:
+      status: extension
+      summary: Frequency or cents streams
+      mechanism: '**freq explicitly encodes hertz; it can coexist with symbolic notation.'
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-freq
+      subset: 'Humdrum extension: **freq spine'
+    musicxml:
+      status: qualified
+      summary: Explicit altered pitches
+      mechanism: Decimal alterations encode offsets, but a general temperament system is not supplied by that field
+        alone.
+      caveat: ''
+      workaround: Document the tuning reference and conversion rules.
+      evidence: inference
+      sources:
+      - mx-alter
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Per-note tuning workflow
+      mechanism: Cents adjustments can implement a tuning in compatible playback setups.
+      caveat: Retain tuning assumptions and test the sound engine.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-noteheads
+      subset: ''
+    mei:
+      status: qualified
+      summary: Tuning metadata
+      mechanism: staffDef includes tune.Hz, tune.pname and tune.temper.
+      caveat: The consumer must implement the specified tuning.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-staffDef
+      subset: ''
+- id: fmt.nonstandard-keys
+  feature: Nonstandard and local key signatures
+  question: A key signature is neither the same as a tonal analysis nor a complete tuning system.
+  tags:
+  - key
+  - signature
+  - polytonality
+  - nonstandard
+  importance: 2
+  cells:
+    krn:
+      status: qualified
+      summary: Explicit signature and key context
+      mechanism: '**kern separates key-signature interpretation from key designation.'
+      caveat: Unusual glyph placement is a rendering matter.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-basic
+      subset: ''
+    musicxml:
+      status: direct
+      summary: Traditional and nontraditional keys
+      mechanism: key supports both conventional fifths and explicit altered steps, with staff scoping.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-key
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Custom/local signatures
+      mechanism: The editor supports customised key signatures and local application.
+      caveat: Check nonstandard accidentals against playback and export.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-keys
+      subset: ''
+    mei:
+      status: direct
+      summary: Explicit key signature elements
+      mechanism: Nonstandard signatures use keySig rather than only a conventional signature abbreviation.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-cmn
+      subset: ''
+- id: fmt.scordatura
+  feature: Scordatura, string tuning and capo
+  question: Preserve the distinction between sounding pitch, fingering and notated string instructions.
+  tags:
+  - scordatura
+  - capo
+  - strings
+  - tuning
+  - tablature
+  importance: 2
+  cells:
+    krn:
+      status: extension
+      summary: Tablature-related representations
+      mechanism: '**fret and associated tuning interpretations describe fretted instruments.'
+      caveat: This extends beyond core **kern.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-fret
+      subset: 'Humdrum extension: **fret spine and tuning interpretations'
+    musicxml:
+      status: direct
+      summary: scordatura and staff tuning
+      mechanism: scordatura/accord describe altered strings; staff-details carries tuning and capo information.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-scordatura
+      - mx-staff-details
+      subset: ''
+    musescore:
+      status: qualified
+      summary: String-tuning changes
+      mechanism: From 4.2, tuning instructions affect a staff and linked staves from their measure onward.
+      caveat: Check written scordatura conventions separately.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-tuning
+      subset: ''
+    mei:
+      status: direct
+      summary: Courses, strings and tuning
+      mechanism: Tablature distinguishes notated courses from physical strings and describes their tuning.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-tab
+      subset: ''
+- id: fmt.unpitched
+  feature: Unpitched percussion and display position
+  question: A note’s height on the staff need not represent a sounding pitch.
+  tags:
+  - percussion
+  - unpitched
+  - drum
+  - display
+  importance: 2
+  cells:
+    krn:
+      status: extension
+      summary: VHV percussion conventions
+      mechanism: Humdrum rendering uses percussion conventions for pitch, head shape and instrument interpretation.
+      caveat: Do not treat staff position as an ordinary tonal pitch.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-percussion
+      subset: VHV
+    musicxml:
+      status: direct
+      summary: unpitched coordinates
+      mechanism: unpitched uses display-step/display-octave; instrument information supplies the playback identity.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-unpitched
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Instrument-specific setup
+      mechanism: Percussion notation relies on the configured instrument and staff model.
+      caveat: A decorative percussion glyph alone has no playback semantics.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-symbols
+      subset: ''
+    mei:
+      status: qualified
+      summary: Notation and instrument data
+      mechanism: Staff location and instrument/performance information can be encoded separately.
+      caveat: Check percussion mappings in the consumer.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mei-note
+      subset: ''

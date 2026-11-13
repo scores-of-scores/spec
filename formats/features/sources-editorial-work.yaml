@@ -1,0 +1,615 @@
+# Features in the category "Sources & editorial work". IDs are fmt.<slug> and permanent. Status vocabulary: formats.yaml. Sources: sources.yaml.
+- id: fmt.editorial-accidentals
+  feature: Editorial accidentals / musica ficta
+  question: Encode both the musical alteration and its editorial status.
+  tags:
+  - editorial
+  - ficta
+  - accidental
+  - brackets
+  importance: 3
+  cells:
+    krn:
+      status: extension
+      summary: RDF convention in VHV
+      mechanism: Declare an editorial-accidental signifier, commonly i, in !!!RDF**kern.
+      caveat: This is a named convention, not a universal meaning of the letter i.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-editorial
+      subset: VHV / RDF
+    musicxml:
+      status: direct
+      summary: Editorial flag and enclosure
+      mechanism: accidental separates the printed symbol from pitch alteration; editorial, bracket and parentheses
+        convey its treatment.
+      caveat: Importer support must be tested.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-accidental
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Appearance is editable
+      mechanism: Accidental/notehead enclosures can mark an intervention visually.
+      caveat: A bracket does not itself identify an editor, source or conjecture.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-noteheads
+      subset: ''
+    mei:
+      status: direct
+      summary: Symbol and intervention model
+      mechanism: accid records accidental information; supplied and responsibility markup can state an editorial
+        intervention.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-accid
+      - mei-supplied
+      subset: ''
+- id: fmt.editorial-status
+  feature: Sic, interpretation and intervention
+  question: Preserve the reason a reading differs from the apparent source.
+  tags:
+  - sic
+  - correction
+  - intervention
+  - editorial
+  importance: 3
+  cells:
+    krn:
+      status: qualified
+      summary: Core editorial signifiers
+      mechanism: Original **kern defines Y, x, X and ? for editorial distinctions.
+      caveat: Modern VHV uses X for forced accidental display; declare conventions before mixing encodings.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-core
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Descriptive editorial level
+      mechanism: level carries editorial status text and enclosure attributes.
+      caveat: No equivalent typed hierarchy of sic/corr alternatives is supplied here.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-level
+      subset: ''
+    musescore:
+      status: workaround
+      summary: Text and visual coding
+      mechanism: Explain editorial categories with text, styles or a separate apparatus.
+      caveat: Readers cannot infer a scholarly ontology from colour or italics.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-props
+      subset: ''
+    mei:
+      status: direct
+      summary: Typed editorial wrappers
+      mechanism: sic/corr and orig/reg express distinct editorial acts; choice can retain both alternatives.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-choice
+      subset: ''
+- id: fmt.critical-apparatus
+  feature: Multiple witnesses and alternative readings
+  question: Alternatives should remain alternatives, rather than simultaneous performed notes.
+  tags:
+  - apparatus
+  - witness
+  - variant
+  - lemma
+  - readings
+  importance: 3
+  cells:
+    krn:
+      status: qualified
+      summary: Strophes / external apparatus
+      mechanism: Humdrum strophes can retain alternative versions.
+      caveat: Witness relationships and reading selection need a documented project model.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-repeats
+      subset: ''
+    musicxml:
+      status: workaround
+      summary: One reading plus commentary
+      mechanism: Keep the selected score and describe variants in footnotes or linked material.
+      caveat: An ossia is not a general critical apparatus.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-footnote
+      subset: ''
+    musescore:
+      status: workaround
+      summary: Separate readings or ossias
+      mechanism: Use separate scores/staves and an external apparatus for witness comparisons.
+      caveat: Avoid making every reading sound simultaneously.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-parts
+      subset: ''
+    mei:
+      status: direct
+      summary: app / lem / rdg
+      mechanism: A critical apparatus groups lemma and readings with source attribution.
+      caveat: A renderer needs a reading-selection policy.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-app
+      subset: ''
+- id: fmt.responsibility
+  feature: Responsibility for individual interventions
+  question: Who supplied this note, rather than who edited the whole file?
+  tags:
+  - editor
+  - resp
+  - provenance
+  - attribution
+  importance: 3
+  cells:
+    krn:
+      status: extension
+      summary: Comment or associated spine
+      mechanism: Attach responsibility using a defined annotation convention; reference records identify contributors
+        at document level.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-refs
+      subset: 'Project convention: comment or associated spine'
+    musicxml:
+      status: workaround
+      summary: Editorial text plus IDs
+      mechanism: Associate a note with explanatory level/footnote content or external attribution.
+      caveat: Use an explicit project convention for machine-readable responsibility.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-level
+      subset: ''
+    musescore:
+      status: workaround
+      summary: External or visible attribution
+      mechanism: Project creator tags do not establish per-intervention scholarly responsibility.
+      caveat: ''
+      workaround: Maintain an apparatus keyed to score locations.
+      evidence: inference
+      sources:
+      - ms-props
+      subset: ''
+    mei:
+      status: direct
+      summary: resp references
+      mechanism: Responsibility attributes can identify the person or agency responsible for an editorial act.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-edit
+      subset: ''
+- id: fmt.certainty
+  feature: Uncertainty and confidence
+  question: An uncertain reading is not simply an invisible or small note.
+  tags:
+  - unclear
+  - uncertainty
+  - confidence
+  - probability
+  importance: 2
+  cells:
+    krn:
+      status: extension
+      summary: Qualify in annotations
+      mechanism: Record confidence in comments or an associated spine under a project convention.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-fret
+      subset: 'Project convention: annotations or an associated spine'
+    musicxml:
+      status: workaround
+      summary: Narrative confidence
+      mechanism: Explain uncertainty using editorial level/footnote text; retain any numeric model externally.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-level
+      subset: ''
+    musescore:
+      status: workaround
+      summary: Appearance plus explanation
+      mechanism: Use notation/text for readers and an external record for structured confidence.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-symbols
+      subset: ''
+    mei:
+      status: direct
+      summary: cert and confidence
+      mechanism: Editorial markup can carry qualitative certainty and, on applicable elements, numeric confidence.
+      caveat: Check attribute availability in the selected customization.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-supplied
+      subset: ''
+- id: fmt.gaps-damage
+  feature: Missing, illegible and supplied material
+  question: A lost passage, an unreadable passage and an editorial completion are different claims.
+  tags:
+  - lacuna
+  - damage
+  - gap
+  - unclear
+  - supplied
+  importance: 3
+  cells:
+    krn:
+      status: workaround
+      summary: Do not use rests for loss
+      mechanism: Represent loss through a declared annotation convention; distinguish musical silence from missing
+        evidence.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-refs
+      subset: ''
+    musicxml:
+      status: workaround
+      summary: Editorial explanation
+      mechanism: A performance rest does not mean a damaged source; explain the gap and any reconstruction separately.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-footnote
+      subset: ''
+    musescore:
+      status: workaround
+      summary: Text and reconstructed score
+      mechanism: Retain damage information outside the sounding reconstruction or in visible notes.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-symbols
+      subset: ''
+    mei:
+      status: direct
+      summary: gap / unclear / supplied
+      mechanism: Different elements distinguish omission, uncertain reading and editorial replacement; attributes
+        qualify extent and cause.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-edit
+      subset: ''
+- id: fmt.genetic-editing
+  feature: Deletions, additions and revision layers
+  question: Describe changes on the manuscript, not only the editor’s final reading.
+  tags:
+  - genetic
+  - revision
+  - deletion
+  - addition
+  - manuscript
+  importance: 2
+  cells:
+    krn:
+      status: extension
+      summary: Custom linked descriptions
+      mechanism: Alternative streams and annotations can document revisions under a local model.
+      caveat: No claim of a standard genetic-editing ontology.
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-repeats
+      subset: 'Project convention: linked alternative streams and annotations'
+    musicxml:
+      status: workaround
+      summary: External revision evidence
+      mechanism: Use links or supplementary documentation for manuscript operations.
+      caveat: Score editing history is not manuscript revision history.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-link
+      subset: ''
+    musescore:
+      status: workaround
+      summary: Separate evidence record
+      mechanism: Application edits produce a score; document scribal/compositional revisions separately.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-props
+      subset: ''
+    mei:
+      status: direct
+      summary: add / del / subst
+      mechanism: MEI distinguishes visible source changes from editorial correction and supports genetic textual
+        work.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-edit
+      subset: ''
+- id: fmt.diplomatic-normalized
+  feature: Diplomatic versus normalized views
+  question: Keep original and regularized forms together without overwriting the source.
+  tags:
+  - diplomatic
+  - normalized
+  - original
+  - regularized
+  importance: 3
+  cells:
+    krn:
+      status: qualified
+      summary: Alternatives and conventions
+      mechanism: Use alternative sections/strophes or documented original/modernized conventions.
+      caveat: Extraction rules must specify which view is intended.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-repeats
+      subset: ''
+    musicxml:
+      status: workaround
+      summary: Separate views
+      mechanism: Store separate score versions or linked originals and explanations.
+      caveat: A selected appearance alone does not retain both interpretations.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-link
+      subset: ''
+    musescore:
+      status: workaround
+      summary: Parallel projects or staves
+      mechanism: Maintain distinct views and document how edits propagate.
+      caveat: Linked performance parts are not editorial-choice containers.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-parts
+      subset: ''
+    mei:
+      status: direct
+      summary: choice with orig / reg
+      mechanism: Retain original and regularized encodings within a choice.
+      caveat: Rendering/extraction software must choose a branch.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-choice
+      subset: ''
+- id: fmt.facsimile-zones
+  feature: Link notes to manuscript image regions
+  question: A URL to a page is weaker than a coordinate-based relationship to a note.
+  tags:
+  - facsimile
+  - manuscript
+  - image
+  - zone
+  - IIIF
+  importance: 3
+  cells:
+    krn:
+      status: extension
+      summary: External mapping
+      mechanism: Use note-address conventions and image-region references in associated metadata.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-refs
+      subset: 'Project convention: external image-region mapping'
+    musicxml:
+      status: qualified
+      summary: Links, not a facsimile model
+      mechanism: link/bookmark can associate resources and locations.
+      caveat: Image zones and surface relationships require a project convention.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-link
+      subset: ''
+    musescore:
+      status: workaround
+      summary: External alignment
+      mechanism: An image or URL in a project is not a semantic note-to-surface mapping.
+      caveat: ''
+      workaround: Keep coordinate and identity mapping externally.
+      evidence: inference
+      sources:
+      - ms-props
+      subset: ''
+    mei:
+      status: direct
+      summary: surface / zone / facs
+      mechanism: Define source surfaces and zones; musical elements can reference them with facs.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-facsimile
+      subset: ''
+- id: fmt.annotations
+  feature: Machine-readable annotations and ranges
+  question: Distinguish a printed comment from an addressable scholarly assertion.
+  tags:
+  - annotation
+  - range
+  - assertion
+  - footnote
+  importance: 2
+  cells:
+    krn:
+      status: qualified
+      summary: Comments and extra data
+      mechanism: Local/global comments and typed spines permit annotation; define the target and vocabulary explicitly.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-syntax
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Footnotes and groupings
+      mechanism: footnote supports printed commentary; grouping/feature supports analysis.
+      caveat: These are different mechanisms with different consumers.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-footnote
+      - mx-grouping
+      subset: ''
+    musescore:
+      status: workaround
+      summary: Text or metadata
+      mechanism: Use visible comments or an external structured annotation file.
+      caveat: Score text is not a general annotation graph.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-props
+      subset: ''
+    mei:
+      status: direct
+      summary: annot with targets
+      mechanism: annot can carry explanation, attribution and links to affected material.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-annot
+      subset: ''
+- id: fmt.source-description
+  feature: Physical source, hands and provenance
+  question: A scholarly edition may need to describe an object, not merely cite its title.
+  tags:
+  - codicology
+  - provenance
+  - hands
+  - paper
+  - source
+  importance: 2
+  cells:
+    krn:
+      status: qualified
+      summary: Bibliographic records plus custom data
+      mechanism: Reference records identify sources; detailed material description needs additional conventions.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-refs
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Basic source citation
+      mechanism: identification/source supplies bibliographic context.
+      caveat: Detailed codicology requires external or project-specific metadata.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-identification
+      subset: ''
+    musescore:
+      status: workaround
+      summary: Project metadata and documents
+      mechanism: Keep detailed physical-source and hand descriptions alongside the score.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-props
+      subset: ''
+    mei:
+      status: direct
+      summary: Structured source descriptions
+      mechanism: MEI metadata covers physical sources and provenance with detailed source-description structures.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-metadata
+      subset: ''
+- id: fmt.edition-selection
+  feature: Producing a performable reading from an edition
+  question: Retaining alternatives and selecting one for playback are separate operations.
+  tags:
+  - selection
+  - rendering
+  - apparatus
+  - playback
+  importance: 3
+  cells:
+    krn:
+      status: qualified
+      summary: Explicit extraction policy
+      mechanism: Section and strophe tools can select an interpretation before further processing.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-repeats
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Usually already selected
+      mechanism: The interchange score generally represents a chosen musical text.
+      caveat: Preserve the apparatus elsewhere if selecting loses evidence.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-spec
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Performance project
+      mechanism: Create a playing score from the selected reading; keep documentary information outside that reduction.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-export
+      subset: ''
+    mei:
+      status: qualified
+      summary: Selection is a processing step
+      mechanism: app/choice preserve alternatives; consumers must define which reading becomes the score.
+      caveat: Schema validity does not determine an editorial policy.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-app
+      - mei-choice
+      subset: ''

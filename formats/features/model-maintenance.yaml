@@ -1,0 +1,411 @@
+# Features in the category "Model & maintenance". IDs are fmt.<slug> and permanent. Status vocabulary: formats.yaml. Sources: sources.yaml.
+- id: fmt.primary-object
+  feature: What is the primary object?
+  question: The design centre predicts which information is natural to preserve.
+  tags:
+  - architecture
+  - purpose
+  - preservation
+  importance: 3
+  cells:
+    krn:
+      status: direct
+      summary: Time-aligned symbolic streams
+      mechanism: Humdrum coordinates typed spines; **kern supplies a compact musical vocabulary.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-syntax
+      subset: ''
+    musicxml:
+      status: direct
+      summary: Interchange score
+      mechanism: MusicXML exchanges score notation and selected performance information between applications.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-spec
+      subset: ''
+    musescore:
+      status: direct
+      summary: Editable application project
+      mechanism: MSCZ/MSCX preserve the score as a MuseScore project, with application-specific editing and presentation
+        state.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-save
+      subset: ''
+    mei:
+      status: direct
+      summary: Encoded music document
+      mechanism: MEI models musical documents, their interpretation and their documentary context.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-intro
+      subset: ''
+- id: fmt.version-profile
+  feature: Version and dialect are part of the answer
+  question: A filename extension alone does not specify a reproducible interpretation.
+  tags:
+  - version
+  - dialect
+  - profile
+  - schema
+  importance: 3
+  cells:
+    krn:
+      status: qualified
+      summary: Core plus named dialect
+      mechanism: Separate original **kern from VHV/humlib conventions and other Humdrum representations.
+      caveat: A signifier can acquire different practical meanings; record the dialect.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-core
+      - krn-start
+      subset: ''
+    musicxml:
+      status: direct
+      summary: MusicXML 4.0 baseline
+      mechanism: This comparison uses the published 4.0 specification, not an evolving editor draft.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-spec
+      subset: ''
+    musescore:
+      status: qualified
+      summary: MuseScore 4 family
+      mechanism: 'Application and file versions differ: the documented 4.6.x family uses native file version 4.60.'
+      caveat: Live handbook claims need checking against the exact installed build.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-version
+      subset: ''
+    mei:
+      status: qualified
+      summary: MEI 5.1 and customization
+      mechanism: CMN, Mensural, Neumes, All and Basic are distinct schema choices.
+      caveat: Full MEI capabilities cannot be assumed for MEI Basic.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-schemas
+      subset: ''
+- id: fmt.time-organisation
+  feature: How simultaneous events are organised
+  question: This changes parsing, editing and comparison algorithms.
+  tags:
+  - timing
+  - onset
+  - hierarchy
+  - cursor
+  importance: 3
+  cells:
+    krn:
+      status: direct
+      summary: Aligned records
+      mechanism: Events align across tab-separated spines; null tokens carry no new event. Split/join operations
+        change spine topology.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-syntax
+      subset: ''
+    musicxml:
+      status: direct
+      summary: Sequential cursor
+      mechanism: Durations advance a cursor; backup/forward coordinate voices and staves inside a measure.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-backup
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Measures, voices, score positions
+      mechanism: Editing follows a shared measure structure and four voice slots per staff.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-voices
+      - ms-timesig
+      subset: ''
+    mei:
+      status: direct
+      summary: Hierarchy plus links
+      mechanism: CMN normally nests measure → staff → layer; control events can target notes through identifiers
+        or timestamps.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-cmn
+      subset: ''
+- id: fmt.persistent-addresses
+  feature: Stable addresses for notes and annotations
+  question: Can an external comment keep pointing to the same musical object after edits?
+  tags:
+  - identity
+  - linking
+  - annotation
+  - provenance
+  importance: 3
+  cells:
+    krn:
+      status: extension
+      summary: Project convention
+      mechanism: Plain tokens do not provide a universal durable note ID; add identifiers in associated data.
+      caveat: Line/field offsets change during editing.
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-fret
+      subset: 'Project convention: identifiers in associated data'
+    musicxml:
+      status: qualified
+      summary: IDs and bookmarks
+      mechanism: Optional element IDs and bookmark targets can identify locations.
+      caveat: Importer preservation and ID stability are separate questions.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-bookmark
+      subset: ''
+    musescore:
+      status: unknown
+      summary: External identity unverified
+      mechanism: No stable public scholarly note-address contract was established from the documentation reviewed.
+      caveat: Do not use screen position as a durable identifier.
+      workaround: ''
+      evidence: unverified
+      sources:
+      - ms-props
+      subset: ''
+    mei:
+      status: direct
+      summary: xml:id and relationships
+      mechanism: xml:id supports references; corresp, sameas and related links express relationships.
+      caveat: An editing workflow must preserve identifiers.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-links
+      subset: ''
+- id: fmt.extensibility
+  feature: Adding a new semantic vocabulary
+  question: A file can carry custom data without other programs understanding it.
+  tags:
+  - custom
+  - extension
+  - validation
+  - vocabulary
+  importance: 3
+  cells:
+    krn:
+      status: extension
+      summary: New spine types
+      mechanism: Define another exclusive interpretation and align its values with the music.
+      caveat: Document the vocabulary and the programs that understand it.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-fret
+      subset: 'Humdrum extension: new exclusive interpretations (spine types)'
+    musicxml:
+      status: extension
+      summary: Defined extension points
+      mechanism: other-notation and related fields carry additional vocabulary.
+      caveat: Custom text alone does not establish interoperable semantics.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-other-notation
+      subset: MusicXML extension points (other-notation and related elements)
+    musescore:
+      status: workaround
+      summary: Metadata or visual objects
+      mechanism: Use project metadata or visible text for project-specific information.
+      caveat: Arbitrary new native XML elements are not a supported interchange contract.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-props
+      subset: ''
+    mei:
+      status: extension
+      summary: Schema customization
+      mechanism: Choose or customize a schema for the project.
+      caveat: Distribute the customization; a generic MEI reader may not implement it.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-schemas
+      subset: MEI schema customization
+- id: fmt.diffs
+  feature: Human review and version-control diffs
+  question: This is an engineering judgement about the representation, not a file-size benchmark.
+  tags:
+  - git
+  - diff
+  - text
+  - serialization
+  importance: 2
+  cells:
+    krn:
+      status: qualified
+      summary: Compact but topology-sensitive
+      mechanism: Text rows are concise; adding a spine changes many lines and alignment.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-syntax
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Verbose, structured diffs
+      mechanism: XML is reviewable; changed voice order, divisions or layout can create large non-musical diffs.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-backup
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Prefer expanded project data
+      mechanism: Compressed projects are awkward to diff; inspect XML where available and retain original packages.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-save
+      subset: ''
+    mei:
+      status: qualified
+      summary: IDs help semantic diffs
+      mechanism: XML structure and identifiers support targeted comparison; different valid encodings can still
+        differ substantially.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - mei-links
+      subset: ''
+- id: fmt.metadata
+  feature: Bibliographic and source metadata
+  question: Distinguish a title field from a description of a physical source.
+  tags:
+  - metadata
+  - source
+  - catalogue
+  - copyright
+  importance: 3
+  cells:
+    krn:
+      status: direct
+      summary: Reference records
+      mechanism: Standard !!! records cover authorship and bibliographic data; project-defined records can supplement
+        them.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-refs
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Interchange metadata
+      mechanism: identification includes creators, rights, encoding history, source and relations; miscellaneous
+        fields add metadata.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-identification
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Project tags
+      mechanism: Project Properties provides descriptive tags, including custom tags; visible title text is a separate
+        object.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-props
+      subset: ''
+    mei:
+      status: direct
+      summary: Rich source descriptions
+      mechanism: meiHead distinguishes the encoding, work, sources and revision history; source descriptions support
+        bibliographic scholarship.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-metadata
+      subset: ''
+- id: fmt.asset-dependencies
+  feature: Assets and reproducible environments
+  question: Saving a score is different from preserving every dependency needed to reproduce it.
+  tags:
+  - archive
+  - dependencies
+  - fonts
+  - assets
+  importance: 2
+  cells:
+    krn:
+      status: qualified
+      summary: Text plus toolchain
+      mechanism: Preserve dialect definitions and rendering/conversion versions with the text.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-system
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Score plus rendering choices
+      mechanism: Layout and font defaults are encoded, but omitted defaults are application decisions.
+      caveat: Keep referenced resources and a reference rendering.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-defaults
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Project plus fonts and sounds
+      mechanism: Rendering fonts and playback sounds/plugins belong to the reproducibility environment.
+      caveat: A project does not guarantee identical output on another installation.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-fonts
+      - ms-mixer
+      subset: ''
+    mei:
+      status: qualified
+      summary: Document plus linked resources
+      mechanism: Facsimile and recording references can point outside the XML.
+      caveat: Archive those resources and the schema/rendering profile.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-facsimile
+      subset: ''

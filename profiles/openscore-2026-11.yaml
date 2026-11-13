@@ -1,0 +1,90 @@
+# OpenScore profile of the Transcription Principles (DRAFT).
+#
+# Describes the position of the OpenScore lieder and string quartet corpora, from their published
+# statements. Rules without an entry under `basis` take the Scores of Scores strength: they are
+# core defaults, not documented OpenScore choices, and stay so until the OpenScore project
+# confirms or changes them. Setting `status: adopted` requires every default to be confirmed.
+
+profile: openscore-2026-11
+title: OpenScore profile (draft)
+status: draft
+principles_version: "2026-11"
+
+basis:
+  stance.faithful-reading: "Paper abstract: the secondary aim is to limit editorial interventions, copying sources directly; OpenScore copies a source as directly as possible."
+  stance.meaning-over-appearance: "Paper abstract: the first aim is scores that are useful to musicians and others."
+  stance.judgement-stays-out: "OpenScore project statement (musescore.org, 2017): no editorial decisions, except global ones such as a separate staff for each instrument."
+  read.preserve-errors: "Same statement: no corrections except the most blatant mistakes. Paper abstract: changes are made only in the case of clear errors."
+  correct.in-place: "Same statement and abstract: clear errors are corrected in the edition itself."
+  correct.layer: "No separate corrections layer is described for OpenScore."
+  encode.defaults-not-overrides: "Paper plan, table of choices: presentation follows MuseScore defaults and a template."
+
+strengths:
+  stance.faithful-reading: SHOULD
+  stance.meaning-over-appearance: MUST
+  stance.judgement-stays-out: MUST
+  stance.doubt-means-preserve: MUST
+
+  read.preserve-distinctions: MUST
+  read.consistency-by-equivalence: MUST
+  read.preserve-errors: SHOULD
+  read.record-source-marks: MUST
+  read.transcribe-all-marks: MUST
+  read.ambiguous-marks: MUST
+  read.source-language: MUST
+  read.standard-instructions: MUST
+  read.composer-led-grouping: SHOULD
+  read.ornaments-as-printed: MUST
+
+  encode.real-objects: MUST
+  encode.defaults-not-overrides: MUST
+  encode.layout-as-data: SHOULD
+
+  normalise.closed-list: MUST
+  normalise.beam-grouping: MUST
+  normalise.rest-grouping: MUST
+  normalise.tuplet-brackets: MUST
+  normalise.tremolo: MAY
+  normalise.stem-placement: MUST
+  normalise.accidental-conventions: MUST
+  normalise.clef: SHOULD
+  normalise.terms: SHOULD
+  normalise.spread-words: MUST
+  normalise.page-geometry: MUST
+
+  declare.mark-additions: MUST
+  declare.report-deviations: MUST
+  declare.observations: MUST
+  declare.record-provenance: MUST
+
+  correct.error-test: MUST
+  correct.in-place: MUST
+  correct.layer: OFF
+  correct.record: MUST
+
+aim_order:
+  - rule: stance.meaning-over-appearance
+    note: Useful to musicians first.
+  - rule: stance.faithful-reading
+    note: Then copy the source directly.
+  - rule: stance.judgement-stays-out
+
+precedence:
+  - over: stance.meaning-over-appearance
+    under: stance.faithful-reading
+    scope: Appearance, and source errors that pass correct.error-test.
+    reason: A useful score comes first; the source is otherwise copied directly.
+  - over: read.standard-instructions
+    under: read.source-language
+    scope: Instructions that have a standard encoding in the tool.
+    reason: Standard entries drive playback, part extraction and export.
+  - over: correct.in-place
+    under: read.preserve-errors
+    scope: Source errors that pass correct.error-test.
+    reason: A clear error is corrected; every other error stays as printed, and read.preserve-errors still applies to it.
+
+scope:
+  encoding:
+    format: musescore
+    dialect: MuseScore 4 native project (MSCZ/MSCX), documented 4.x workflows.
+    accept_extensions: []

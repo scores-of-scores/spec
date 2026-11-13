@@ -1,17 +1,33 @@
 {
   "principles_version": "2026-11",
-  "profile": "sos-2026-11",
-  "mark_categories": [
-    {
-      "id": "fingering",
-      "title": "Fingering",
-      "description": "Finger numbers and similar hand-position indications printed in the source.",
-      "default_treatment": "unsupported",
-      "treatment": "unsupported",
-      "reclassified": false,
-      "reason": "Fingering is outside the remit of some basic encoding formats."
-    }
+  "profiles": [
+    "openscore-2026-11",
+    "sos-2026-11"
   ],
+  "mark_categories": {
+    "openscore-2026-11": [
+      {
+        "id": "fingering",
+        "title": "Fingering",
+        "description": "Finger numbers and similar hand-position indications printed in the source.",
+        "derived": "transcribe",
+        "treatment": "transcribe",
+        "reclassified": false,
+        "reason": "fmt.fingering in musescore: direct. Fingering text objects."
+      }
+    ],
+    "sos-2026-11": [
+      {
+        "id": "fingering",
+        "title": "Fingering",
+        "description": "Finger numbers and similar hand-position indications printed in the source.",
+        "derived": "unsupported",
+        "treatment": "unsupported",
+        "reclassified": false,
+        "reason": "fmt.fingering in krn: extension (extension not accepted). Separate **fing spine."
+      }
+    ]
+  },
   "rules": [
     {
       "id": "stance.faithful-reading",
@@ -22,12 +38,19 @@
       "kind": "obligation",
       "title": "Faithful reading",
       "statement": "Reproduce what the source prints, as exactly as the encoding allows. A transcription reads; it does not edit.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "SHOULD",
+        "sos-2026-11": "MUST"
+      },
       "relations": {
         "tension-with": [
           "stance.meaning-over-appearance"
         ]
       },
+      "format_features": [
+        "fmt.version-profile",
+        "fmt.exact-appearance"
+      ],
       "aliases": [
         "TP1"
       ],
@@ -42,13 +65,17 @@
       "kind": "obligation",
       "title": "Meaning over appearance",
       "statement": "Encode musical meaning in a form that converts, plays back and survives tool changes. Where an exact visual copy conflicts with a standard encoding, use the standard encoding, only through the registered normalisations, and report them.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {
         "requires": [
           "normalise.closed-list",
           "declare.report-deviations"
         ]
       },
+      "format_features": [],
       "aliases": [
         "TP2"
       ],
@@ -63,8 +90,12 @@
       "kind": "obligation",
       "title": "Judgement stays out",
       "statement": "Do not choose between readings, correct, complete or interpret. A transcription records; judgement belongs elsewhere.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {},
+      "format_features": [],
       "aliases": [
         "TP4"
       ],
@@ -78,13 +109,20 @@
       "theme_title": "Boundary",
       "kind": "obligation",
       "title": "In doubt, preserve",
-      "statement": "When it is unclear which tier a decision falls in, treat it as editorial. Keep what the source prints, flag the point and ask a reviewer.",
-      "strength": "MUST",
+      "statement": "When it is unclear which tier a decision falls in, treat it as editorial. Keep what the source prints and record the point as an observation.",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {
         "refines": [
           "stance.judgement-stays-out"
+        ],
+        "requires": [
+          "declare.observations"
         ]
       },
+      "format_features": [],
       "aliases": [],
       "status": "active"
     },
@@ -97,8 +135,16 @@
       "kind": "obligation",
       "title": "Preserve the distinctions the source makes",
       "statement": "Where the source uses different notations for what might seem the same, keep the difference (for example common time, cut time and 4/4; ties and slurs; acciaccatura and appoggiatura; key signatures as given).",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {},
+      "format_features": [
+        "fmt.phrase-slur-tie",
+        "fmt.time-signature-symbol",
+        "fmt.grace-timing"
+      ],
       "aliases": [
         "TP3"
       ],
@@ -113,12 +159,16 @@
       "kind": "obligation",
       "title": "Consistency means equivalence only",
       "statement": "Encode notations that mean the same thing the same way. Preserve any divergence that might be musical (a different articulation in one part, a different pitch in a repeated passage); do not harmonise it.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {
         "refines": [
           "stance.judgement-stays-out"
         ]
       },
+      "format_features": [],
       "aliases": [
         "TP5"
       ],
@@ -132,16 +182,27 @@
       "theme_title": "Fidelity",
       "kind": "obligation",
       "title": "Source errors are preserved",
-      "statement": "Transcribe an evident source error as printed and flag it for whoever maintains corrections. Never fix it silently in the transcription.",
-      "strength": "MUST",
+      "statement": "Transcribe a source error as printed and record it as an observation. Never fix it silently in the transcription.",
+      "strengths": {
+        "openscore-2026-11": "SHOULD",
+        "sos-2026-11": "MUST"
+      },
       "relations": {
         "refines": [
           "stance.judgement-stays-out"
         ],
+        "requires": [
+          "declare.observations"
+        ],
         "see-also": [
-          "declare.report-deviations"
+          "declare.report-deviations",
+          "correct.error-test"
         ]
       },
+      "format_features": [
+        "fmt.irregular-measures",
+        "fmt.annotations"
+      ],
       "aliases": [
         "TP7"
       ],
@@ -155,13 +216,19 @@
       "theme_title": "Fidelity",
       "kind": "obligation",
       "title": "Record the source's own editorial marks",
-      "statement": "Brackets and similar marks printed in the source signal an intervention by that edition. Keep the element, record each such mark in the report, and drop the printed mark from the encoding only if the standard encoding requires it.",
-      "strength": "MUST",
+      "statement": "Brackets and similar marks printed in the source signal an intervention by that edition. Keep the printed mark in the encoding where the format expresses it, and record each such mark in the report. Where the format cannot express the mark, record it in the report only.",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {
         "see-also": [
           "declare.report-deviations"
         ]
       },
+      "format_features": [
+        "fmt.editorial-accidentals"
+      ],
       "aliases": [
         "TP11"
       ],
@@ -176,12 +243,18 @@
       "kind": "obligation",
       "title": "Transcribe every printed mark",
       "statement": "Transcribe pitches, rhythms and every printed mark, within what the encoding can express. A category of mark that is classed as editorial or unsupported (see mark_categories; a profile may reclassify a category) is left out systematically and stated once in each report.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {
         "requires": [
           "declare.report-deviations"
         ]
       },
+      "format_features": [
+        "fmt.fingering"
+      ],
       "aliases": [
         "TP6"
       ],
@@ -196,7 +269,10 @@
       "kind": "obligation",
       "title": "Keep the source language",
       "statement": "Keep musical terms and other text in the source language. Translations are additions.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {
         "tension-with": [
           "read.standard-instructions"
@@ -206,6 +282,7 @@
           "normalise.terms"
         ]
       },
+      "format_features": [],
       "aliases": [
         "TP9"
       ],
@@ -220,8 +297,12 @@
       "kind": "obligation",
       "title": "Standard encodings for instructions",
       "statement": "Transcribe printed techniques, strings, mutes and harmonics using the standard encoding where one exists, even where that changes the printed wording.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {},
+      "format_features": [],
       "aliases": [
         "TP10"
       ],
@@ -235,14 +316,18 @@
       "theme_title": "Notation",
       "kind": "obligation",
       "title": "Preserve composer-led grouping",
-      "statement": "Preserve beaming, rest and similar grouping that carries musical meaning (the composer's own choice for a passage). Grouping that is only the source edition's habit is a presentation matter. If the two cannot be told apart, ask a reviewer and report the decision.",
-      "strength": "SHOULD",
+      "statement": "Preserve beaming, rest and similar grouping that carries musical meaning (the composer's own choice for a passage). Grouping that is only the source edition's habit is a presentation matter. If the two cannot be told apart, keep the grouping as printed and record an observation.",
+      "strengths": {
+        "openscore-2026-11": "SHOULD",
+        "sos-2026-11": "SHOULD"
+      },
       "relations": {
         "exception-of": [
           "normalise.beam-grouping",
           "normalise.rest-grouping"
         ]
       },
+      "format_features": [],
       "aliases": [
         "TP8"
       ],
@@ -257,11 +342,47 @@
       "kind": "obligation",
       "title": "Ornaments as printed",
       "statement": "Copy ornaments as printed, including the difference between acciaccatura and appoggiatura and the position before or after the main note. Where the tool cannot represent a detail, use the nearest available form in this order - type of ornament, then number of beams or strokes, then other indications.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {},
+      "format_features": [
+        "fmt.grace-timing",
+        "fmt.ornament-realization"
+      ],
       "aliases": [
         "TP12"
       ],
+      "status": "active"
+    },
+    {
+      "id": "read.ambiguous-marks",
+      "domain": "read",
+      "domain_title": "Reading the source",
+      "theme": "notation",
+      "theme_title": "Notation",
+      "kind": "obligation",
+      "title": "Ambiguous marks",
+      "statement": "Where a printed mark could be read in more than one way (what it is, or which notes it attaches to), encode the reading that the source's own convention fixes - a curve joining adjacent notes of the same pitch is a tie, any other curve is a slur - attached to the notes at the horizontal positions nearest the printed endpoints. Where the convention does not fix a reading, encode that nearest-endpoint reading and record an observation that names the alternatives. A mark that cannot be read as any notated object is recorded as an observation and not encoded.",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
+      "relations": {
+        "refines": [
+          "stance.doubt-means-preserve"
+        ],
+        "see-also": [
+          "read.preserve-distinctions",
+          "declare.observations"
+        ]
+      },
+      "format_features": [
+        "fmt.phrase-slur-tie",
+        "fmt.spanner-geometry"
+      ],
+      "aliases": [],
       "status": "active"
     },
     {
@@ -273,8 +394,15 @@
       "kind": "obligation",
       "title": "Real objects, not drawings or text",
       "statement": "Encode ties, slurs, hairpins, spanning lines, tuplets, tremolo and grace notes as the musical objects they are, so that playback and export work. Do not draw them or type them as text.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {},
+      "format_features": [
+        "fmt.phrase-slur-tie",
+        "fmt.spanner-geometry"
+      ],
       "aliases": [
         "TP13"
       ],
@@ -289,12 +417,19 @@
       "kind": "obligation",
       "title": "Defaults, not manual overrides",
       "statement": "Use the tool's defaults for placement, stem direction, accidentals and similar. Avoid manual position offsets and flips.",
-      "strength": "SHOULD",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "SHOULD"
+      },
       "relations": {
         "refines": [
           "stance.meaning-over-appearance"
         ]
       },
+      "format_features": [
+        "fmt.stem-direction",
+        "fmt.visual-accidental"
+      ],
       "aliases": [
         "TP14"
       ],
@@ -309,12 +444,18 @@
       "kind": "obligation",
       "title": "Source layout is removable data",
       "statement": "Record the source's system and page breaks where possible, never split a bar across them, and keep them separable from the musical content so that they can be removed in one step. Where a source has no usable layout, omit them and say so.",
-      "strength": "SHOULD",
+      "strengths": {
+        "openscore-2026-11": "SHOULD",
+        "sos-2026-11": "SHOULD"
+      },
       "relations": {
         "see-also": [
           "normalise.page-geometry"
         ]
       },
+      "format_features": [
+        "fmt.page-breaks"
+      ],
       "aliases": [
         "TP16"
       ],
@@ -329,7 +470,10 @@
       "kind": "obligation",
       "title": "Normalisations are a closed list",
       "statement": "Presentation normalisations are limited to those registered in this domain. A profile chooses which are permitted or required; local notes may not add to them. Each applied normalisation is stated once per transcription in the report.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {
         "refines": [
           "stance.meaning-over-appearance"
@@ -338,6 +482,7 @@
           "declare.report-deviations"
         ]
       },
+      "format_features": [],
       "aliases": [
         "TP15"
       ],
@@ -352,8 +497,14 @@
       "kind": "permission",
       "title": "Beam grouping",
       "statement": "Beam grouping follows the time-signature default, except where grouping is composer-led.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {},
+      "format_features": [
+        "fmt.beam-geometry"
+      ],
       "aliases": [
         "TP15.1"
       ],
@@ -368,8 +519,12 @@
       "kind": "permission",
       "title": "Rest grouping",
       "statement": "Rest grouping follows the time-signature default, except where grouping is composer-led.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {},
+      "format_features": [],
       "aliases": [
         "TP15.2"
       ],
@@ -384,8 +539,14 @@
       "kind": "permission",
       "title": "Tuplet brackets",
       "statement": "Tuplet brackets use a single standard form. Repeated tuplet numbers in a long group may be hidden but are kept in the data.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {},
+      "format_features": [
+        "fmt.nested-tuplets"
+      ],
       "aliases": [
         "TP15.3"
       ],
@@ -400,8 +561,12 @@
       "kind": "permission",
       "title": "Tremolo",
       "statement": "A measured tremolo may use any semantically equivalent notation.",
-      "strength": "MAY",
+      "strengths": {
+        "openscore-2026-11": "MAY",
+        "sos-2026-11": "MAY"
+      },
       "relations": {},
+      "format_features": [],
       "aliases": [
         "TP15.10"
       ],
@@ -416,8 +581,14 @@
       "kind": "permission",
       "title": "Stem and placement",
       "statement": "Stem direction and similar placement is automatic.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {},
+      "format_features": [
+        "fmt.stem-direction"
+      ],
       "aliases": [
         "TP15.4"
       ],
@@ -432,8 +603,14 @@
       "kind": "permission",
       "title": "Accidental conventions",
       "statement": "Courtesy accidentals and cancelling naturals follow the default.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {},
+      "format_features": [
+        "fmt.visual-accidental"
+      ],
       "aliases": [
         "TP15.5"
       ],
@@ -448,8 +625,14 @@
       "kind": "permission",
       "title": "Clefs",
       "statement": "An unusual or obsolete clef may be replaced by its nearest modern equivalent; an octave-ambiguous clef is notated at sounding pitch; a brief clef change may be adapted for readability. Written pitch is unaffected.",
-      "strength": "SHOULD",
+      "strengths": {
+        "openscore-2026-11": "SHOULD",
+        "sos-2026-11": "SHOULD"
+      },
       "relations": {},
+      "format_features": [
+        "fmt.written-sounding"
+      ],
       "aliases": [
         "TP15.6"
       ],
@@ -464,8 +647,12 @@
       "kind": "permission",
       "title": "Standard terms and abbreviations",
       "statement": "Standard abbreviations and equivalent terms are normalised (for example one standard form for decrescendo and diminuendo); anything ambiguous is spelled out.",
-      "strength": "SHOULD",
+      "strengths": {
+        "openscore-2026-11": "SHOULD",
+        "sos-2026-11": "SHOULD"
+      },
       "relations": {},
+      "format_features": [],
       "aliases": [
         "TP15.7"
       ],
@@ -480,8 +667,12 @@
       "kind": "permission",
       "title": "Words spread over several bars",
       "statement": "A word spread over several bars or systems (for example cre - - scen - - do) is one spanning object with a start text and a continuation text.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {},
+      "format_features": [],
       "aliases": [
         "TP15.8"
       ],
@@ -496,12 +687,18 @@
       "kind": "permission",
       "title": "Page geometry and typography",
       "statement": "Page geometry and typography follow defaults. The source's system and page breaks are kept as data.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {
         "see-also": [
           "encode.layout-as-data"
         ]
       },
+      "format_features": [
+        "fmt.page-breaks"
+      ],
       "aliases": [
         "TP15.9"
       ],
@@ -516,12 +713,18 @@
       "kind": "obligation",
       "title": "Additions are rare and marked",
       "statement": "Add only what is needed to express the source's own notational conventions in the encoding (for example accidentals that the source's convention leaves implicit). Mark every addition visibly. Translations of non-standard terms are additions. Anything that needs judgement is editorial, not an addition.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {
         "refines": [
           "stance.judgement-stays-out"
         ]
       },
+      "format_features": [
+        "fmt.editorial-accidentals"
+      ],
       "aliases": [
         "TP17"
       ],
@@ -536,11 +739,39 @@
       "kind": "obligation",
       "title": "Report every unmarked deviation",
       "statement": "Report every deviation that is not visibly marked. Differences caused by registered normalisations are stated once per transcription; specific interventions are listed one by one. The report, with the transcription, is enough to recover what the source prints.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {},
+      "format_features": [],
       "aliases": [
         "TP18"
       ],
+      "status": "active"
+    },
+    {
+      "id": "declare.observations",
+      "domain": "declare",
+      "domain_title": "Declaration",
+      "theme": "observations",
+      "theme_title": "Observations",
+      "kind": "obligation",
+      "title": "Observations",
+      "statement": "Record in the report, as an observation, every point that may be a source error, a divergence between parts or repeated passages, a mark with more than one reading, or a decision whose tier was unclear. An observation gives the location, what the source prints, and why it was recorded. It does not change the transcription.",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
+      "relations": {
+        "see-also": [
+          "declare.report-deviations"
+        ]
+      },
+      "format_features": [
+        "fmt.annotations"
+      ],
+      "aliases": [],
       "status": "active"
     },
     {
@@ -552,11 +783,118 @@
       "kind": "obligation",
       "title": "Record provenance",
       "statement": "Record the source edition and file, the pages where the transcription appears, who transcribed and reviewed it, when, which tools were used, and the versions of the Principles, profile and notes applied.",
-      "strength": "MUST",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
       "relations": {},
+      "format_features": [
+        "fmt.metadata",
+        "fmt.source-description"
+      ],
       "aliases": [
         "TP19"
       ],
+      "status": "active"
+    },
+    {
+      "id": "correct.error-test",
+      "domain": "correct",
+      "domain_title": "Correction",
+      "theme": "test",
+      "theme_title": "The clear-error test",
+      "kind": "obligation",
+      "title": "The clear-error test",
+      "statement": "A source error is clear only if both conditions hold. (1) The printed reading is impossible under the source's own notation, for example a bar whose durations do not add up to the time signature and that is not marked as incomplete, a tie joining different pitches, or a slur that begins and never ends. (2) Exactly one minimal change makes the reading possible, and that change is found from the source alone, its own parallel passages included. An error that fails either condition is not clear and is kept as printed.",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
+      "relations": {
+        "refines": [
+          "stance.judgement-stays-out"
+        ]
+      },
+      "format_features": [],
+      "aliases": [],
+      "status": "active"
+    },
+    {
+      "id": "correct.in-place",
+      "domain": "correct",
+      "domain_title": "Correction",
+      "theme": "record",
+      "theme_title": "Placement and record",
+      "kind": "permission",
+      "title": "Correct in the transcription",
+      "statement": "A clear error (`correct.error-test`) may be corrected directly in the transcription.",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "OFF"
+      },
+      "relations": {
+        "tension-with": [
+          "read.preserve-errors"
+        ],
+        "requires": [
+          "correct.error-test",
+          "correct.record"
+        ]
+      },
+      "format_features": [],
+      "aliases": [],
+      "status": "active"
+    },
+    {
+      "id": "correct.layer",
+      "domain": "correct",
+      "domain_title": "Correction",
+      "theme": "record",
+      "theme_title": "Placement and record",
+      "kind": "obligation",
+      "title": "Corrections in a separate layer",
+      "statement": "A correction that is not made in the transcription is recorded in a layer separate from it, pinned to a transcription version, so that the printed reading and the corrected reading can each be recovered.",
+      "strengths": {
+        "openscore-2026-11": "OFF",
+        "sos-2026-11": "MUST"
+      },
+      "relations": {
+        "requires": [
+          "correct.error-test",
+          "correct.record"
+        ]
+      },
+      "format_features": [
+        "fmt.editorial-status",
+        "fmt.annotations",
+        "fmt.persistent-addresses"
+      ],
+      "aliases": [],
+      "status": "active"
+    },
+    {
+      "id": "correct.record",
+      "domain": "correct",
+      "domain_title": "Correction",
+      "theme": "record",
+      "theme_title": "Placement and record",
+      "kind": "obligation",
+      "title": "Record every correction",
+      "statement": "Record each correction with its location, the printed reading, the corrected reading, and the part of `correct.error-test` that was met, whether the correction is made in the transcription or in a layer.",
+      "strengths": {
+        "openscore-2026-11": "MUST",
+        "sos-2026-11": "MUST"
+      },
+      "relations": {
+        "see-also": [
+          "declare.report-deviations"
+        ]
+      },
+      "format_features": [
+        "fmt.editorial-status",
+        "fmt.annotations"
+      ],
+      "aliases": [],
       "status": "active"
     }
   ]

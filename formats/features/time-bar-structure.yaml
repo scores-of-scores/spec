@@ -1,0 +1,568 @@
+# Features in the category "Time & bar structure". IDs are fmt.<slug> and permanent. Status vocabulary: formats.yaml. Sources: sources.yaml.
+- id: fmt.equal-span-polymetre
+  feature: Different metres over a shared bar span
+  question: 'Example: 18/16 in one staff against 3/4 in another, with coincident barlines.'
+  tags:
+  - polymetre
+  - polymeter
+  - simultaneous
+  - time
+  - signatures
+  importance: 3
+  cells:
+    krn:
+      status: qualified
+      summary: Separate meter interpretations
+      mechanism: Meter indications can differ by spine; encode durations so synchronisation is explicit.
+      caveat: Different labels alone do not rescale elapsed time.
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-timesig
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Staff-specific time signatures
+      mechanism: time/@number scopes the signature; actual durations and time modification must express the common
+        span.
+      caveat: The numerator alone does not determine a tempo ratio.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-time
+      subset: ''
+    musescore:
+      status: direct
+      summary: Local time signatures
+      mechanism: Local signatures stretch the notated content into the global bar span, like an invisible tuplet.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-timesig
+      subset: ''
+    mei:
+      status: qualified
+      summary: Staff-specific definitions
+      mechanism: staffDef can hold a distinct meter; durations/proportions must establish the intended synchronisation.
+      caveat: Validate the rendering and temporal interpretation.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-staffDef
+      subset: ''
+- id: fmt.independent-bars
+  feature: Simultaneous bars of differing lengths
+  question: 'Example: 3/4 and 4/4 at the same quarter-note pulse; barlines meet every 12 quarters.'
+  tags:
+  - polymetre
+  - polymeter
+  - independent
+  - asynchronous
+  - bars
+  importance: 3
+  cells:
+    krn:
+      status: qualified
+      summary: Union of boundaries
+      mechanism: The documented VHV polymeter example inserts barline records at the combined boundaries and uses
+        invisible =- in unaffected spines.
+      caveat: These extra structural boundaries can affect analysis.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-poly
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Non-controlling measures
+      mechanism: Partwise measures support non-controlling="yes" for a left boundary not aligned with other parts.
+      caveat: The flag describes the left boundary. Receiving applications may still force common measure boundaries.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-measure
+      subset: ''
+    musescore:
+      status: workaround
+      summary: No independent bar lengths
+      mechanism: Local time signatures keep the global bar duration.
+      caveat: ''
+      workaround: Use a common subdivision grid or longer shared containers, hide unwanted boundaries and draw local
+        barlines where needed. Repair numbering and retain local bar identities separately.
+      evidence: documented
+      sources:
+      - ms-timesig
+      subset: ''
+    mei:
+      status: qualified
+      summary: Non-controlling bar structure
+      mechanism: barLine/control and measure control distinguish alignment points; part-oriented or unmeasured structures
+        can express independent boundaries.
+      caveat: On measure, control describes the right boundary. Shared measure containers may need restructuring;
+        renderer support is not assured.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mei-bar
+      subset: ''
+- id: fmt.polytempo
+  feature: Independent simultaneous tempi
+  question: Different printed tempo marks are not proof of independently running clocks.
+  tags:
+  - polytempo
+  - asynchronous
+  - tempo
+  - clocks
+  importance: 3
+  cells:
+    krn:
+      status: qualified
+      summary: Per-spine tempo metadata
+      mechanism: Tandem interpretations can differ across spines.
+      caveat: Common record alignment still needs a declared temporal interpretation.
+      workaround: Use a common time grid or external performance model.
+      evidence: inference
+      sources:
+      - krn-basic
+      subset: ''
+    musicxml:
+      status: unknown
+      summary: Notation possible; clocks unverified
+      mechanism: Tempo directions can be written, but independent concurrent playback clocks were not established.
+      caveat: ''
+      workaround: Encode rational ratios on a shared timeline or retain separate performance data.
+      evidence: unverified
+      sources:
+      - mx-sound
+      subset: ''
+    musescore:
+      status: workaround
+      summary: Shared playback timeline
+      mechanism: Use tuplets and explicit notation for rational ratios; independent clocks need a separate performance
+        workflow.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-timesig
+      subset: ''
+    mei:
+      status: qualified
+      summary: Multiple temporal descriptions
+      mechanism: Gestural and real-time attributes can describe timing distinct from notation.
+      caveat: This does not promise polytempo playback in a renderer.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mei-note
+      subset: ''
+- id: fmt.unmeasured
+  feature: Unmeasured or unbarred music
+  question: Removing visible barlines is different from removing a measure-based data model.
+  tags:
+  - cadenza
+  - free
+  - rhythm
+  - unbarred
+  - chant
+  importance: 3
+  cells:
+    krn:
+      status: direct
+      summary: No mandatory visible bars
+      mechanism: Event streams can omit barlines; durations remain available for analysis.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-basic
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: senza-misura; measure containers remain
+      mechanism: A time element may specify senza-misura.
+      caveat: Music still lives in measure containers; choose boundaries deliberately.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-time
+      subset: ''
+    musescore:
+      status: workaround
+      summary: Hidden boundaries or long measures
+      mechanism: Hide signatures/barlines, or create irregular measures.
+      caveat: The score still behaves as measures internally.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-mensural
+      subset: ''
+    mei:
+      status: direct
+      summary: Unmeasured structures
+      mechanism: MEI supports music organised without CMN measure containers, including historical repertoires.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-shared
+      subset: ''
+- id: fmt.irregular-measures
+  feature: Pickups and incomplete / overfull bars
+  question: Nominal metre, actual duration and displayed numbering should stay distinct.
+  tags:
+  - pickup
+  - anacrusis
+  - overfull
+  - incomplete
+  - metcon
+  importance: 2
+  cells:
+    krn:
+      status: qualified
+      summary: Encode actual events
+      mechanism: Durations and bar markers are explicit; metre-conformance checks remain separate.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-rhythm
+      subset: ''
+    musicxml:
+      status: direct
+      summary: Implicit measure plus durations
+      mechanism: implicit can suppress the measure number; encoded events determine content rather than the printed
+        number alone.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-measure
+      subset: ''
+    musescore:
+      status: direct
+      summary: Actual versus nominal duration
+      mechanism: Measure properties allow an actual duration differing from the time signature.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-irregular
+      subset: ''
+    mei:
+      status: direct
+      summary: Metrical conformance metadata
+      mechanism: metcon identifies whether a measure conforms to the prevailing metre.
+      caveat: It does not by itself supply the missing duration.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-metcon
+      subset: ''
+- id: fmt.compound-metre
+  feature: Additive and composite time signatures
+  question: A display such as 3+2/8 or 2/4+3/8 should not obscure the duration model.
+  tags:
+  - additive
+  - compound
+  - irrational
+  - meter
+  importance: 2
+  cells:
+    krn:
+      status: qualified
+      summary: Meter versus displayed symbol
+      mechanism: Use meter interpretations and supported display conventions.
+      caveat: Distinguish computational metre from its visual spelling.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-timesig
+      subset: ''
+    musicxml:
+      status: direct
+      summary: Repeated beats/beat-type pairs
+      mechanism: Additive numerators and multiple beat units have explicit encodings.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-time
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Custom displayed signatures
+      mechanism: Time-signature properties control display and beaming.
+      caveat: Unusual denominators and exact playback should be tested in the chosen build.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-timesig
+      subset: ''
+    mei:
+      status: direct
+      summary: Meter definitions and groups
+      mechanism: MEI meter counts permit expressions; grouped signatures extend the notation model.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-cmn
+      subset: ''
+- id: fmt.nested-tuplets
+  feature: Nested and complex tuplets
+  question: The sounding ratio and the visible bracket hierarchy are separate information.
+  tags:
+  - tuplets
+  - nesting
+  - bracket
+  - ratios
+  importance: 3
+  cells:
+    krn:
+      status: qualified
+      summary: Duration plus styling conventions
+      mechanism: Reciprocal durations express timing; VHV adds controls for displayed tuplets.
+      caveat: Do not assume bracket hierarchy is recoverable from duration alone.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-tuplets
+      subset: ''
+    musicxml:
+      status: direct
+      summary: Ratio plus notation hierarchy
+      mechanism: time-modification gives cumulative scaling; tuplet describes the displayed and nested structure.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-tuplet
+      subset: ''
+    musescore:
+      status: direct
+      summary: Custom and nested tuplets
+      mechanism: The editor supports user-defined ratios and nested groups.
+      caveat: Test unusual ratios during interchange.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-tuplets
+      subset: ''
+    mei:
+      status: direct
+      summary: Tuplet containers and spans
+      mechanism: MEI offers tuplet grouping and span-based descriptions.
+      caveat: Use the appropriate construction for containment and overlap.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-tupletSpan
+      subset: ''
+- id: fmt.tuplet-across-bars
+  feature: Tuplets spanning barlines
+  question: A duration ratio may be representable even when an editor cannot keep one bracket across a bar.
+  tags:
+  - tuplet
+  - cross-bar
+  - boundary
+  importance: 3
+  cells:
+    krn:
+      status: unknown
+      summary: Exact round trip unverified
+      mechanism: Rhythmic values can continue across bar markers; preservation of one cross-bar tuplet object was
+        not verified.
+      caveat: ''
+      workaround: ''
+      evidence: unverified
+      sources:
+      - krn-tuplets
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Start/stop tuplet notation
+      mechanism: Tuplet start/stop markers are not a nested measure container.
+      caveat: Cross-bar rendering and import require a test.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-tuplet
+      subset: ''
+    musescore:
+      status: unknown
+      summary: Build-specific test required
+      mechanism: The handbook documents nesting but does not establish arbitrary cross-bar tuplets.
+      caveat: ''
+      workaround: Consider a longer measure with visual subdivision, documenting the structural compromise.
+      evidence: unverified
+      sources:
+      - ms-tuplets
+      subset: ''
+    mei:
+      status: direct
+      summary: tupletSpan
+      mechanism: The dedicated span element explicitly targets tuplets extending across barlines.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-tupletSpan
+      subset: ''
+- id: fmt.grace-timing
+  feature: Grace-note timing versus written value
+  question: Grace-note appearance does not uniquely determine the performance duration.
+  tags:
+  - grace
+  - appoggiatura
+  - acciaccatura
+  - timing
+  importance: 2
+  cells:
+    krn:
+      status: qualified
+      summary: Grace signifiers
+      mechanism: Core **kern distinguishes grace material; exact realised timing needs additional performance information.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-notation
+      subset: ''
+    musicxml:
+      status: direct
+      summary: Explicit timing options
+      mechanism: grace offers make-time and percentages stolen from preceding or following notes.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-grace
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Attached grace groups
+      mechanism: Before/after grace notes attach to a main note and do not count towards the measure.
+      caveat: Playback is an engine interpretation, not a complete performance transcript.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-grace
+      subset: ''
+    mei:
+      status: direct
+      summary: Notated and gestural timing
+      mechanism: grace and grace.time distinguish grace treatment; gestural timing can supplement the written duration.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-note
+      subset: ''
+- id: fmt.repeat-structure
+  feature: Repeats, endings and performed order
+  question: A compact written score and an expanded performance sequence are different representations.
+  tags:
+  - repeats
+  - volta
+  - da-capo
+  - expansion
+  - playback
+  importance: 2
+  cells:
+    krn:
+      status: direct
+      summary: Sections and expansion lists
+      mechanism: Humdrum sections and expansion mechanisms can specify performance order.
+      caveat: Preserve the compact source when making an expanded derivative.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-repeats
+      subset: ''
+    musicxml:
+      status: direct
+      summary: Notation plus playback instructions
+      mechanism: Barline/ending notation and sound jump attributes serve related but distinct purposes.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-sound
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Application playback interpretation
+      mechanism: Repeats are part of the score workflow; intricate jumps should be checked by listening and export.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-export
+      subset: ''
+    mei:
+      status: qualified
+      summary: Written structure and expansion
+      mechanism: MEI supports structural sections and expansion mechanisms.
+      caveat: Realised order depends on a processing policy.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-shared
+      subset: ''
+- id: fmt.time-signature-symbol
+  feature: Common and cut time symbols versus numeric signatures
+  importance: 2
+  question: A printed C or cut C and the numeric 4/4 or 2/2 give the same metre but are different printed notations.
+  tags:
+  - time signature
+  - common time
+  - cut time
+  - meter symbol
+  - alla breve
+  cells:
+    krn:
+      status: qualified
+      summary: '*M plus *met tandem'
+      mechanism: '*M4/4 gives the meter. A separate *met(c) or *met(c|) tandem interpretation records the common-
+        or cut-time symbol.'
+      caveat: The symbol is a second token, so a file can state the numeric meter without it.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-ccarh-format
+      - krn-timesig
+      subset: ''
+    musicxml:
+      status: direct
+      summary: symbol attribute of time
+      mechanism: The symbol attribute of time takes common, cut, single-number or normal, separately from the beats
+        and beat-type values.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-time
+      subset: ''
+    musescore:
+      status: direct
+      summary: Time signature symbols
+      mechanism: The Time signatures palette offers common and cut time symbols alongside numeric signatures.
+      caveat: Stated from the handbook section on time signatures; the symbol entries were not checked line by line.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-timesig
+      subset: ''
+    mei:
+      status: direct
+      summary: sym on meterSig
+      mechanism: The sym attribute (and meter.sym on scoreDef and staffDef) takes common or cut and marks that a
+        symbol is used instead of a numeric signature.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-metersign
+      subset: ''

@@ -1,0 +1,120 @@
+# Formats under comparison, status vocabulary, methodology and categories.
+# Features are in features/<category>.yaml; sources in sources.yaml; worked cases in cases.yaml; test fixtures in fixtures.yaml.
+formats_version: 2026-11
+title: Music Encoding Format Comparison
+methodology:
+  date: '2026-11-06'
+  scope: Symbolic music notation and music-document encoding, not audio compression.
+  emphasis: 'Balanced: scholarly editing, notation, analysis, performance and interchange.'
+  assumptions:
+  - KRN means Humdrum **kern, not every representation that can inhabit a Humdrum file. Adjacent representations
+    and VHV conventions are labelled.
+  - MusicXML means the published 4.0 specification; a receiving application may implement much less.
+  - MuseScore 4 means the native MSCZ/MSCX project and the application workflows documented for the 4.x family.
+    Exact release differences are retained where known. This is not a frozen source-code audit of one build.
+  - MEI means 5.1 across the full framework; MEI Basic and repertoire-specific customizations can exclude features.
+  - Direct is not a quality score or a promise of render/playback/import support. No format is assigned an overall
+    winner.
+  - All capability assessments are documentation-based or explicitly inferred/unverified. No music-format round-trip,
+    playback or converter tests were run. HTML/data checks are a separate validation activity.
+  - 'Blank or absent common basics are deliberate: this comparison prioritises distinctions, failure modes and modelling
+    choices.'
+  - Sources are primary specifications, maintainer documentation or official application handbooks. Live pages may
+    change; accessed dates are recorded.
+  - Choosing a format for the version of record is a decision for a Principles profile (scope.encoding). This dataset
+    gives the evidence for that choice and does not rank formats.
+  evidence:
+    documented: The cited primary documentation states the mechanism or limitation. This does not mean it was empirically
+      tested.
+    inference: An author judgement or proposed workflow derived from the cited model; not an explicit guarantee
+      by the specification or vendor.
+    unverified: The precise capability was not established. A related source defines the context rather than proving
+      support or absence.
+  workflow: Keep the richest appropriate master. Produce task-specific derivatives. Compare semantic events, editorial
+    information, layout and playback independently after conversion.
+  coverage_limits: Broad rather than exhaustive. Specialist non-Western notations, electroacoustic spatial scores,
+    braille conversion and full DAW/MIDI 2.0 workflows are outside the detailed matrix. No numerical benchmarks
+    or converter league table are claimed.
+formats:
+- id: krn
+  name: KRN / Humdrum **kern
+  short: KRN
+  baseline: Original **kern, with explicitly labelled VHV/Humdrum extensions
+  role: Compact symbolic streams
+  description: A strong fit for corpus work and explicit aligned musical data. Distinguish core **kern from extra
+    spines and rendering conventions.
+  sources:
+  - krn-core
+  - krn-guide
+  version: core **kern, Humdrum guide
+- id: musicxml
+  name: MusicXML
+  short: MusicXML
+  baseline: Published MusicXML 4.0 (2021)
+  role: Notation interchange
+  description: A practical exchange format with more editorial and polymetric expressivity than many importing applications
+    expose.
+  sources:
+  - mx-spec
+  - mx-level
+  - mx-measure
+  version: '4.0'
+- id: musescore
+  name: MuseScore 4 native
+  short: MuseScore 4 (MSCX)
+  baseline: MSCZ / MSCX; 4.x handbook, with 4.6 family as a reference point
+  role: Editable engraving project
+  description: The application’s native working score. Strong for layout, linked parts and playback setup; constrained
+    by the application model.
+  sources:
+  - ms-save
+  - ms-parts
+  - ms-mixer
+  version: 4.x, 4.6 family as reference
+- id: mei
+  name: Music Encoding Initiative
+  short: MEI
+  baseline: MEI 5.1; full framework, with subset caveats
+  role: Scholarly music documents
+  description: Particularly expressive for sources, editorial choices and historical notation. A schema capability
+    is not a renderer guarantee.
+  sources:
+  - mei-intro
+  - mei-edit
+  - mei-schemas
+  version: '5.1'
+statuses:
+  direct:
+    label: Direct
+    description: A documented construct or application workflow expresses this feature within the stated scope.
+  qualified:
+    label: Qualified
+    description: Representable, but a significant semantic, structural, profile or implementation condition applies.
+  extension:
+    label: Extension
+    description: Requires a named dialect, adjacent representation or agreed additional vocabulary.
+  workaround:
+    label: Workaround
+    description: Approximate, reframe or externalise the information; some semantics or convenience are lost.
+  unknown:
+    label: Unverified
+    description: The reviewed evidence does not establish the specific capability; a targeted test is needed.
+categories:
+- id: model-maintenance
+  title: Model & maintenance
+- id: sources-editorial-work
+  title: Sources & editorial work
+- id: voices-staves
+  title: Voices & staves
+- id: time-bar-structure
+  title: Time & bar structure
+- id: pitch-tuning
+  title: Pitch & tuning
+- id: notation-repertoire
+  title: Notation & repertoire
+- id: engraving-presentation
+  title: Engraving & presentation
+- id: performance
+  title: Performance
+- id: interchange-research
+  title: Interchange & research

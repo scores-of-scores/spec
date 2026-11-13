@@ -1,0 +1,356 @@
+# Features in the category "Interchange & research". IDs are fmt.<slug> and permanent. Status vocabulary: formats.yaml. Sources: sources.yaml.
+- id: fmt.validation
+  feature: Syntax, schema and musical validation
+  question: A valid file can still encode the wrong music or lose the intended interpretation.
+  tags:
+  - validation
+  - schema
+  - correctness
+  importance: 3
+  cells:
+    krn:
+      status: qualified
+      summary: Layered checking
+      mechanism: Use syntax/representation checks plus musical and source review.
+      caveat: There is no single check that proves the transcription correct.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-validation
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: XSD plus semantic checks
+      mechanism: The published schema checks structure and types.
+      caveat: It cannot prove voicing, rhythmic intention or successful interchange.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-schema
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Application acceptance
+      mechanism: Opening in the intended build is a practical compatibility check.
+      caveat: No independent comprehensive native-format validator was established here.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-save
+      subset: ''
+    mei:
+      status: qualified
+      summary: Selected schema and project rules
+      mechanism: Validate against the declared MEI customization, then verify musical and editorial constraints.
+      caveat: Schema validity is not renderer compatibility.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-schemas
+      subset: ''
+- id: fmt.unknown-preservation
+  feature: Preservation of unfamiliar data
+  question: An importer may successfully open a file while discarding information it does not model.
+  tags:
+  - lossy
+  - unknown
+  - extension
+  - preservation
+  importance: 3
+  cells:
+    krn:
+      status: qualified
+      summary: Keep the source streams
+      mechanism: Transformations may select or replace spines; retain custom-data definitions and original input.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-validation
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Test every extension
+      mechanism: other-notation explicitly permits non-interoperable extensions.
+      caveat: A valid custom field is not a retention guarantee.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-other-notation
+      subset: ''
+    musescore:
+      status: unknown
+      summary: No arbitrary XML retention promise
+      mechanism: The reviewed documentation does not establish preservation of unknown native elements or all imported
+        editorial fields.
+      caveat: ''
+      workaround: ''
+      evidence: unverified
+      sources:
+      - ms-xml
+      subset: ''
+    mei:
+      status: qualified
+      summary: Profile-aware processing required
+      mechanism: Software targeting a subset may ignore full-MEI information.
+      caveat: Keep a master document and check exported content.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mei-schemas
+      subset: ''
+- id: fmt.roundtrip
+  feature: Round-trip fidelity
+  question: A→B→A should compare semantics, appearance and playback separately.
+  tags:
+  - roundtrip
+  - conversion
+  - fidelity
+  - loss
+  importance: 3
+  cells:
+    krn:
+      status: qualified
+      summary: Conversion is profile-dependent
+      mechanism: Pitch and structural conventions can change during conversion; written/sounding conversion is explicit
+        in VHV.
+      caveat: Check annotations and stream relationships as well as notes.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-transpose
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Practical interchange; not lossless guarantee
+      mechanism: MuseScore’s handbook warns that layout cleanup is commonly required after MusicXML transfer.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-xml
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Retain native master
+      mechanism: Use native projects for continuing application work and exports as derivatives.
+      caveat: MusicXML/MEI exports are not complete backups of the project.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-save
+      subset: ''
+    mei:
+      status: qualified
+      summary: Richness exceeds many consumers
+      mechanism: Basic and repertoire customizations differ from full MEI.
+      caveat: A successful score import need not preserve apparatus or facsimile relationships.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mei-schemas
+      subset: ''
+- id: fmt.batch-processing
+  feature: Batch conversion and automation
+  question: Automation availability is a tool ecosystem property, not an intrinsic file-format guarantee.
+  tags:
+  - automation
+  - batch
+  - CLI
+  - scripting
+  importance: 2
+  cells:
+    krn:
+      status: direct
+      summary: Composable command-line tools
+      mechanism: Humdrum tools support selection, transformation, analysis and conversions.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-guide
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: XML processing ecosystem
+      mechanism: Standard XML tooling can transform/inspect MusicXML; musical conversion needs a music-aware library.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-schema
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Command-line conversion
+      mechanism: MuseScore documents export and batch conversion options.
+      caveat: The page warns that some content was copied from the version 3 manual; test the exact build.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-cli
+      subset: ''
+    mei:
+      status: qualified
+      summary: XML and schema-based workflows
+      mechanism: XML tooling supports queries and transformations; musical semantics require profile-aware processing.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - mei-intro
+      subset: ''
+- id: fmt.corpus-analysis
+  feature: Corpus analysis and aligned derived features
+  question: The cost of extracting a usable event stream differs substantially.
+  tags:
+  - corpus
+  - analysis
+  - querying
+  - statistics
+  importance: 3
+  cells:
+    krn:
+      status: direct
+      summary: Analysis-oriented streams
+      mechanism: Humdrum provides interval, rhythm, harmony and pattern-analysis workflows with aligned derived
+        representations.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-guide
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Normalise before analysis
+      mechanism: Reconstruct timing from the cursor, voice labels and durations before comparing events.
+      caveat: File order is not simply onset order.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-backup
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Export or inspect native model
+      mechanism: A notation editor project is less direct as a portable analytical table.
+      caveat: ''
+      workaround: Export a suitable symbolic representation, checking the required distinctions.
+      evidence: inference
+      sources:
+      - ms-export
+      subset: ''
+    mei:
+      status: qualified
+      summary: Rich semantics; selection needed
+      mechanism: Analysis markup is available; choose apparatus branches and temporal interpretations before calculating
+        statistics.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - mei-analysis
+      subset: ''
+- id: fmt.preservation-strategy
+  feature: Choosing a preservation master
+  question: The preferred master depends on which losses would be unacceptable.
+  tags:
+  - archive
+  - master
+  - preservation
+  - recommendation
+  importance: 3
+  cells:
+    krn:
+      status: qualified
+      summary: Compact analytical master
+      mechanism: Useful for stream-based research when conventions and companion data are preserved.
+      caveat: Retain sources and reference renderings.
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-validation
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Portable score derivative
+      mechanism: Useful for broad notation interchange; test the features your project depends on.
+      caveat: Keep native or scholarly masters where they contain additional information.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-spec
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Application master
+      mechanism: Keep the native project for editing in MuseScore and archive a documented environment.
+      caveat: Also retain portable exports and approved output.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-save
+      subset: ''
+    mei:
+      status: qualified
+      summary: Scholarly document master
+      mechanism: Useful when source relationships, variants and editorial acts are first-class requirements.
+      caveat: Preserve schema customizations and linked assets.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mei-intro
+      subset: ''
+- id: fmt.containers
+  feature: Serialization and packaging
+  question: Compression changes packaging, not the underlying musical expressivity.
+  tags:
+  - serialization
+  - ZIP
+  - mscz
+  - mscx
+  - mxl
+  - XML
+  importance: 2
+  cells:
+    krn:
+      status: direct
+      summary: Plain structured text
+      mechanism: Humdrum is line/field-oriented text with typed spines and record classes.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-syntax
+      subset: ''
+    musicxml:
+      status: direct
+      summary: XML or MXL ZIP package
+      mechanism: MXL uses a ZIP container and META-INF/container.xml to identify the score root and alternate renditions.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-mxl
+      subset: ''
+    musescore:
+      status: qualified
+      summary: MSCZ / MSCX native files
+      mechanism: MuseScore’s native project formats differ from MusicXML even though XML is involved.
+      caveat: Preserve the original package and associated resources.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-save
+      subset: ''
+    mei:
+      status: direct
+      summary: XML plus linked resources
+      mechanism: MEI is XML; associated images and recordings may be separate resources.
+      caveat: A .mei suffix alone does not specify the customization.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-intro
+      subset: ''

@@ -1,0 +1,565 @@
+# Features in the category "Notation & repertoire". IDs are fmt.<slug> and permanent. Status vocabulary: formats.yaml. Sources: sources.yaml.
+- id: fmt.mensural
+  feature: Mensural notation as a semantic system
+  question: A mensuration sign can govern duration rather than merely decorate a modern time signature.
+  tags:
+  - mensural
+  - early
+  - renaissance
+  - proportions
+  importance: 3
+  cells:
+    krn:
+      status: extension
+      summary: Use **mens, not **kern
+      mechanism: Humdrum has a separate **mens representation for mensural signs, durations and related features.
+      caveat: Label this as an adjacent representation, not a core KRN capability.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-mens
+      subset: 'Humdrum extension: **mens representation'
+    musicxml:
+      status: workaround
+      summary: Modern transcription / symbols
+      mechanism: Use modern durations and visual approximations, retaining mensural interpretation externally.
+      caveat: A historical glyph does not introduce mensural duration semantics.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-other-notation
+      subset: ''
+    musescore:
+      status: workaround
+      summary: Display substitution
+      mechanism: The handbook describes mensural signs as display-only substitutions over conventional metre.
+      caveat: They do not change the duration ratios between note values.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-mensural
+      subset: ''
+    mei:
+      status: direct
+      summary: Dedicated mensural module
+      mechanism: MEI models mensuration, proportion and context-sensitive duration distinctions.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-mensural
+      subset: ''
+- id: fmt.ligature-coloration
+  feature: Ligatures, coloration and perfection
+  question: Historical grouping and duration qualification should survive modern transcription.
+  tags:
+  - ligature
+  - coloration
+  - perfection
+  - mensural
+  importance: 2
+  cells:
+    krn:
+      status: extension
+      summary: '**mens vocabulary'
+      mechanism: The separate mensural representation includes ligatures, coloration and duration qualifications.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-mens
+      subset: 'Humdrum extension: **mens representation'
+    musicxml:
+      status: workaround
+      summary: Modern equivalents plus annotation
+      mechanism: Retain the historical interpretation in supplemental data if exchanging a modernised score.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-other-notation
+      subset: ''
+    musescore:
+      status: workaround
+      summary: Visual reconstruction
+      mechanism: Use symbols or a modern transcription with commentary.
+      caveat: Do not claim a native mensural semantic model.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-mensural
+      subset: ''
+    mei:
+      status: direct
+      summary: Historical encoding vocabulary
+      mechanism: The mensural module distinguishes notation signs and interpreted durations.
+      caveat: Not all renderers infer duration from context.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-mensural
+      subset: ''
+- id: fmt.neumes
+  feature: Neumes and chant structure
+  question: A modern pitch transcription may discard neume grouping and textual organisation.
+  tags:
+  - chant
+  - neumes
+  - medieval
+  - plainchant
+  importance: 3
+  cells:
+    krn:
+      status: workaround
+      summary: Transcribe pitches; add grouping
+      mechanism: Core **kern is not a dedicated neume vocabulary.
+      caveat: ''
+      workaround: Keep grouping and source signs in supplemental data.
+      evidence: inference
+      sources:
+      - krn-core
+      subset: ''
+    musicxml:
+      status: workaround
+      summary: Visual or modern transcription
+      mechanism: Generic extensions can retain labels/glyphs but do not establish a neume model.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-other-notation
+      subset: ''
+    musescore:
+      status: workaround
+      summary: Symbols and unbarred appearance
+      mechanism: Hide conventional bars and use symbols as needed.
+      caveat: The underlying structure remains a notation-editor score.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-mensural
+      - ms-symbols
+      subset: ''
+    mei:
+      status: direct
+      summary: syllable / neume / nc
+      mechanism: The neumes module organises chant around syllables and neume components.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-neumes
+      subset: ''
+- id: fmt.tablature
+  feature: Guitar and historical lute tablature
+  question: String/course assignment can contain information not recoverable from pitch alone.
+  tags:
+  - guitar
+  - lute
+  - tablature
+  - fret
+  - courses
+  importance: 3
+  cells:
+    krn:
+      status: extension
+      summary: '**fret / associated data'
+      mechanism: Humdrum provides a separate fret representation; core **kern alone does not preserve every fingering.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-fret
+      subset: 'Humdrum extension: **fret spine'
+    musicxml:
+      status: qualified
+      summary: Strings, frets and staff tuning
+      mechanism: Tablature information is supported; staff-details includes letter/number fret presentation.
+      caveat: Historical idioms require specific interoperability tests.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-staff-details
+      subset: ''
+    musescore:
+      status: direct
+      summary: Tablature and linked staves
+      mechanism: Create tab staves, including links to standard notation.
+      caveat: Check whether a particular historical tab style is supported.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-tab
+      subset: ''
+    mei:
+      status: direct
+      summary: Named tablature types
+      mechanism: MEI describes guitar and Italian, French and German lute tablatures.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-tab
+      subset: ''
+- id: fmt.figured-bass
+  feature: Figured bass with changing figures
+  question: Figures changing during a sustained note need their own temporal placement.
+  tags:
+  - figured-bass
+  - continuo
+  - figures
+  importance: 2
+  cells:
+    krn:
+      status: extension
+      summary: Dedicated associated spines
+      mechanism: VHV documents figured-bass encodings independent of the **kern notes.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-fb
+      subset: VHV
+    musicxml:
+      status: direct
+      summary: figured-bass with duration
+      mechanism: A duration permits figure changes beneath one note; figures retain vertical order.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-figured-bass
+      subset: ''
+    musescore:
+      status: direct
+      summary: Figured-bass objects
+      mechanism: Specialised entry parses and aligns figures and continuations.
+      caveat: This is more semantic than typing ordinary text.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-figbass
+      subset: ''
+    mei:
+      status: direct
+      summary: Harmony / figured-bass structures
+      mechanism: MEI harmonic markup distinguishes figures from note events.
+      caveat: Realising a continuo accompaniment is another operation.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-analysis
+      subset: ''
+- id: fmt.harmony-analysis
+  feature: Chord symbols, Roman numerals and analysis
+  question: A sounding chord, a printed chord name and an analytical assertion are different objects.
+  tags:
+  - harmony
+  - chord
+  - roman-numeral
+  - Nashville
+  - analysis
+  importance: 2
+  cells:
+    krn:
+      status: extension
+      summary: '**harm and analysis spines'
+      mechanism: '**harm models functional harmony; other typed spines can record other analyses.'
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-harm
+      subset: 'Humdrum extension: **harm and other analysis spines'
+    musicxml:
+      status: direct
+      summary: harmony with root or numeral
+      mechanism: MusicXML 4.0 supports chord roots, scale-degree numerals and stacked functional relationships.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-harmony
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Chord / RNA / Nashville entry
+      mechanism: Dedicated modes parse chord labels; formatting and playback depend on the kind of symbol.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-chords
+      subset: ''
+    mei:
+      status: direct
+      summary: Analysis attributes and harmony
+      mechanism: Harmonic and analytical information can coexist with the score and linking relationships.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-analysis
+      subset: ''
+- id: fmt.lyrics-underlay
+  feature: Lyrics, verses, elision and melisma
+  question: Text may be attached to notes or maintained as a separate aligned stream.
+  tags:
+  - lyrics
+  - underlay
+  - verses
+  - melisma
+  - elision
+  importance: 2
+  cells:
+    krn:
+      status: extension
+      summary: Separate text spines
+      mechanism: '**text and **silbe support word/syllable-oriented lyrics alongside the music.'
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-lyrics
+      subset: 'Humdrum extension: **text and **silbe spines'
+    musicxml:
+      status: direct
+      summary: Note-attached lyric elements
+      mechanism: lyric includes syllabic division, elision and extension, with verse identifiers.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-lyric
+      subset: ''
+    musescore:
+      status: direct
+      summary: Lyric objects
+      mechanism: Syllabic entry supports extension lines and multiple lyric lines.
+      caveat: Keep independent text editions outside a purely graphical lyric layout.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-lyrics
+      subset: ''
+    mei:
+      status: direct
+      summary: Two underlay approaches
+      mechanism: Syllables can be encoded within notes or separately and linked to the music.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-lyrics
+      subset: ''
+- id: fmt.phrase-slur-tie
+  feature: Ties, slurs and analytical phrases
+  question: Identical-looking curves can assert different musical relationships.
+  tags:
+  - phrase
+  - slur
+  - tie
+  - semantics
+  importance: 3
+  cells:
+    krn:
+      status: direct
+      summary: Distinct signifier families
+      mechanism: '**kern separates ties, slurs and phrases; it does not simply record an uninterpreted curved line.'
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-core
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Tie sound versus drawn tie
+      mechanism: tie and tied distinguish sound from appearance; analytical grouping is separate.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-tied
+      - mx-grouping
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Semantic elements versus drawings
+      mechanism: Use functional notation objects when possible.
+      caveat: A decorative symbol or line does not establish the intended musical relation.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-symbols
+      subset: ''
+    mei:
+      status: direct
+      summary: Separate relationship elements
+      mechanism: phrase is available alongside tie and slur, including control of its shape and endpoints.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-phrase
+      subset: ''
+- id: fmt.custom-symbols
+  feature: New symbols and graphical notation
+  question: Being able to display a glyph is weaker than knowing what it means.
+  tags:
+  - symbols
+  - SMuFL
+  - graphical
+  - contemporary
+  importance: 3
+  cells:
+    krn:
+      status: extension
+      summary: Declared signifiers or data
+      mechanism: Custom representations can carry new meaning; renderer-specific layout must be supplied separately.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-fret
+      subset: 'Humdrum extension: declared signifiers or data spines'
+    musicxml:
+      status: qualified
+      summary: other-notation and SMuFL
+      mechanism: SMuFL-named symbols can be identified; unrestricted custom content does not guarantee interoperability.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-other-notation
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Display-only palette items
+      mechanism: The Symbols palette contains non-functional graphical items.
+      caveat: They have no effect beyond appearance.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-symbols
+      subset: ''
+    mei:
+      status: qualified
+      summary: symbolDef / altsym
+      mechanism: User-defined symbols and references can preserve visual information.
+      caveat: A custom symbol still needs a semantic definition and a capable renderer.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-symbolDef
+      subset: ''
+- id: fmt.fretboard-diagrams
+  feature: Fretboard diagrams versus tablature
+  question: A static chord diagram is not a time-ordered sequence of string events.
+  tags:
+  - fretboard
+  - guitar
+  - diagram
+  - frame
+  importance: 2
+  cells:
+    krn:
+      status: workaround
+      summary: External or renderer convention
+      mechanism: '**fret describes performance positions; preserve a static diagram separately if required.'
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-fret
+      subset: ''
+    musicxml:
+      status: direct
+      summary: frame element
+      mechanism: frame represents a fretboard diagram associated with a harmony.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-frame
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Notation application objects
+      mechanism: Fretboard-diagram workflows accompany guitar notation.
+      caveat: Exact diagram interchange was not tested.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-tab
+      subset: ''
+    mei:
+      status: unknown
+      summary: Exact diagram interchange unverified
+      mechanism: Tablature covers course/string information; equivalent static diagram handling needs a selected
+        profile and tool.
+      caveat: ''
+      workaround: ''
+      evidence: unverified
+      sources:
+      - mei-tab
+      subset: ''
+- id: fmt.fingering
+  feature: Printed fingering
+  importance: 3
+  question: 'Printed finger numbers are a mark of their own: each format stores them as an element, a spine or a
+    text object, or not at all.'
+  tags:
+  - fingering
+  - technique
+  - performance
+  - marks
+  cells:
+    krn:
+      status: extension
+      summary: Separate **fing spine
+      mechanism: Fingering is not part of the core **kern note vocabulary. Humdrum allows further typed spines beside
+        **kern, and a **fing spine is used for fingering in VHV-based practice.
+      caveat: The **fing definition itself was not reviewed. The spine model is documented; its use for fingering
+        is inferred from VHV usage reports.
+      workaround: Record the fingering in a comment or an external annotation keyed to the note.
+      evidence: inference
+      sources:
+      - krn-syntax
+      - krn-core
+      subset: 'Humdrum extension: **fing spine'
+    musicxml:
+      status: direct
+      summary: fingering inside technical
+      mechanism: fingering sits inside technical within notations. The alternate and substitution attributes mark
+        alternative or substituted fingerings.
+      caveat: Fretted instruments use fingering for the fretting finger and a separate pluck element for the plucking
+        finger.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-fingering
+      subset: ''
+    musescore:
+      status: direct
+      summary: Fingering text objects
+      mechanism: Fingering symbols come from the Fingering palette (some are repeated in the Guitar palette). They
+        are text elements with their own text-style classes.
+      caveat: Fingering is a text-based object. Whether it converts to a fingering element in other formats was
+        not tested.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-fingering
+      subset: ''
+    mei:
+      status: direct
+      summary: fing and fingGrp
+      mechanism: fing encodes one finger and fingGrp groups individual fingers, both in the MEI.fingering module.
+      caveat: 'Fingering is its own element, not an articulation value: the guidelines direct fingerings to fing,
+        not to the artic attribute.'
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-fing
+      subset: ''

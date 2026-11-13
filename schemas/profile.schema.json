@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:scores-of-scores:schema:profile:1",
+  "$id": "urn:scores-of-scores:schema:profile:2",
   "title": "Profile of the Transcription Principles",
   "description": "A project's choices over the core registry: strength of each rule, ranked aims, resolution of tensions, and scope.",
   "type": "object",
@@ -8,9 +8,11 @@
   "required": [
     "profile",
     "title",
+    "status",
     "principles_version",
     "strengths",
-    "precedence"
+    "precedence",
+    "scope"
   ],
   "properties": {
     "profile": {
@@ -123,9 +125,60 @@
           }
         },
         "encoding": {
-          "type": "string",
-          "description": "The encoding format of the version of record. Categories classed as unsupported are relative to it."
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "format",
+            "dialect",
+            "accept_extensions"
+          ],
+          "description": "The encoding format of the version of record. Mark categories classed as unsupported are derived relative to it.",
+          "properties": {
+            "format": {
+              "enum": [
+                "krn",
+                "musicxml",
+                "musescore",
+                "mei"
+              ]
+            },
+            "dialect": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The exact dialect, version and extensions in use."
+            },
+            "accept_extensions": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "pattern": "^fmt\\.[a-z0-9]+(-[a-z0-9]+)*$"
+              },
+              "description": "Features whose \"extension\" status the profile accepts, so that they count as expressible."
+            }
+          }
         }
+      },
+      "required": [
+        "encoding"
+      ]
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "adopted"
+      ],
+      "description": "draft: strengths not yet confirmed by the project the profile describes."
+    },
+    "basis": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z]+\\.[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "description": "Where a strength, precedence or aim comes from. A rule without an entry is a default taken from the core, not a documented choice.",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
       }
     }
   }

@@ -26,11 +26,11 @@ areas:
   brackets:   { title: Brackets,            description: "Our brackets, the source's brackets, and telling them apart." }
   playing:    { title: Playing instructions, description: "Techniques, strings, mutes, harmonics and fingerings." }
   text:       { title: Text,                description: "Translations and other text conventions." }
-  workflow:   { title: Workflow,            description: "How work proceeds from transcriber to reviewer." }
+  workflow:   { title: Workflow,            description: "How work proceeds from first transcription to release." }
   report:     { title: The editorial report, description: "What the report contains and how it is laid out." }
   editorial:  { title: Editorial matters,   description: "Out of scope for the transcription and the version of record. Suggestions for handing observations on and for downstream work." }
 
-not_yet_covered:
+outside_this_version:
   - "Lyrics: underlay, hyphenation, melismas, translations."
   - "Piano pedalling."
   - "Articulations, fermatas, repeats and voltas."
@@ -114,14 +114,14 @@ notes:
     title: Beam placement
     statement: Beams go all above or all below the noteheads, not a combination of both.
     exceptions:
-      - "String parts never use beams with noteheads on both sides. Lieder piano parts sometimes need it, for example when crossing between treble and bass of the grand stave. Discuss with your reviewer."
+      - "String parts never use beams with noteheads on both sides. Lieder piano parts sometimes need it, for example when crossing between treble and bass of the grand stave."
     aliases: [T2.1]
 
   - id: rhythm.composer-led-signals
     area: rhythm
     kind: house
     title: Telling composer-led grouping from house style
-    statement: Copy a non-standard grouping when it appears to be the composer's own choice for a passage (Bartok is a classic case). If you cannot tell, ask your reviewer and report the decision.
+    statement: Copy a non-standard grouping when it appears to be the composer's own choice for a passage (Bartok is a classic case). If you cannot tell, keep the source grouping and record an observation (`read.composer-led-grouping`).
     details:
       - "Signals of composer-led grouping: it departs from the norm only in that passage; it recurs identically when the material recurs; it plainly serves the music (regrouping the metre, showing a phrase); or other sources agree."
       - "Signals of house style: the same habit applies across the whole edition regardless of the music."
@@ -310,7 +310,7 @@ notes:
     area: brackets
     kind: house
     title: Keep the source's brackets
-    statement: In a direct transcription, keep the brackets (square or curved) that the source prints around a note, accidental or similar, as printed. They signal an intervention by the source's edition. Downstream editions may drop them (see `editorial.downstream-editions`).
+    statement: In a direct transcription, keep the brackets (square or curved) that the source prints around a note, accidental or similar, as printed where the encoding expresses them, and otherwise record them in the report. They signal an intervention by the source's edition. Downstream editions may drop them (see `editorial.downstream-editions`).
     applies: [read.record-source-marks]
     aliases: [B1, B3]
 
@@ -351,7 +351,7 @@ notes:
     area: playing
     kind: house
     title: Fingerings are not transcribed
-    statement: Fingering is classed as unsupported in our profile (mark category `fingering`), because it is outside what basic encoding formats express, so printed fingerings are not transcribed. State this once in each report.
+    statement: Fingering is classed as unsupported in our profile. The version-of-record format (KRN) has no fingering in its core vocabulary and the profile accepts no extension for it (`fmt.fingering`), so printed fingerings are not transcribed. State this once in each report.
     exceptions:
       - "Where a fingering works as an implicit string instruction, include it."
     applies: [read.transcribe-all-marks]
@@ -371,53 +371,46 @@ notes:
     area: workflow
     kind: house
     title: Red text while working
-    statement: Use staff text coloured red to explain intentional deviations from the source and to flag anything suspicious, including 'obvious' corrections you did not make. Reviewers decide each point and delete all red text before upload.
-    aliases: [W1]
-
-  - id: workflow.report-transfer
-    area: workflow
-    kind: house
-    title: From red text to the report
-    statement: Before deleting red text, reviewers move whatever still applies into the editorial report. Red text is the working draft of that report.
-    applies: [declare.report-deviations]
-    aliases: [W2]
+    statement: While transcribing, use red staff text to explain an intentional deviation from the source and to mark anything suspicious, including a correction you did not make. Before release, convert each red text into a report entry (`declare.report-deviations`) or an observation (`declare.observations`), then delete it. A release contains no red text.
+    applies: [declare.report-deviations, declare.observations]
+    aliases: [W1, W2]
 
   - id: workflow.source-errors
     area: workflow
     kind: house
     title: Handling a suspected source error
-    statement: Transcribe it as printed, add red text, and note it as an observation in the report (`editorial.observations`) so that a correction can be proposed later.
-    applies: [read.preserve-errors]
+    statement: Transcribe it as printed, mark it with red text while working, and record an observation in the report (`declare.observations`, `editorial.observations`). If the error passes the clear-error test (`correct.error-test`), the observation names the one minimal change, so that a correction can be recorded (`correct.record`).
+    applies: [read.preserve-errors, correct.error-test]
     aliases: [W3]
 
   - id: workflow.consistency-edits
     area: workflow
     kind: house
     title: Consistency edits
-    statement: Make equivalent notations match, but do not edit a divergence that might be musical (an articulation that differs in one part, a different pitch in a recurring motive). Preserve it and flag it. Harmonising is editorial.
-    applies: [read.consistency-by-equivalence]
+    statement: Make equivalent notations match, but do not edit a divergence that might be musical (an articulation that differs in one part, a different pitch in a recurring motive). Preserve it and record an observation (`declare.observations`). Harmonising is editorial.
+    applies: [read.consistency-by-equivalence, declare.observations]
     aliases: [G4]
 
-  - id: workflow.ask-reviewer
+  - id: workflow.unclear-cases
     area: workflow
     kind: house
-    title: If in doubt, ask
-    statement: Ask your reviewer and/or the team via Signal.
-    applies: [stance.doubt-means-preserve]
+    title: A case no rule or Note covers
+    statement: Keep what the source prints and record an observation (`stance.doubt-means-preserve`, `declare.observations`). Topics listed under "Outside this version" have no Note yet and are handled this way.
+    applies: [stance.doubt-means-preserve, declare.observations]
     aliases: [G7]
 
   - id: workflow.manuscripts
     area: workflow
     kind: house
     title: Manuscripts
-    statement: Manuscript and other special sources are not covered by the Principles yet. They bring more exceptions and need more reporting. Always agree the approach with your reviewer first.
+    statement: Manuscripts and other special sources are out of scope for this profile (`unsupported_sources` in the profile) and are not transcribed under it.
     aliases: [G6]
 
   - id: workflow.original-clefs
     area: workflow
     kind: house
     title: Original clefs while transcribing
-    statement: Some transcribers use the original clefs while transcribing, to make proofreading easier (comparing a notehead on the same line or space). Reviewers change them to the standard clefs before release.
+    statement: Some transcribers use the original clefs while transcribing, to make proofreading easier (comparing a notehead on the same line or space). Before release the clefs follow `clef.preserved-clefs`, `clef.leger-line-test` and `clef.other-clefs-modern`.
 
   # ------------------------------------------------------------ report
   - id: report.contents
@@ -430,10 +423,11 @@ notes:
       - Normalised terms and abbreviations.
       - Added accidentals (also bracketed in the score).
       - Clef changes and modernisation.
-      - Composer-led or house-style grouping decisions that were not obvious.
+      - Grouping kept as printed because composer-led and house-style grouping could not be told apart (as an observation).
       - System and page breaks omitted.
       - Ornaments or details entered in the nearest available form.
       - Excluded categories of mark.
+      - Observations, in a separate section (`declare.observations`).
       - Which brackets are ours, where the source also uses square brackets (`brackets.tell-apart`).
     applies: [declare.report-deviations]
     aliases: [R1]
@@ -470,15 +464,15 @@ notes:
     area: editorial
     kind: editorial
     title: Observations
-    statement: If you notice something that looks like a source error, a divergence between parts or repeated passages, or a question an editor would want to ask, record it as an observation in a separate section of the report, not in the score. Say where it is, what the source prints, and why it caught your eye. Observations are not decisions. A clear source error may later be proposed for the corrections layer.
-    applies: [stance.judgement-stays-out]
+    statement: If you notice something that looks like a source error, a divergence between parts or repeated passages, or a question an editor would want to ask, record it as an observation in a separate section of the report, not in the score. Say where it is, what the source prints, and why it caught your eye. Observations are not decisions. An observation about a clear error (`correct.error-test`) names the one minimal change.
+    applies: [declare.observations]
     aliases: [E1, R4]
 
   - id: editorial.do-not-resolve
     area: editorial
     kind: editorial
     title: Do not resolve
-    statement: Do not choose between readings, supply missing material or "improve" the score, however obvious it seems.
+    statement: Do not choose between readings, supply missing material or "improve" the score. A correction is made only for a clear error (`correct.error-test`), and only where the profile allows it.
     applies: [stance.judgement-stays-out]
     aliases: [E2]
 
@@ -490,9 +484,9 @@ notes:
     applies: [stance.judgement-stays-out]
     aliases: [E3]
 
-  - id: editorial.comparing-sources
+  - id: editorial.collation
     area: editorial
     kind: editorial
-    title: Comparing sources
-    statement: An optional, judgement-free comparison between transcriptions of the same work is planned. Editions may use it as a starting point.
+    title: Collating sources
+    statement: A collation records where transcriptions of the same work differ, without choosing between them. It is a derived view and never part of a transcription. Editions may use it as a starting point.
     aliases: [E4]

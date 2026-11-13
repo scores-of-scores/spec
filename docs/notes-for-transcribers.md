@@ -1,18 +1,19 @@
 # Notes for Transcribers
 
-*Local notes for transcribers and reviewers. Version 2026-11 (draft). Generated from `notes/registry.yaml`. Applies the profile `sos-2026-11` of the Transcription Principles, version 2026-11. Part of the Scores of Scores document set (see the README).*
+*Local notes for transcribers and reviewers. Version 2026-11. Generated from `notes/registry.yaml`. Applies the profile `sos-2026-11` of the Transcription Principles, version 2026-11. Part of the Scores of Scores document set (see the README).*
 
-These Notes say how **our project** works with the [Transcription Principles](principles-framework.md): house style, tool settings, workflow, report format and suggestions for downstream editorial work. They are the local-notes layer for the Scores of Scores profile (`sos-2026-11`). Rules in the core are cited by ID, for example `read.preserve-errors`; the full list, with the strength each has in our profile, is the [rules table](principles-rules.md). These Notes replace the previous Transcription Guide (superseded; it survives in the repository history).
+These Notes say how **our project** works with the [Transcription Principles](principles-framework.md): house style, tool settings, workflow, report format and suggestions for downstream editorial work. They are the local-notes layer for the Scores of Scores profile (`sos-2026-11`). Rules in the core are cited by ID, for example `read.preserve-errors`; the full list, with the strength each has in each profile, is the [rules table](principles-rules.md). What each format can express is in [Format support](format-support.md). These Notes replace the previous Transcription Guide (superseded; it survives in the repository history).
 
 ## How to read these Notes
 
-- **Notes narrow, never override.** If a Note conflicts with a core rule or with the profile, the rule and profile win. Report the conflict so the Note can be fixed. A Note can never add a normalisation (`normalise.closed-list`).
+- **Notes narrow, never override.** If a Note conflicts with a core rule or with the profile, the rule and profile win, and the Note is corrected. A Note can never add a normalisation (`normalise.closed-list`).
 - **Every Note has a kind:**
   - **presentation:** a choice among the normalisations the profile permits.
   - **tool:** settings and palette entries that may change between apps and versions.
   - **house:** a house convention (placement, scope, workflow, report format).
   - **editorial:** a suggestion for downstream editorial work. It is never applied in the version of record (VoR).
 - **Each Note has a permanent ID,** `<area>.<slug>`, and may say which core rules it `applies` to. Earlier section-and-number codes from the previous guide are kept as aliases and listed in the concordance at the end.
+- **A point that no rule or Note covers** is kept as printed and recorded as an observation (`workflow.unclear-cases`).
 - **This document is generated** from `notes/registry.yaml` by `python3 tools/build.py`. Edit the registry, not this file.
 
 ## Contents
@@ -142,7 +143,7 @@ Earlier codes: T2, T2.2.
 
 Beams go all above or all below the noteheads, not a combination of both.
 
-- *Exception:* String parts never use beams with noteheads on both sides. Lieder piano parts sometimes need it, for example when crossing between treble and bass of the grand stave. Discuss with your reviewer.
+- *Exception:* String parts never use beams with noteheads on both sides. Lieder piano parts sometimes need it, for example when crossing between treble and bass of the grand stave.
 
 Earlier codes: T2.1.
 
@@ -152,7 +153,7 @@ Earlier codes: T2.1.
 
 *house*; applies [`read.composer-led-grouping`](principles-rules.md#read.composer-led-grouping)
 
-Copy a non-standard grouping when it appears to be the composer's own choice for a passage (Bartok is a classic case). If you cannot tell, ask your reviewer and report the decision.
+Copy a non-standard grouping when it appears to be the composer's own choice for a passage (Bartok is a classic case). If you cannot tell, keep the source grouping and record an observation (`read.composer-led-grouping`).
 
 - Signals of composer-led grouping: it departs from the norm only in that passage; it recurs identically when the material recurs; it plainly serves the music (regrouping the metre, showing a phrase); or other sources agree.
 
@@ -404,7 +405,7 @@ Earlier codes: B2.
 
 *house*; applies [`read.record-source-marks`](principles-rules.md#read.record-source-marks)
 
-In a direct transcription, keep the brackets (square or curved) that the source prints around a note, accidental or similar, as printed. They signal an intervention by the source's edition. Downstream editions may drop them (see `editorial.downstream-editions`).
+In a direct transcription, keep the brackets (square or curved) that the source prints around a note, accidental or similar, as printed where the encoding expresses them, and otherwise record them in the report. They signal an intervention by the source's edition. Downstream editions may drop them (see `editorial.downstream-editions`).
 
 Earlier codes: B1, B3.
 
@@ -458,7 +459,7 @@ Earlier codes: P3.
 
 *house*; applies [`read.transcribe-all-marks`](principles-rules.md#read.transcribe-all-marks)
 
-Fingering is classed as unsupported in our profile (mark category `fingering`), because it is outside what basic encoding formats express, so printed fingerings are not transcribed. State this once in each report.
+Fingering is classed as unsupported in our profile. The version-of-record format (KRN) has no fingering in its core vocabulary and the profile accepts no extension for it (`fmt.fingering`), so printed fingerings are not transcribed. State this once in each report.
 
 - *Exception:* Where a fingering works as an implicit string instruction, include it.
 
@@ -480,35 +481,25 @@ Earlier codes: G5.2.
 
 ## Workflow (`workflow`)
 
-How work proceeds from transcriber to reviewer.
+How work proceeds from first transcription to release.
 
 <a id="workflow.red-text"></a>
 
 ### `workflow.red-text`: Red text while working
 
-*house*
+*house*; applies [`declare.report-deviations`](principles-rules.md#declare.report-deviations), [`declare.observations`](principles-rules.md#declare.observations)
 
-Use staff text coloured red to explain intentional deviations from the source and to flag anything suspicious, including 'obvious' corrections you did not make. Reviewers decide each point and delete all red text before upload.
+While transcribing, use red staff text to explain an intentional deviation from the source and to mark anything suspicious, including a correction you did not make. Before release, convert each red text into a report entry (`declare.report-deviations`) or an observation (`declare.observations`), then delete it. A release contains no red text.
 
-Earlier codes: W1.
-
-<a id="workflow.report-transfer"></a>
-
-### `workflow.report-transfer`: From red text to the report
-
-*house*; applies [`declare.report-deviations`](principles-rules.md#declare.report-deviations)
-
-Before deleting red text, reviewers move whatever still applies into the editorial report. Red text is the working draft of that report.
-
-Earlier codes: W2.
+Earlier codes: W1, W2.
 
 <a id="workflow.source-errors"></a>
 
 ### `workflow.source-errors`: Handling a suspected source error
 
-*house*; applies [`read.preserve-errors`](principles-rules.md#read.preserve-errors)
+*house*; applies [`read.preserve-errors`](principles-rules.md#read.preserve-errors), [`correct.error-test`](principles-rules.md#correct.error-test)
 
-Transcribe it as printed, add red text, and note it as an observation in the report (`editorial.observations`) so that a correction can be proposed later.
+Transcribe it as printed, mark it with red text while working, and record an observation in the report (`declare.observations`, `editorial.observations`). If the error passes the clear-error test (`correct.error-test`), the observation names the one minimal change, so that a correction can be recorded (`correct.record`).
 
 Earlier codes: W3.
 
@@ -516,19 +507,19 @@ Earlier codes: W3.
 
 ### `workflow.consistency-edits`: Consistency edits
 
-*house*; applies [`read.consistency-by-equivalence`](principles-rules.md#read.consistency-by-equivalence)
+*house*; applies [`read.consistency-by-equivalence`](principles-rules.md#read.consistency-by-equivalence), [`declare.observations`](principles-rules.md#declare.observations)
 
-Make equivalent notations match, but do not edit a divergence that might be musical (an articulation that differs in one part, a different pitch in a recurring motive). Preserve it and flag it. Harmonising is editorial.
+Make equivalent notations match, but do not edit a divergence that might be musical (an articulation that differs in one part, a different pitch in a recurring motive). Preserve it and record an observation (`declare.observations`). Harmonising is editorial.
 
 Earlier codes: G4.
 
-<a id="workflow.ask-reviewer"></a>
+<a id="workflow.unclear-cases"></a>
 
-### `workflow.ask-reviewer`: If in doubt, ask
+### `workflow.unclear-cases`: A case no rule or Note covers
 
-*house*; applies [`stance.doubt-means-preserve`](principles-rules.md#stance.doubt-means-preserve)
+*house*; applies [`stance.doubt-means-preserve`](principles-rules.md#stance.doubt-means-preserve), [`declare.observations`](principles-rules.md#declare.observations)
 
-Ask your reviewer and/or the team via Signal.
+Keep what the source prints and record an observation (`stance.doubt-means-preserve`, `declare.observations`). Topics listed under "Outside this version" have no Note yet and are handled this way.
 
 Earlier codes: G7.
 
@@ -538,7 +529,7 @@ Earlier codes: G7.
 
 *house*
 
-Manuscript and other special sources are not covered by the Principles yet. They bring more exceptions and need more reporting. Always agree the approach with your reviewer first.
+Manuscripts and other special sources are out of scope for this profile (`unsupported_sources` in the profile) and are not transcribed under it.
 
 Earlier codes: G6.
 
@@ -548,7 +539,7 @@ Earlier codes: G6.
 
 *house*
 
-Some transcribers use the original clefs while transcribing, to make proofreading easier (comparing a notehead on the same line or space). Reviewers change them to the standard clefs before release.
+Some transcribers use the original clefs while transcribing, to make proofreading easier (comparing a notehead on the same line or space). Before release the clefs follow `clef.preserved-clefs`, `clef.leger-line-test` and `clef.other-clefs-modern`.
 
 ## The editorial report (`report`)
 
@@ -570,13 +561,15 @@ Report any deviation from the source that is not visibly marked in the score. Th
 
 - Clef changes and modernisation.
 
-- Composer-led or house-style grouping decisions that were not obvious.
+- Grouping kept as printed because composer-led and house-style grouping could not be told apart (as an observation).
 
 - System and page breaks omitted.
 
 - Ornaments or details entered in the nearest available form.
 
 - Excluded categories of mark.
+
+- Observations, in a separate section (`declare.observations`).
 
 - Which brackets are ours, where the source also uses square brackets (`brackets.tell-apart`).
 
@@ -622,9 +615,9 @@ Out of scope for the transcription and the version of record. Suggestions for ha
 
 ### `editorial.observations`: Observations
 
-*editorial*; applies [`stance.judgement-stays-out`](principles-rules.md#stance.judgement-stays-out)
+*editorial*; applies [`declare.observations`](principles-rules.md#declare.observations)
 
-If you notice something that looks like a source error, a divergence between parts or repeated passages, or a question an editor would want to ask, record it as an observation in a separate section of the report, not in the score. Say where it is, what the source prints, and why it caught your eye. Observations are not decisions. A clear source error may later be proposed for the corrections layer.
+If you notice something that looks like a source error, a divergence between parts or repeated passages, or a question an editor would want to ask, record it as an observation in a separate section of the report, not in the score. Say where it is, what the source prints, and why it caught your eye. Observations are not decisions. An observation about a clear error (`correct.error-test`) names the one minimal change.
 
 Earlier codes: E1, R4.
 
@@ -634,7 +627,7 @@ Earlier codes: E1, R4.
 
 *editorial*; applies [`stance.judgement-stays-out`](principles-rules.md#stance.judgement-stays-out)
 
-Do not choose between readings, supply missing material or "improve" the score, however obvious it seems.
+Do not choose between readings, supply missing material or "improve" the score. A correction is made only for a clear error (`correct.error-test`), and only where the profile allows it.
 
 Earlier codes: E2.
 
@@ -648,19 +641,19 @@ Anyone preparing an edition (harmonising recurring motives or articulation acros
 
 Earlier codes: E3.
 
-<a id="editorial.comparing-sources"></a>
+<a id="editorial.collation"></a>
 
-### `editorial.comparing-sources`: Comparing sources
+### `editorial.collation`: Collating sources
 
 *editorial*
 
-An optional, judgement-free comparison between transcriptions of the same work is planned. Editions may use it as a starting point.
+A collation records where transcriptions of the same work differ, without choosing between them. It is a derived view and never part of a transcription. Editions may use it as a starting point.
 
 Earlier codes: E4.
 
-## Not yet covered
+## Outside this version
 
-To be added as core rules if general, or as Notes if house style. Until then, ask your reviewer (`workflow.ask-reviewer`) and record the decision in the report.
+These topics have no Note in this version. The core rules apply to them unchanged: keep what the source prints (`stance.doubt-means-preserve`) and record an observation (`declare.observations`). A later pinned version adds Notes for them.
 
 - Lyrics: underlay, hyphenation, melismas, translations.
 - Piano pedalling.
@@ -696,12 +689,12 @@ Codes not listed here moved to the core rules; see the concordance in the [rules
 | E1 | `editorial.observations` |
 | E2 | `editorial.do-not-resolve` |
 | E3 | `editorial.downstream-editions` |
-| E4 | `editorial.comparing-sources` |
+| E4 | `editorial.collation` |
 | G4 | `workflow.consistency-edits` |
 | G5.1 | `playing.standard-entries` |
 | G5.2 | `text.translation-format` |
 | G6 | `workflow.manuscripts` |
-| G7 | `workflow.ask-reviewer` |
+| G7 | `workflow.unclear-cases` |
 | K1.1 | `key.no-cancelling-naturals` |
 | K2 | `key.added-accidentals` |
 | L1 | `layout.source-breaks` |
@@ -741,5 +734,5 @@ Codes not listed here moved to the core rules; see the concordance in the [rules
 | T5 | `rhythm.tremolo-default` |
 | T6 | `rhythm.tempo-marks` |
 | W1 | `workflow.red-text` |
-| W2 | `workflow.report-transfer` |
+| W2 | `workflow.red-text` |
 | W3 | `workflow.source-errors` |

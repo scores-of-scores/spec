@@ -1,16 +1,17 @@
 # Scores of Scores profile of the Transcription Principles.
 # A profile is where a project makes its choices: how strong each rule is, which rule wins
-# when two are in tension, and what is out of scope. Another project can adopt the core
-# registry with a different profile.
+# when two are in tension, which format the version of record uses, and what is out of scope.
+# Another project can adopt the core registry with a different profile.
 #
 # Strengths use the BCP 14 (RFC 2119 / RFC 8174) terms, in capitals:
 #   MUST    always applied
 #   SHOULD  applied unless there is a recorded reason
 #   MAY     at the transcriber's discretion
-#   OFF     not adopted (for a normalisation: not permitted)
+#   OFF     not adopted (for a normalisation or a correction: not permitted)
 
 profile: sos-2026-11
 title: Scores of Scores profile
+status: adopted
 principles_version: "2026-11"
 notes: docs/notes-for-transcribers.md
 
@@ -25,6 +26,7 @@ strengths:
   read.preserve-errors: MUST
   read.record-source-marks: MUST
   read.transcribe-all-marks: MUST
+  read.ambiguous-marks: MUST
   read.source-language: MUST
   read.standard-instructions: MUST
   read.composer-led-grouping: SHOULD
@@ -48,7 +50,13 @@ strengths:
 
   declare.mark-additions: MUST
   declare.report-deviations: MUST
+  declare.observations: MUST
   declare.record-provenance: MUST
+
+  correct.error-test: MUST
+  correct.in-place: OFF
+  correct.layer: MUST
+  correct.record: MUST
 
 # Ranked aims, highest first. Where two aims pull apart, the higher one wins
 # (more specific resolutions are in `precedence`).
@@ -69,12 +77,20 @@ precedence:
     under: read.source-language
     scope: Instructions that have a standard encoding in the tool (for example arco, pizz., con sord., senza sord.).
     reason: Standard entries drive playback, part extraction and export. Almost no other terms have this status.
+  - over: read.preserve-errors
+    under: correct.in-place
+    scope: Every source error, including clear ones.
+    reason: The transcription records what the source prints. A clear error is corrected only in the separate layer (correct.layer).
 
 scope:
-  encoding: KRN
-  # Categories of printed mark take the default treatment set in the core registry (mark_categories):
-  # currently fingering is unsupported (outside what basic encoding formats express). To reclassify
-  # one, for example when the format gains support for it, add it here with a reason:
+  encoding:
+    format: krn
+    dialect: Core **kern as defined in the Humdrum guide, plus the VHV editorial-accidental signifier declared in !!!RDF**kern and the VHV system and page break conventions. No other extension.
+    accept_extensions:
+      - fmt.editorial-accidentals
+      - fmt.page-breaks
+  # Categories of printed mark take the treatment derived from the formats data
+  # (see mark_categories in the core registry). To reclassify one, add it here with a reason:
   #   marks:
   #     fingering: { treatment: transcribe, reason: "..." }
   unsupported_sources:

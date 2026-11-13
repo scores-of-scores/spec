@@ -1,0 +1,406 @@
+# Features in the category "Voices & staves". IDs are fmt.<slug> and permanent. Status vocabulary: formats.yaml. Sources: sources.yaml.
+- id: fmt.two-voices
+  feature: Two independent voices on one stave
+  question: Represent independent rhythms and voice identity, not just a chord with opposite stems.
+  tags:
+  - polyphony
+  - voices
+  - stave
+  - staff
+  - layers
+  importance: 3
+  cells:
+    krn:
+      status: qualified
+      summary: Split a spine
+      mechanism: '*^ and *v split and join streams; VHV interprets subspines as voices sharing a staff.'
+      caveat: Staff rendering belongs to the consumer’s conventions.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-syntax
+      subset: ''
+    musicxml:
+      status: direct
+      summary: voice + staff + backup
+      mechanism: Use separate voice labels, the same staff number and cursor movement to encode overlapping lines.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-voice
+      - mx-backup
+      subset: ''
+    musescore:
+      status: direct
+      summary: Voice slots 1–4
+      mechanism: Enter the lines in separate voice slots on the same staff.
+      caveat: Stem direction alone does not establish a separate voice.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-voices
+      subset: ''
+    mei:
+      status: direct
+      summary: Multiple layers in one staff
+      mechanism: Each voice occupies a layer inside the same staff.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-cmn
+      subset: ''
+- id: fmt.voice-limit
+  feature: More than four independent voices per stave
+  question: A schema-level capability can exceed a notation application’s internal model.
+  tags:
+  - limit
+  - polyphony
+  - five
+  - voices
+  importance: 3
+  cells:
+    krn:
+      status: direct
+      summary: No four-voice syntax ceiling
+      mechanism: Spine splitting is not limited to four branches by the Humdrum syntax.
+      caveat: Rendering complexity and tool limits remain.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-syntax
+      subset: ''
+    musicxml:
+      status: direct
+      summary: No four-voice label ceiling
+      mechanism: voice contains a string; the format does not prescribe MuseScore’s four slots.
+      caveat: Destination programs may merge or redistribute voices.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-voice
+      subset: ''
+    musescore:
+      status: workaround
+      summary: Four slots per staff
+      mechanism: The documented model permits four voices.
+      caveat: ''
+      workaround: Use extra staves or reorganise the notation; retain original voice identities separately.
+      evidence: documented
+      sources:
+      - ms-voices
+      subset: ''
+    mei:
+      status: direct
+      summary: Multiple layers
+      mechanism: MEI does not impose a four-layer limit analogous to MuseScore’s voice slots.
+      caveat: Check the target renderer.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mei-cmn
+      subset: ''
+- id: fmt.temporary-divisi
+  feature: Temporary divisi and merging
+  question: Preserve continuity through a passage that branches and later rejoins.
+  tags:
+  - divisi
+  - merge
+  - branch
+  - lineage
+  importance: 2
+  cells:
+    krn:
+      status: direct
+      summary: Explicit stream topology
+      mechanism: Spine split/join operations describe branching and convergence.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-syntax
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Persistent voice labels
+      mechanism: Use voice labels and aligned events; a merge is inferred from subsequent voice use.
+      caveat: No general voice-lineage graph is implied.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-voice
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Enter secondary voices as needed
+      mechanism: Voice slots allow local polyphony; staff additions are a separate layout choice.
+      caveat: Four slots remain the ceiling.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-voices
+      subset: ''
+    mei:
+      status: qualified
+      summary: Layers plus relationships
+      mechanism: Layers and linking attributes can distinguish musical material and its correspondence.
+      caveat: Define how lineage should be interpreted.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mei-links
+      subset: ''
+- id: fmt.cross-staff
+  feature: Cross-staff notes and beams
+  question: Logical voice ownership need not equal the staff on which a note is drawn.
+  tags:
+  - cross-staff
+  - keyboard
+  - ownership
+  - beams
+  importance: 3
+  cells:
+    krn:
+      status: extension
+      summary: Rendering conventions
+      mechanism: Staff assignment and layout conventions supplement the core stream representation.
+      caveat: Test cross-staff conversion in the chosen Humdrum renderer.
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-system
+      subset: VHV rendering conventions
+    musicxml:
+      status: direct
+      summary: Per-note staff assignment
+      mechanism: staff and voice distinguish location from voice identity; beaming is specified separately.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-basics
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Draw on neighbouring staff
+      mechanism: Cross-staff movement keeps logical ownership on the original staff.
+      caveat: Moving one note moves the whole chord.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-cross
+      subset: ''
+    mei:
+      status: direct
+      summary: Staff references and beam relations
+      mechanism: Events can identify a staff independently of their containment; cross-staff beam attributes describe
+        the relation.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-note
+      - mei-tupletSpan
+      subset: ''
+- id: fmt.split-chord
+  feature: One chord split between staves
+  question: This is narrower than moving an entire voice to another stave.
+  tags:
+  - split
+  - chord
+  - cross-staff
+  - stem
+  importance: 3
+  cells:
+    krn:
+      status: unknown
+      summary: Tool-specific arrangement
+      mechanism: The exact shared-stem, split-chord result was not verified for the selected Humdrum renderer.
+      caveat: ''
+      workaround: ''
+      evidence: unverified
+      sources:
+      - krn-system
+      subset: ''
+    musicxml:
+      status: direct
+      summary: Chord notes carry staff values
+      mechanism: The notation tutorial demonstrates chord members assigned to different staves.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-basics
+      subset: ''
+    musescore:
+      status: workaround
+      summary: Split into separate voices
+      mechanism: The handbook says individual members of a chord cannot be moved independently across staves.
+      caveat: ''
+      workaround: Separate the members into voices and adjust the stems/beams.
+      evidence: documented
+      sources:
+      - ms-cross
+      subset: ''
+    mei:
+      status: qualified
+      summary: Per-note staff information
+      mechanism: The data model provides staff assignment on individual notes.
+      caveat: Shared-stem rendering and import need a fixture test.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mei-note
+      subset: ''
+- id: fmt.unequal-chord-durations
+  feature: Simultaneous notes of unequal duration
+  question: Do not silently flatten independently sustained notes into a single uniform chord.
+  tags:
+  - polyrhythm
+  - duration
+  - chord
+  - sustain
+  importance: 3
+  cells:
+    krn:
+      status: qualified
+      summary: Use separate streams
+      mechanism: Represent independent continuations in subspines rather than relying on a mixed-duration chord
+        token.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-notation
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Shorter chord members allowed
+      mechanism: A chord member may be shorter, but not longer, than the preceding anchor note.
+      caveat: Separate voices are clearer for independent subsequent motion.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-chord
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Separate voices
+      mechanism: Use different voice slots when simultaneous notes have different rhythmic continuations.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-voices
+      subset: ''
+    mei:
+      status: qualified
+      summary: Separate layers preferred
+      mechanism: The chord definition specifies equal duration; use layers for independent durations.
+      caveat: Do not assume every schema-permitted note attribute defines a supported mixed-duration chord.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-chord
+      subset: ''
+- id: fmt.ossia
+  feature: Ossia and alternatives on small staves
+  question: An alternate passage is not simply a second part playing at the same time.
+  tags:
+  - ossia
+  - alternatives
+  - small
+  - stave
+  importance: 2
+  cells:
+    krn:
+      status: qualified
+      summary: Alternative streams/sections
+      mechanism: Humdrum alternatives can retain alternate passages; engraved ossia treatment is consumer-specific.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-repeats
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Ossia staff typing
+      mechanism: staff-details permits staff types, sizes and visibility choices.
+      caveat: Selection and non-playing behaviour need explicit handling.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-staff-details
+      subset: ''
+    musescore:
+      status: workaround
+      summary: Small extra staff
+      mechanism: Use an additional staff, adjust size and hide unused regions.
+      caveat: Check playback and part inclusion.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-hidden
+      subset: ''
+    mei:
+      status: direct
+      summary: Dedicated ossia model
+      mechanism: CMN includes ossia; it is distinct from the critical apparatus.
+      caveat: Renderer support varies.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-cmn
+      subset: ''
+- id: fmt.linked-parts
+  feature: Linked score and instrumental parts
+  question: Representing a part differs from maintaining synchronised editable views.
+  tags:
+  - parts
+  - extraction
+  - linkage
+  - orchestra
+  importance: 3
+  cells:
+    krn:
+      status: qualified
+      summary: Extract from streams
+      mechanism: Part extraction is a transformation of the encoded streams.
+      caveat: Independent engraving edits need separate management.
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-guide
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Exchange representations
+      mechanism: Score and part data can be exchanged, but the format does not mandate a live linked editing session.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-spec
+      subset: ''
+    musescore:
+      status: direct
+      summary: Native linked part workflow
+      mechanism: Custom parts can show selected instruments and voices, with their own styles.
+      caveat: Exporting the parts is not the same as transferring the native linkage.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-parts
+      subset: ''
+    mei:
+      status: qualified
+      summary: Score/parts and references
+      mechanism: MEI can describe score and part structures and their relationships.
+      caveat: Live synchronisation is an application responsibility.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-shared
+      subset: ''

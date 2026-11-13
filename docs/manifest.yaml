@@ -1,0 +1,38 @@
+# Document map. Generated into the README and the project overview.
+documents:
+  - file: docs/start-here.md
+    title: Start here
+    answers: A short orientation to the rules and how they fit together
+    audience: Everyone
+  - file: docs/principles-framework.md
+    title: Principles framework
+    answers: How the layers work, the tiers and boundary test, rule anatomy, relations, derived treatments, versioning, adoption
+    audience: Anyone, including other projects
+  - file: docs/principles-rules.md
+    title: Rules table
+    answers: Every rule, with its strength and relations in each profile, priorities and scope (generated)
+    audience: Transcribers, reviewers, other projects
+  - file: docs/format-support.md
+    title: Format support
+    answers: What each of four formats can express for each rule, and what follows in each profile (generated)
+    audience: Profile authors, transcribers
+  - file: site/formats.html
+    title: Format reader
+    answers: The full formats dataset as a searchable matrix, with worked cases and sources (generated)
+    audience: Anyone choosing or comparing formats
+  - file: docs/notes-for-transcribers.md
+    title: Notes for Transcribers
+    answers: Day-to-day local notes for the Scores of Scores profile (generated)
+    audience: Transcribers and reviewers
+  - file: docs/glossary.md
+    title: Glossary
+    answers: The terms used across the documents (generated)
+    audience: Everyone
+  - file: docs/overview.md
+    title: Project overview
+    answers: Scope, pipeline and conventions of the wider project
+    audience: Developers, maintainers, funders
+  - file: paper/paper.md
+    title: Paper
+    answers: The framework, the two worked positions and the evidence for them
+    audience: Researchers

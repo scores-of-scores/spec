@@ -545,15 +545,17 @@ code,.cell-body a,.sources small{overflow-wrap:anywhere}
   button{display:none}
   .legend{grid-template-columns:repeat(5,1fr)}
 }
+.rules{margin:4px 0 0;font:11px ui-monospace,Menlo,monospace;color:var(--muted);word-break:break-word}
+.edition a{color:inherit}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to comparison</a>
 <div class="shell">
- <div class="topline"><div class="brand">Music encoding field guide</div><div class="edition"><span>Documentation review; {{DATE}}</span><span>Offline edition; v1.0</span></div></div>
+ <div class="topline"><div class="brand">Scores of Scores: format evidence</div><div class="edition"><span>Documentation review; {{DATE}}</span><a href="index.html">Rules and Notes</a></div></div>
  <header>
   <div class="eyebrow">KRN; MusicXML; MuseScore 4; MEI</div>
-  <h1>Music Encoding Format Comparison.</h1>
+  <h1>What each encoding format can express.</h1>
   <div class="intro"><p>A practical comparison of musical structure, editorial evidence and the compromises between them. Explore the feature matrix, then open a cell for mechanisms, conditions and sources.</p><div class="stats"><div class="stat"><strong>{{FEATURE_COUNT}}</strong><small>topics</small></div><div class="stat"><strong>{{ASSESSMENT_COUNT}}</strong><small>assessments</small></div><div class="stat"><strong>{{SOURCE_COUNT}}</strong><small>primary sources</small></div></div></div>
  </header>
  <nav class="nav" aria-label="Report sections" role="tablist">
@@ -568,16 +570,16 @@ code,.cell-body a,.sources small{overflow-wrap:anywhere}
   <h2>Four different centres of gravity</h2><p>These are overlapping models, not interchangeable containers. The profiles below are synthesis, not a ranking.</p>
   <div class="profiles">{{PROFILES}}</div>
   <div class="summary-grid">
-   <article class="overview-note"><h3>Editorial information has several layers</h3><p>A bracketed accidental can preserve appearance while losing the source reading, responsible editor or degree of certainty. The matrix treats those as separate requirements.</p><a href="#feature-editorial-accidentals">Inspect editorial support →</a></article>
+   <article class="overview-note"><h3>Editorial information has several layers</h3><p>A bracketed accidental can preserve appearance while losing the source reading, responsible editor or degree of certainty. The matrix treats those as separate requirements.</p><a href="#feature-fmt.editorial-accidentals">Inspect editorial support →</a></article>
    <article class="overview-note"><h3>Polymetre needs a precise question</h3><p>Different time signatures can share one bar duration. Independent 3/4 and 4/4 bars at the same quarter-note pulse are a harder problem, with different consequences for each model.</p><a href="#case-bars">See the boundary example →</a></article>
-   <article class="overview-note"><h3>Two voices is not a chord-format question</h3><p>All four can describe polyphony. They differ in voice identity, stream topology, the four-slot limit in MuseScore, and the representation of shared staves and independent durations.</p><a href="#feature-two-voices">Compare voice models →</a></article>
-   <article class="overview-note"><h3>Preserve a master and test derivatives</h3><p>Choose the master for the information you cannot afford to lose. Keep native projects, scholarly encodings, analytical derivatives and approved renderings where each serves a distinct purpose.</p><a href="#feature-preservation-strategy">Inspect preservation trade-offs →</a></article>
+   <article class="overview-note"><h3>Two voices is not a chord-format question</h3><p>All four can describe polyphony. They differ in voice identity, stream topology, the four-slot limit in MuseScore, and the representation of shared staves and independent durations.</p><a href="#feature-fmt.two-voices">Compare voice models →</a></article>
+   <article class="overview-note"><h3>Preserve a master and test derivatives</h3><p>Choose the master for the information you cannot afford to lose. Keep native projects, scholarly encodings, analytical derivatives and approved renderings where each serves a distinct purpose.</p><a href="#feature-fmt.preservation-strategy">Inspect preservation trade-offs →</a></article>
   </div>
   <h3>How to read the badges</h3><div class="legend">{{LEGEND}}</div>
   <div class="alert"><b>Evidence boundary:</b> capability judgements are based on documentation or labelled inference. No converter round trips or playback tests were run. “Direct” is not a guarantee that a particular program supports the feature.</div>
  </section>
  <section class="section" id="compare" role="tabpanel" aria-labelledby="tab-compare">
-  <div class="section-head"><div><h2>The comparison matrix</h2><p>Search includes the hidden detail notes. Hover for a quick explanation; click or press Enter to keep a cell open.</p></div><button id="download-json" class="primary">Download source JSON</button></div>
+  <div class="section-head"><div><h2>The comparison matrix</h2><p>Search includes the hidden detail notes. Hover for a quick explanation; click or press Enter to keep a cell open.</p></div><button id="download-json" class="primary">Download data JSON</button></div>
   <div class="controls">
    <div class="searchline"><div class="search-wrap"><label for="query">Search topics, mechanisms and caveats</label><input id="query" type="search" placeholder="Try: polymetre, ficta, tuplet, source, resp…" autocomplete="off"></div></div>
    <div class="filters">
@@ -588,10 +590,10 @@ code,.cell-body a,.sources small{overflow-wrap:anywhere}
     <div class="field"><label for="sort">Sort rows</label><select id="sort"><option value="theme">Thematic order</option><option value="az">Feature A–Z</option><option value="differences">Most varied assessments</option><option value="krn">Group by KRN capability</option><option value="musicxml">Group by MusicXML capability</option><option value="musescore">Group by MuseScore capability</option><option value="mei">Group by MEI capability</option></select></div>
    </div>
    <fieldset class="column-options"><legend>Visible formats</legend>{{FORMATS}}</fieldset><div id="column-message" role="status"></div>
-   <div class="quick"><button class="chip" data-quick="editorial">Editorial evidence</button><button class="chip" data-quick="bars">Independent bars</button><button class="chip" data-quick="voices">Voices & staves</button><button class="chip" data-quick="unknown">Needs a test</button><button class="chip" id="reset">Reset filters</button></div>
+   <div class="quick"><button class="chip" data-quick="editorial">Editorial evidence</button><button class="chip" data-quick="bars">Independent bars</button><button class="chip" data-quick="voices">Voices & staves</button><button class="chip" data-quick="unknown">Needs a test</button><button class="chip" data-quick="rules">Linked to a rule</button><button class="chip" id="reset">Reset filters</button></div>
   </div>
   <div class="toolbar"><div><span id="result-count">{{FEATURE_COUNT}} of {{FEATURE_COUNT}} topics</span><span class="small" id="filter-note">Filters match any visible format. Counts are not quality scores.</span></div><div class="actions"><button id="expand">Expand visible notes</button><button id="collapse">Collapse notes</button><button id="download-csv">Export filtered CSV</button><button id="print">Print report</button></div></div>
-  <p class="small print-label">The printed matrix reflects current filters and visible columns. Full source data remains in comparison.json.</p>
+  <p class="small print-label">The printed matrix reflects current filters and visible columns. Full source data is in the formats/ directory of the repository.</p>
   <div class="table-scroll" role="region" aria-label="Format comparison; scroll horizontally on narrow screens" tabindex="0"><table class="matrix"><thead><tr><th scope="col">Feature<small>What changes between models</small></th>{{HEADERS}}</tr></thead><tbody id="matrix-body">{{ROWS}}</tbody></table></div>
   <div class="empty" id="empty" hidden>No topics match these filters. Try a shorter search or reset the filters.</div>
   <p class="small">All music-software behaviour is documentation-based, inferred or unverified. Open a cell for its evidence label. Search is case-insensitive and matches all entered words within the row.</p>
@@ -600,16 +602,16 @@ code,.cell-body a,.sources small{overflow-wrap:anywhere}
  <section class="section" id="method" role="tabpanel" aria-labelledby="tab-method">
   <div class="method-content"><h2>Scope, evidence and reproducibility</h2><p>The comparison focuses on symbolic music representation, with light treatment of shared basics. Research date: <b>{{DATE}}</b>.</p><ul>{{ASSUMPTIONS}}</ul><h3>Evidence labels</h3><dl>{{EVIDENCE}}</dl><h3>Coverage limits</h3><p>{{COVERAGE}}</p><h3>A reusable verification plan</h3><p>These tests are specified, <b>not executed</b>. Record the exporter/importer build, settings, input and output checksums. Check event timing, source/editorial semantics, appearance and playback separately. A clean opening or a schema-valid file is not sufficient.</p></div>
   <div class="table-scroll" style="max-height:none"><table class="test-table"><thead><tr><th>Fixture</th><th>Acceptance condition</th><th>Status</th></tr></thead><tbody>{{TESTS}}</tbody></table></div>
-  <div class="method-content"><h3>Maintaining this report (access to underpinning data files required)</h3><p>Edit <code>comparison.json</code> and run <code>python3 build.py</code>. The script validates identifiers, references and required fields, then embeds the data in this standalone HTML. It uses only Python’s standard library. The source package includes the template, a JSON Schema and a focused verification script.</p><p>JSON was chosen over YAML to avoid parser dependencies and implicit typing surprises. Capability, evidence, profile and empirical-test status are separate fields. Filters do not treat a workaround as direct semantic support.</p><h3>{{SOURCE_COUNT}} primary sources</h3><p>Numbered references in cells link directly to the specification or maintainer documentation. Related documentation accompanying an “Unverified” cell supplies context; it is not evidence of a negative claim.</p></div>
+  <div class="method-content"><h3>Maintaining this report</h3><p>The data are YAML files in <code>formats/</code>: one file of features per category, plus sources, cases and fixtures. Run <code>python3 tools/build.py</code>: it validates every file against its schema, checks identifiers, source references and the links from the Principles rules, and rebuilds this page. Capability, evidence, subset and empirical-test status are separate fields. A cell counts as tested only when a fixture that covers it has a recorded result for that format. Filters do not treat a workaround as direct semantic support. Features marked <b>rule-linked</b> bear on a rule of the Transcription Principles; the rule IDs are shown under the feature name.</p><h3>{{SOURCE_COUNT}} primary sources</h3><p>Numbered references in cells link directly to the specification or maintainer documentation. Related documentation accompanying an “Unverified” cell supplies context; it is not evidence of a negative claim.</p></div>
   <table class="sources"><thead><tr><th>Ref.</th><th>Document</th><th>Accessed</th></tr></thead><tbody>{{SOURCES}}</tbody></table>
  </section>
  </main>
  <footer class="foot"><span>Music encoding field guide; {{FEATURE_COUNT}} topics; {{ASSESSMENT_COUNT}} assessments</span><span>Self-contained HTML; No analytics, libraries or network requests required</span></footer>
 </div>
-<script type="application/json" id="comparison-data">{{DATA}}</script>
+<script type="application/json" id="formats-data">{{DATA}}</script>
 <script>
 'use strict';
-const DATA=JSON.parse(document.getElementById('comparison-data').textContent);
+const DATA=JSON.parse(document.getElementById('formats-data').textContent);
 const $=id=>document.getElementById(id);
 const ALL_FORMATS=DATA.formats.map(f=>f.id);
 const STATUS_ORDER=['direct','qualified','extension','workaround','unknown'];
@@ -618,7 +620,7 @@ const records=new Map(DATA.features.map((f,i)=>[f.id,{feature:f,index:i,node:$('
 const normalize=x=>x.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 function matches(f,s){
  if(s.category&&f.category!==s.category)return false;
- const body=[f.feature,f.question,f.category,...f.tags,...Object.values(f.cells).flatMap(c=>[c.summary,c.mechanism,c.caveat,c.workaround,c.profile])].join(' ');
+ const body=[f.feature,f.question,f.category,...f.tags,...Object.values(f.cells).flatMap(c=>[c.summary,c.mechanism,c.caveat,c.workaround,c.subset])].join(' ');
  if(!normalize(s.q).trim().split(/\s+/).filter(Boolean).every(w=>normalize(body).includes(w)))return false;
  const targets=s.matchFormat?[s.matchFormat]:s.visible;
  return targets.some(k=>(!s.status||f.cells[k].status===s.status)&&(!s.evidence||f.cells[k].evidence===s.evidence));
@@ -655,12 +657,12 @@ for(const k of ['category','status','evidence','match-format','sort'])$(k).addEv
 $('query').addEventListener('input',apply);
 document.querySelectorAll('.column-options input').forEach(box=>box.addEventListener('change',()=>{let selected=[...document.querySelectorAll('.column-options input:checked')].map(e=>e.value);if(!selected.length){box.checked=true;$('column-message').textContent='Keep at least one format visible.';return}state.visible=selected;$('column-message').textContent='';apply()}));
 $('reset').addEventListener('click',reset);
-document.querySelectorAll('[data-quick]').forEach(b=>b.addEventListener('click',()=>{reset();if(b.dataset.quick==='editorial')$('category').value='Sources & editorial work';if(b.dataset.quick==='bars')$('query').value='independent bars';if(b.dataset.quick==='voices')$('category').value='Voices & staves';if(b.dataset.quick==='unknown')$('status').value='unknown';apply()}));
+document.querySelectorAll('[data-quick]').forEach(b=>b.addEventListener('click',()=>{reset();if(b.dataset.quick==='editorial')$('category').value='Sources & editorial work';if(b.dataset.quick==='bars')$('query').value='independent bars';if(b.dataset.quick==='voices')$('category').value='Voices & staves';if(b.dataset.quick==='unknown')$('status').value='unknown';if(b.dataset.quick==='rules')$('query').value='rule-linked';apply()}));
 $('expand').addEventListener('click',()=>{for(const r of records.values())if(!r.node.hidden)r.node.querySelectorAll('td:not([hidden]) details').forEach(e=>e.open=true)});
 $('collapse').addEventListener('click',()=>document.querySelectorAll('.cell-detail').forEach(e=>e.open=false));
 function download(name,mime,text){const u=URL.createObjectURL(new Blob([text],{type:mime}));const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
-$('download-json').addEventListener('click',()=>download('comparison.json','application/json;charset=utf-8',JSON.stringify(DATA,null,2)+'\n'));
-function csvText(){const cols=['Feature ID','Category','Feature','Format','Capability','Summary','Mechanism','Condition','Workaround','Evidence','Profile','Empirically tested','Sources'];const values=[cols];for(const f of [...DATA.features].filter(f=>matches(f,state)).sort((a,b)=>compareFeatures(a,b,state)))for(const k of state.visible){const c=f.cells[k];values.push([f.id,f.category,f.feature,DATA.formats.find(x=>x.id===k).short,DATA.statuses[c.status].label,c.summary,c.mechanism,c.caveat,c.workaround,c.evidence,c.profile,String(c.tested),c.sources.map(s=>DATA.sources[s].url).join(' | ')])}return '\ufeff'+values.map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n')+'\r\n'}
+$('download-json').addEventListener('click',()=>download('formats.json','application/json;charset=utf-8',JSON.stringify(DATA,null,2)+'\n'));
+function csvText(){const cols=['Feature ID','Category','Feature','Format','Capability','Summary','Mechanism','Condition','Workaround','Evidence','Subset','Empirically tested','Linked rules','Sources'];const values=[cols];for(const f of [...DATA.features].filter(f=>matches(f,state)).sort((a,b)=>compareFeatures(a,b,state)))for(const k of state.visible){const c=f.cells[k];values.push([f.id,f.category,f.feature,DATA.formats.find(x=>x.id===k).short,DATA.statuses[c.status].label,c.summary,c.mechanism,c.caveat,c.workaround,c.evidence,c.subset,String(c.tested),f.rules.join(' '),c.sources.map(s=>DATA.sources[s].url).join(' | ')])}return '\ufeff'+values.map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n')+'\r\n'}
 $('download-csv').addEventListener('click',()=>download('music-encoding-filtered.csv','text/csv;charset=utf-8',csvText()));
 $('print').addEventListener('click',()=>window.print());
 let openBeforePrint=[];

@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:scores-of-scores:schema:principles-registry:1",
+  "$id": "urn:scores-of-scores:schema:principles-registry:2",
   "title": "Transcription Principles: core registry",
-  "description": "The adoptable core. Rules are identified as <domain>.<slug>; IDs are permanent. Strengths and priorities are not set here: they belong to a profile. Cross-checks (domains and themes exist, relation targets exist, aliases unique) are done by tools/build.py.",
+  "description": "The adoptable core. Rules are identified as <domain>.<slug>; IDs are permanent. Strengths and priorities are not set here: they belong to a profile. Cross-checks (domains and themes exist, relation targets exist, aliases unique, format features exist) are done by tools/build.py.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -99,7 +99,7 @@
     "mark_categories": {
       "type": "object",
       "minProperties": 1,
-      "description": "Categories of printed mark that are classed by tier rather than transcribed by default. A profile may reclassify them (scope.marks).",
+      "description": "Categories of printed mark whose treatment depends on the encoding format. The treatment is derived from format_feature (or set by default_treatment when there is none). A profile may reclassify a category (scope.marks).",
       "propertyNames": {
         "pattern": "^[a-z]+(-[a-z]+)*$"
       },
@@ -108,8 +108,7 @@
         "additionalProperties": false,
         "required": [
           "title",
-          "description",
-          "default_treatment"
+          "description"
         ],
         "properties": {
           "title": {
@@ -123,8 +122,25 @@
           },
           "rationale": {
             "type": "string"
+          },
+          "format_feature": {
+            "type": "string",
+            "pattern": "^fmt\\.[a-z0-9]+(-[a-z0-9]+)*$",
+            "description": "Formats-data feature whose status in the profile's format determines the treatment of this category."
           }
-        }
+        },
+        "anyOf": [
+          {
+            "required": [
+              "format_feature"
+            ]
+          },
+          {
+            "required": [
+              "default_treatment"
+            ]
+          }
+        ]
       }
     },
     "treatments": {
@@ -279,6 +295,15 @@
             "pattern": "^[a-z]+\\.[a-z0-9]+(-[a-z0-9]+)*$"
           },
           "uniqueItems": true
+        },
+        "format_features": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^fmt\\.[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "description": "Formats-data features that bear on what this rule can achieve in a given format."
         }
       },
       "allOf": [

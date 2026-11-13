@@ -1,0 +1,667 @@
+# Primary sources: specifications, maintainer documentation, official handbooks.
+# Cells cite these by ID. Every entry records when it was accessed.
+krn-basic:
+  title: 'Humdrum Guide, chapter 2: Representing Music Using **kern'
+  url: https://www.humdrum.org/guide/ch02/
+  accessed: '2026-11-06'
+  type: primary
+krn-cents:
+  title: 'KRN: Humdrum Representation for Pitch Cents'
+  url: https://www.humdrum.org/Humdrum/representations/cents.rep.html
+  accessed: '2026-11-06'
+  type: primary
+krn-core:
+  title: Humdrum **kern representation
+  url: https://www.humdrum.org/Humdrum/representations/kern.rep.html
+  accessed: '2026-11-06'
+  type: primary
+krn-dynamics:
+  title: Humdrum — Chapter 28
+  url: https://www.humdrum.org/guide/ch28/
+  accessed: '2026-11-06'
+  type: primary
+krn-editorial:
+  title: 'VHV: editorial accidentals'
+  url: https://doc.verovio.humdrum.org/graphic/pitch/
+  accessed: '2026-11-06'
+  type: primary
+krn-fb:
+  title: 'VHV: figured bass'
+  url: https://doc.verovio.humdrum.org/humdrum/figured_bass/
+  accessed: '2026-11-06'
+  type: primary
+krn-freq:
+  title: 'KRN: Humdrum Representation for Frequency'
+  url: https://www.humdrum.org/Humdrum/representations/freq.rep.html
+  accessed: '2026-11-06'
+  type: primary
+krn-fret:
+  title: Humdrum — Chapter 18
+  url: https://www.humdrum.org/guide/ch18/
+  accessed: '2026-11-06'
+  type: primary
+krn-guide:
+  title: Humdrum Toolkit User Guide
+  url: https://www.humdrum.org/guide/
+  accessed: '2026-11-06'
+  type: primary
+krn-harm:
+  title: Humdrum — Humdrum Representation for Functional Harmony
+  url: https://www.humdrum.org/Humdrum/representations/harm.rep.html
+  accessed: '2026-11-06'
+  type: primary
+krn-lyrics:
+  title: Humdrum — Chapter 27
+  url: https://www.humdrum.org/guide/ch27/
+  accessed: '2026-11-06'
+  type: primary
+krn-mens:
+  title: 'VHV: **mens notation'
+  url: https://doc.verovio.humdrum.org/humdrum/mens/
+  accessed: '2026-11-06'
+  type: primary
+krn-midi:
+  title: 'Humdrum: MIDI output tools'
+  url: https://www.humdrum.org/guide/ch07/
+  accessed: '2026-11-06'
+  type: primary
+krn-notation:
+  title: 'Humdrum Guide, chapter 6: Representing Music Using **kern II'
+  url: https://www.humdrum.org/guide/ch06/
+  accessed: '2026-11-06'
+  type: primary
+krn-percussion:
+  title: 'VHV: percussion'
+  url: https://doc.verovio.humdrum.org/humdrum/percussion/
+  accessed: '2026-11-06'
+  type: primary
+krn-poly:
+  title: 'VHV meter filter: polymeter example'
+  url: https://doc.verovio.humdrum.org/filter/meter/
+  accessed: '2026-11-06'
+  type: primary
+krn-refs:
+  title: Humdrum — Reference Records
+  url: https://www.humdrum.org/reference-records/
+  accessed: '2026-11-06'
+  type: primary
+krn-repeats:
+  title: Humdrum — Chapter 20
+  url: https://www.humdrum.org/guide/ch20/
+  accessed: '2026-11-06'
+  type: primary
+krn-rhythm:
+  title: Humdrum — Chapter 23
+  url: https://www.humdrum.org/guide/ch23/
+  accessed: '2026-11-06'
+  type: primary
+krn-sound:
+  title: 'Humdrum: Sound and Spectra'
+  url: https://www.humdrum.org/guide/ch36/
+  accessed: '2026-11-06'
+  type: primary
+krn-start:
+  title: 'VHV: encoding, accidentals and barlines'
+  url: https://doc.verovio.humdrum.org/humdrum/getting_started/
+  accessed: '2026-11-06'
+  type: primary
+krn-syntax:
+  title: 'Humdrum Guide, chapter 5: The Humdrum Syntax'
+  url: https://www.humdrum.org/guide/ch05/
+  accessed: '2026-11-06'
+  type: primary
+krn-system:
+  title: 'VHV: system decorating'
+  url: https://doc.verovio.humdrum.org/humdrum/system/
+  accessed: '2026-11-06'
+  type: primary
+krn-timesig:
+  title: 'VHV: time signatures'
+  url: https://doc.verovio.humdrum.org/humdrum/timesig/
+  accessed: '2026-11-06'
+  type: primary
+krn-transpose:
+  title: Humdrum — Transposing parts
+  url: https://doc.verovio.humdrum.org/humdrum/transposing/
+  accessed: '2026-11-06'
+  type: primary
+krn-tuplets:
+  title: 'VHV: tuplet styling'
+  url: https://doc.verovio.humdrum.org/humdrum/tuplets/
+  accessed: '2026-11-06'
+  type: primary
+krn-validation:
+  title: 'Humdrum: Trouble-Shooting'
+  url: https://www.humdrum.org/guide/ch39/
+  accessed: '2026-11-06'
+  type: primary
+mei-accid:
+  title: MEI 5.1 — <accid>
+  url: https://music-encoding.org/guidelines/v5/elements/accid.html
+  accessed: '2026-11-06'
+  type: primary
+mei-analysis:
+  title: MEI 5.1 — 10 Analysis Markup and Harmonies
+  url: https://music-encoding.org/guidelines/v5/content/analysisharm.html
+  accessed: '2026-11-06'
+  type: primary
+mei-annot:
+  title: MEI 5.1 — <annot>
+  url: https://music-encoding.org/guidelines/v5/elements/annot.html
+  accessed: '2026-11-06'
+  type: primary
+mei-app:
+  title: MEI 5.1 — <app>
+  url: https://music-encoding.org/guidelines/v5/elements/app.html
+  accessed: '2026-11-06'
+  type: primary
+mei-bar:
+  title: 'MEI 5.1: barLine'
+  url: https://music-encoding.org/guidelines/v5/elements/barLine.html
+  accessed: '2026-11-06'
+  type: primary
+mei-beamSpan:
+  title: 'MEI: <beamSpan>'
+  url: https://music-encoding.org/guidelines/v5/elements/beamSpan.html
+  accessed: '2026-11-06'
+  type: primary
+mei-choice:
+  title: MEI 5.1 — <choice>
+  url: https://music-encoding.org/guidelines/v5/elements/choice.html
+  accessed: '2026-11-06'
+  type: primary
+mei-chord:
+  title: MEI 5.1 — <chord>
+  url: https://music-encoding.org/guidelines/v5/elements/chord.html
+  accessed: '2026-11-06'
+  type: primary
+mei-cmn:
+  title: 'MEI 5.1: Common Music Notation'
+  url: https://music-encoding.org/guidelines/v5/content/cmn.html
+  accessed: '2026-11-06'
+  type: primary
+mei-dynam:
+  title: 'MEI: <dynam>'
+  url: https://music-encoding.org/guidelines/v5/elements/dynam.html
+  accessed: '2026-11-06'
+  type: primary
+mei-edit:
+  title: 'MEI 5.1: Scholarly Editing'
+  url: https://music-encoding.org/guidelines/v5/content/scholarlyediting.html
+  accessed: '2026-11-06'
+  type: primary
+mei-facsimile:
+  title: 'MEI 5.1: Facsimiles and Recordings'
+  url: https://music-encoding.org/guidelines/v5/content/facsimilesrecordings.html
+  accessed: '2026-11-06'
+  type: primary
+mei-integration:
+  title: 'MEI 5.1: Integration with Other Standards'
+  url: https://music-encoding.org/guidelines/v5/content/integration.html
+  accessed: '2026-11-06'
+  type: primary
+mei-intro:
+  title: MEI 5.1 — 1 Introduction to MEI
+  url: https://music-encoding.org/guidelines/v5/content/introduction.html
+  accessed: '2026-11-06'
+  type: primary
+mei-links:
+  title: MEI 5.1 — 13 Linking Data
+  url: https://music-encoding.org/guidelines/v5/content/linkingdata.html
+  accessed: '2026-11-06'
+  type: primary
+mei-lyrics:
+  title: MEI 5.1 — 8 Lyrics and Performance Directions
+  url: https://music-encoding.org/guidelines/v5/content/lyricsperfdir.html
+  accessed: '2026-11-06'
+  type: primary
+mei-mensural:
+  title: 'MEI 5.1 — 5 Repertoire: Mensural Notation'
+  url: https://music-encoding.org/guidelines/v5/content/mensural.html
+  accessed: '2026-11-06'
+  type: primary
+mei-metadata:
+  title: MEI 5.1 — 3 Metadata in MEI
+  url: https://music-encoding.org/guidelines/v5/content/metadata.html
+  accessed: '2026-11-06'
+  type: primary
+mei-metcon:
+  title: 'MEI 5.1: metrical conformance'
+  url: https://music-encoding.org/guidelines/v5/attribute-classes/att.meterConformance.bar.html
+  accessed: '2026-11-06'
+  type: primary
+mei-neumes:
+  title: 'MEI 5.1 — 6 Repertoire: Neume Notation'
+  url: https://music-encoding.org/guidelines/v5/content/neumes.html
+  accessed: '2026-11-06'
+  type: primary
+mei-note:
+  title: 'MEI 5.1: note'
+  url: https://music-encoding.org/guidelines/v5/elements/note.html
+  accessed: '2026-11-06'
+  type: primary
+mei-phrase:
+  title: 'MEI: <phrase>'
+  url: https://music-encoding.org/guidelines/v5/elements/phrase.html
+  accessed: '2026-11-06'
+  type: primary
+mei-schemas:
+  title: MEI 5.1 schemas and profiles
+  url: https://music-encoding.org/resources/schemas.html
+  accessed: '2026-11-06'
+  type: primary
+mei-shared:
+  title: 'MEI 5.1: Shared Concepts'
+  url: https://music-encoding.org/guidelines/v5/content/shared.html
+  accessed: '2026-11-06'
+  type: primary
+mei-staffDef:
+  title: MEI 5.1 — <staffDef>
+  url: https://music-encoding.org/guidelines/v5/elements/staffDef.html
+  accessed: '2026-11-06'
+  type: primary
+mei-supplied:
+  title: MEI 5.1 — <supplied>
+  url: https://music-encoding.org/guidelines/v5/elements/supplied.html
+  accessed: '2026-11-06'
+  type: primary
+mei-symbolDef:
+  title: MEI 5.1 — <symbolDef>
+  url: https://music-encoding.org/guidelines/v5/elements/symbolDef.html
+  accessed: '2026-11-06'
+  type: primary
+mei-tab:
+  title: 'MEI 5.1 — 7 Repertoire: String Tablature'
+  url: https://music-encoding.org/guidelines/v5/content/tablature.html
+  accessed: '2026-11-06'
+  type: primary
+mei-tupletSpan:
+  title: MEI 5.1 — <tupletSpan>
+  url: https://music-encoding.org/guidelines/v5/elements/tupletSpan.html
+  accessed: '2026-11-06'
+  type: primary
+ms-beams:
+  title: MuseScore Studio Handbook — Beams
+  url: https://handbook.musescore.org/notation/rhythm-meter-and-measures/beams.md
+  accessed: '2026-11-06'
+  type: primary
+ms-chords:
+  title: 'MS: Chord symbols'
+  url: https://handbook.musescore.org/text/chord-symbols.md
+  accessed: '2026-11-06'
+  type: primary
+ms-cli:
+  title: 'MuseScore Studio: command-line usage'
+  url: https://handbook.musescore.org/appendix/command-line-usage.md
+  accessed: '2026-11-06'
+  type: primary
+ms-cross:
+  title: MuseScore Studio Handbook — Cross-staff notation
+  url: https://handbook.musescore.org/idiomatic-notation/keyboard/cross-staff-notation.md
+  accessed: '2026-11-06'
+  type: primary
+ms-dynamics:
+  title: MuseScore Studio Handbook — Dynamics and hairpins
+  url: https://handbook.musescore.org/notation/expressive-markings/dynamics-and-hairpins.md
+  accessed: '2026-11-06'
+  type: primary
+ms-export:
+  title: MuseScore Studio Handbook — File export
+  url: https://handbook.musescore.org/file-management/file-export.md
+  accessed: '2026-11-06'
+  type: primary
+ms-figbass:
+  title: MuseScore Studio Handbook — Figured bass
+  url: https://handbook.musescore.org/text/figured-bass.md
+  accessed: '2026-11-06'
+  type: primary
+ms-fonts:
+  title: MuseScore Studio Handbook — Music fonts
+  url: https://handbook.musescore.org/appendix/music-fonts.md
+  accessed: '2026-11-06'
+  type: primary
+ms-grace:
+  title: MuseScore Studio Handbook — Grace notes
+  url: https://handbook.musescore.org/notation/expressive-markings/grace-notes.md
+  accessed: '2026-11-06'
+  type: primary
+ms-hidden:
+  title: MuseScore Studio Handbook — Showing staves only where needed
+  url: https://handbook.musescore.org/notation/instruments-staves-and-systems/showing-staves-only-where-needed.md
+  accessed: '2026-11-06'
+  type: primary
+ms-irregular:
+  title: 'MuseScore Studio: pickup and non-metered measures'
+  url: https://handbook.musescore.org/notation/rhythm-meter-and-measures/pickup-and-non-metered-measures.md
+  accessed: '2026-11-06'
+  type: primary
+ms-keys:
+  title: MuseScore Studio Handbook — Key signatures
+  url: https://handbook.musescore.org/notation/pitch/key-signatures.md
+  accessed: '2026-11-06'
+  type: primary
+ms-layout:
+  title: MuseScore Studio Handbook — Systems and horizontal spacing
+  url: https://handbook.musescore.org/formatting/systems-and-horizontal-spacing.md
+  accessed: '2026-11-06'
+  type: primary
+ms-lyrics:
+  title: MuseScore Studio Handbook — Lyrics
+  url: https://handbook.musescore.org/text/lyrics.md
+  accessed: '2026-11-06'
+  type: primary
+ms-mensural:
+  title: 'MuseScore Studio: mensural notation'
+  url: https://handbook.musescore.org/alternative-notation/mensural-notation-and-mensurstrich.md
+  accessed: '2026-11-06'
+  type: primary
+ms-mixer:
+  title: MuseScore Studio Handbook — Mixer
+  url: https://handbook.musescore.org/sound-and-playback/mixer.md
+  accessed: '2026-11-06'
+  type: primary
+ms-noteheads:
+  title: MuseScore Studio Handbook — Noteheads
+  url: https://handbook.musescore.org/notation/pitch/noteheads.md
+  accessed: '2026-11-06'
+  type: primary
+ms-ornaments:
+  title: 'MS: Ornaments'
+  url: https://handbook.musescore.org/notation/expressive-markings/ornaments.md
+  accessed: '2026-11-06'
+  type: primary
+ms-parts:
+  title: MuseScore Studio Handbook — Parts
+  url: https://handbook.musescore.org/basics/parts.md
+  accessed: '2026-11-06'
+  type: primary
+ms-pedal:
+  title: 'MS: Pedal'
+  url: https://handbook.musescore.org/idiomatic-notation/keyboard/pedal.md
+  accessed: '2026-11-06'
+  type: primary
+ms-props:
+  title: MuseScore Studio Handbook — Project properties
+  url: https://handbook.musescore.org/file-management/project-properties.md
+  accessed: '2026-11-06'
+  type: primary
+ms-release:
+  title: MuseScore Studio 4.6 release announcement
+  url: https://musescore.org/en/4.6
+  accessed: '2026-11-06'
+  type: primary
+ms-save:
+  title: 'MuseScore Studio: opening and saving'
+  url: https://handbook.musescore.org/file-management/opening-and-saving-scores.md
+  accessed: '2026-11-06'
+  type: primary
+ms-symbols:
+  title: MuseScore Studio Handbook — Other symbols
+  url: https://handbook.musescore.org/notation/expressive-markings/other-symbols.md
+  accessed: '2026-11-06'
+  type: primary
+ms-tab:
+  title: MuseScore Studio Handbook — Creating a tablature staff
+  url: https://handbook.musescore.org/idiomatic-notation/guitar/creating-a-tablature-staff.md
+  accessed: '2026-11-06'
+  type: primary
+ms-timesig:
+  title: 'MuseScore Studio: time signatures'
+  url: https://handbook.musescore.org/notation/rhythm-meter-and-measures/time-signatures.md
+  accessed: '2026-11-06'
+  type: primary
+ms-transpose:
+  title: 'MS: Transposition'
+  url: https://handbook.musescore.org/notation/pitch/transposition.md
+  accessed: '2026-11-06'
+  type: primary
+ms-tuning:
+  title: MuseScore Studio Handbook — Alternate string tunings
+  url: https://handbook.musescore.org/idiomatic-notation/guitar/alternate-string-tunings.md
+  accessed: '2026-11-06'
+  type: primary
+ms-tuplets:
+  title: 'MuseScore Studio: tuplets'
+  url: https://handbook.musescore.org/notation/rhythm-meter-and-measures/tuplets.md
+  accessed: '2026-11-06'
+  type: primary
+ms-version:
+  title: MuseScore version and native file-version table
+  url: https://musescore.org/sr/handbook/developers-handbook/references/version-information
+  accessed: '2026-11-06'
+  type: primary
+ms-voices:
+  title: 'MuseScore Studio: multiple voices'
+  url: https://handbook.musescore.org/basics/working-with-multiple-voices.md
+  accessed: '2026-11-06'
+  type: primary
+ms-xml:
+  title: MuseScore Studio Handbook — Working with MusicXML files
+  url: https://handbook.musescore.org/file-management/working-with-musicxml-files.md
+  accessed: '2026-11-06'
+  type: primary
+mx-accidental:
+  title: 'MusicXML 4.0: accidental'
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/accidental/
+  accessed: '2026-11-06'
+  type: primary
+mx-alter:
+  title: MusicXML 4.0 — The <alter> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/alter/
+  accessed: '2026-11-06'
+  type: primary
+mx-backup:
+  title: MusicXML 4.0 — The <backup> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/backup/
+  accessed: '2026-11-06'
+  type: primary
+mx-basics:
+  title: MusicXML notation and sound
+  url: https://www.w3.org/2021/06/musicxml40/tutorial/notation-basics/
+  accessed: '2026-11-06'
+  type: primary
+mx-beam:
+  title: MusicXML 4.0 — The <beam> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/beam/
+  accessed: '2026-11-06'
+  type: primary
+mx-bookmark:
+  title: MusicXML 4.0 — The <bookmark> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/bookmark/
+  accessed: '2026-11-06'
+  type: primary
+mx-chord:
+  title: MusicXML 4.0 — The <chord> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/chord/
+  accessed: '2026-11-06'
+  type: primary
+mx-defaults:
+  title: MusicXML 4.0 — The <defaults> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/defaults/
+  accessed: '2026-11-06'
+  type: primary
+mx-figured-bass:
+  title: MusicXML 4.0 — The <figured-bass> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/figured-bass/
+  accessed: '2026-11-06'
+  type: primary
+mx-footnote:
+  title: 'MusicXML 4.0: footnote'
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/footnote/
+  accessed: '2026-11-06'
+  type: primary
+mx-frame:
+  title: 'MX: The <frame> element'
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/frame/
+  accessed: '2026-11-06'
+  type: primary
+mx-grace:
+  title: MusicXML 4.0 — The <grace> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/grace/
+  accessed: '2026-11-06'
+  type: primary
+mx-grouping:
+  title: MusicXML 4.0 — The <grouping> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/grouping/
+  accessed: '2026-11-06'
+  type: primary
+mx-harmony:
+  title: MusicXML 4.0 — The <harmony> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/harmony/
+  accessed: '2026-11-06'
+  type: primary
+mx-identification:
+  title: MusicXML 4.0 — The <identification> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/identification/
+  accessed: '2026-11-06'
+  type: primary
+mx-key:
+  title: 'MX: The <key> element'
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/key/
+  accessed: '2026-11-06'
+  type: primary
+mx-level:
+  title: 'MusicXML 4.0: level'
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/level/
+  accessed: '2026-11-06'
+  type: primary
+mx-link:
+  title: MusicXML 4.0 — The <link> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/link/
+  accessed: '2026-11-06'
+  type: primary
+mx-lyric:
+  title: MusicXML 4.0 — The <lyric> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/lyric/
+  accessed: '2026-11-06'
+  type: primary
+mx-measure:
+  title: 'MusicXML 4.0: partwise measure'
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/measure-partwise/
+  accessed: '2026-11-06'
+  type: primary
+mx-mxl:
+  title: 'MusicXML 4.0: compressed MXL files'
+  url: https://www.w3.org/2021/06/musicxml40/tutorial/compressed-mxl-files/
+  accessed: '2026-11-06'
+  type: primary
+mx-note:
+  title: 'MusicXML 4.0: note'
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/note/
+  accessed: '2026-11-06'
+  type: primary
+mx-other-notation:
+  title: MusicXML 4.0 — The <other-notation> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/other-notation/
+  accessed: '2026-11-06'
+  type: primary
+mx-play:
+  title: MusicXML 4.0 — The <play> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/play/
+  accessed: '2026-11-06'
+  type: primary
+mx-print:
+  title: MusicXML 4.0 — The <print> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/print/
+  accessed: '2026-11-06'
+  type: primary
+mx-schema:
+  title: MusicXML 4.0 XSD
+  url: https://www.w3.org/2021/06/musicxml40/listings/musicxml.xsd/
+  accessed: '2026-11-06'
+  type: primary
+mx-scordatura:
+  title: MusicXML 4.0 — The <scordatura> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/scordatura/
+  accessed: '2026-11-06'
+  type: primary
+mx-sound:
+  title: MusicXML 4.0 — The <sound> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/sound/
+  accessed: '2026-11-06'
+  type: primary
+mx-spec:
+  title: MusicXML 4.0 specification
+  url: https://www.w3.org/2021/06/musicxml40/
+  accessed: '2026-11-06'
+  type: primary
+mx-staff-details:
+  title: MusicXML 4.0 — The <staff-details> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/staff-details/
+  accessed: '2026-11-06'
+  type: primary
+mx-tied:
+  title: MusicXML 4.0 — The <tied> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tied/
+  accessed: '2026-11-06'
+  type: primary
+mx-time:
+  title: 'MusicXML 4.0: time'
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/time/
+  accessed: '2026-11-06'
+  type: primary
+mx-transpose:
+  title: MusicXML 4.0 — The <transpose> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/transpose/
+  accessed: '2026-11-06'
+  type: primary
+mx-tuplet:
+  title: MusicXML 4.0 — The <tuplet> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/tuplet/
+  accessed: '2026-11-06'
+  type: primary
+mx-unpitched:
+  title: MusicXML 4.0 — The <unpitched> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/unpitched/
+  accessed: '2026-11-06'
+  type: primary
+mx-voice:
+  title: MusicXML 4.0 — The <voice> element
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/voice/
+  accessed: '2026-11-06'
+  type: primary
+mx-fingering:
+  title: 'MusicXML 4.0: fingering element (example)'
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/fingering-element-notation/
+  accessed: '2026-11-11'
+  type: primary
+mx-stem:
+  title: 'MusicXML 4.0: the <stem> element'
+  url: https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/stem
+  accessed: '2026-11-11'
+  type: primary
+mei-fing:
+  title: 'MEI 5.1: model.fingeringLike (fing, fingGrp)'
+  url: https://music-encoding.org/guidelines/v5/model-classes/model.fingeringLike.html
+  accessed: '2026-11-11'
+  type: primary
+mei-stems:
+  title: 'MEI 5.1: att.stems'
+  url: https://music-encoding.org/guidelines/v5/attribute-classes/att.stems.html
+  accessed: '2026-11-11'
+  type: primary
+mei-metersign:
+  title: 'MEI 5.1: data.METERSIGN'
+  url: https://music-encoding.org/guidelines/v5/data-types/data.METERSIGN.html
+  accessed: '2026-11-11'
+  type: primary
+ms-fingering:
+  title: 'MuseScore Studio Handbook: Fingering'
+  url: https://handbook.musescore.org/text/fingering
+  accessed: '2026-11-11'
+  type: primary
+ms-stems:
+  title: 'MuseScore Studio Handbook: Stems and flags'
+  url: https://handbook.musescore.org/notation/rhythm-meter-and-measures/stems-and-flags
+  accessed: '2026-11-11'
+  type: primary
+krn-help:
+  title: Humdrum **kern help (kern_hlp.txt)
+  url: https://www.ccarh.org/publications/data/humdrum/vivaldi-op8/files/kern_hlp.txt
+  accessed: '2026-11-11'
+  type: primary
+krn-ccarh-format:
+  title: Humdrum file format (CCARH handout)
+  url: https://wiki.ccarh.org/images/d/dc/Humdrum_file_format.pdf
+  accessed: '2026-11-11'
+  type: primary

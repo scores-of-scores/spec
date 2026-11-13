@@ -1,0 +1,305 @@
+# Features in the category "Performance". IDs are fmt.<slug> and permanent. Status vocabulary: formats.yaml. Sources: sources.yaml.
+- id: fmt.performance-events
+  feature: Performed onset, duration and velocity
+  question: A notation file and a measured performance transcript answer different questions.
+  tags:
+  - performance
+  - onset
+  - velocity
+  - timing
+  - MIDI
+  importance: 3
+  cells:
+    krn:
+      status: extension
+      summary: Associated **MIDI data
+      mechanism: Humdrum can carry performance events alongside **kern; note-on/off data is a separate representation.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-midi
+      subset: 'Humdrum extension: associated **MIDI data'
+    musicxml:
+      status: direct
+      summary: Note performance attributes
+      mechanism: attack, release and dynamics can qualify the performance of a notated note.
+      caveat: Not every player consumes these fields.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-note
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Playback properties
+      mechanism: The project includes playback controls, but it is not a full performance-analysis interchange model.
+      caveat: Supported controls vary by sound engine.
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-noteheads
+      subset: ''
+    mei:
+      status: direct
+      summary: Gestural and real-time values
+      mechanism: MEI offers performed duration, real-time timestamps and velocity-related data alongside notation.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-integration
+      subset: ''
+- id: fmt.ornament-realization
+  feature: Ornament sign versus realised notes
+  question: One trill sign can admit several historically plausible performances.
+  tags:
+  - ornament
+  - trill
+  - realization
+  - performance
+  importance: 2
+  cells:
+    krn:
+      status: qualified
+      summary: Symbolic ornament codes
+      mechanism: '**kern encodes ornament signs; a realised performance needs extra events/data.'
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-notation
+      subset: ''
+    musicxml:
+      status: qualified
+      summary: Notation and playback layers
+      mechanism: Sound-oriented information can accompany notation, but a symbol does not specify a unique realisation.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-play
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Engine realisation
+      mechanism: Ornaments have application playback settings and behaviours.
+      caveat: Preserve an explicit realisation separately if exact notes are required.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-ornaments
+      subset: ''
+    mei:
+      status: qualified
+      summary: Keep interpretations distinct
+      mechanism: Notated material and an expanded/gestural reading can be recorded separately.
+      caveat: Consumer policy determines which representation is played.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mei-choice
+      - mei-integration
+      subset: ''
+- id: fmt.voice-dynamics
+  feature: Dynamics affecting one voice on a shared stave
+  question: The position of a dynamic does not reliably identify its playback scope.
+  tags:
+  - dynamics
+  - voices
+  - playback
+  - scope
+  importance: 3
+  cells:
+    krn:
+      status: extension
+      summary: Associated dynamics streams
+      mechanism: '**dyn / **dynam distinguish notated and interpreted dynamics.'
+      caveat: Specify how the stream associates with musical voices.
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-dynamics
+      subset: 'Humdrum extension: **dyn and **dynam spines'
+    musicxml:
+      status: qualified
+      summary: Direction voice assignment
+      mechanism: direction can include voice; scope and actual playback should be checked in the recipient.
+      caveat: A printed placement is not a voice selector.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-voice
+      subset: ''
+    musescore:
+      status: direct
+      summary: Voice assignment controls
+      mechanism: Dynamics can target a specific voice, all voices on a staff, or the instrument.
+      caveat: This capability belongs to later MuseScore 4 builds, not every 4.x release.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-dynamics
+      subset: ''
+    mei:
+      status: direct
+      summary: Layer/staff targeting
+      mechanism: dynam carries layer, staff and event/timestamp references.
+      caveat: Targeted encoding does not promise per-layer playback in every tool.
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-dynam
+      subset: ''
+- id: fmt.pedal-continuous
+  feature: Pedal notation versus continuous control
+  question: A Ped. line is not a sampled half-pedal trajectory.
+  tags:
+  - pedal
+  - half-pedal
+  - controller
+  - continuous
+  importance: 2
+  cells:
+    krn:
+      status: extension
+      summary: Performance stream for controllers
+      mechanism: Keep continuous/controller data in a suitable associated performance representation.
+      caveat: Core **kern alone is not that controller stream.
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-midi
+      subset: 'Humdrum extension: associated performance representation'
+    musicxml:
+      status: qualified
+      summary: Notation and sound controls
+      mechanism: Playback parameters are distinct from graphical directions.
+      caveat: Do not assume the format substitutes for arbitrary DAW automation.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-sound
+      subset: ''
+    musescore:
+      status: qualified
+      summary: Pedal objects and playback
+      mechanism: Pedal lines/symbols have engraving controls; playback depends on the instrument and engine.
+      caveat: Continuous half-pedal fidelity was not tested.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-pedal
+      subset: ''
+    mei:
+      status: qualified
+      summary: Notation plus performance data
+      mechanism: MEI can supplement the score with performance information.
+      caveat: Consumer support for continuous control must be established.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mei-integration
+      subset: ''
+- id: fmt.recording-alignment
+  feature: Align the score with an audio/video recording
+  question: A recording link alone does not identify the moment corresponding to a note.
+  tags:
+  - audio
+  - video
+  - alignment
+  - recording
+  - timestamp
+  importance: 3
+  cells:
+    krn:
+      status: extension
+      summary: Associated timing data
+      mechanism: Humdrum’s sound-analysis workflow can coexist with custom alignment streams.
+      caveat: Document the event-address and time-unit convention.
+      workaround: ''
+      evidence: inference
+      sources:
+      - krn-sound
+      subset: 'Project convention: associated timing data'
+    musicxml:
+      status: workaround
+      summary: External alignment model
+      mechanism: Use linked resources plus a separate mapping of score events to recording times.
+      caveat: Generic links are not a rich recording-alignment model.
+      workaround: ''
+      evidence: inference
+      sources:
+      - mx-link
+      subset: ''
+    musescore:
+      status: workaround
+      summary: External annotation workflow
+      mechanism: Exported audio/video is a rendering, not a general alignment of an independently recorded performance.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - ms-export
+      subset: ''
+    mei:
+      status: direct
+      summary: performance / recording / when
+      mechanism: Performance structures and temporal references support alignment with recordings.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mei-facsimile
+      subset: ''
+- id: fmt.sound-environment
+  feature: Virtual instruments, effects and mixer state
+  question: Preserve a production setup separately from portable score semantics.
+  tags:
+  - mixer
+  - VST
+  - soundfont
+  - MuseSounds
+  - effects
+  importance: 2
+  cells:
+    krn:
+      status: extension
+      summary: External synthesis workflow
+      mechanism: Humdrum can generate synthesis/performance data; a plugin rack is outside core **kern.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - krn-sound
+      subset: External synthesis workflow (outside the format)
+    musicxml:
+      status: qualified
+      summary: Portable playback parameters
+      mechanism: sound/play carry instrument and technique information, not a universal plugin-host project.
+      caveat: ''
+      workaround: ''
+      evidence: documented
+      sources:
+      - mx-play
+      subset: ''
+    musescore:
+      status: direct
+      summary: Application mixer and sounds
+      mechanism: The mixer selects SoundFonts, VST instruments or MuseSounds and supports effects.
+      caveat: Required sounds/plugins must be available in the target environment.
+      workaround: ''
+      evidence: documented
+      sources:
+      - ms-mixer
+      subset: ''
+    mei:
+      status: qualified
+      summary: Performance description
+      mechanism: MEI can describe performance data and recordings; it is not a standard VST host-session package.
+      caveat: ''
+      workaround: ''
+      evidence: inference
+      sources:
+      - mei-integration
+      subset: ''

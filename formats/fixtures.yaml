@@ -1,0 +1,153 @@
+# Test fixtures. Each names the features it exercises. A fixture with `paper: true` is a worked example in the paper and carries `positions` (the outcome under each profile).
+# `results` (per format: not_run, pass, fail, partial) is added when a fixture is run. A feature cell counts as tested only when a fixture covering it has a result for that format.
+- id: fx.editorial
+  title: Editorial sharp with a responsible editor
+  acceptance: Preserve pitch, editorial status, enclosure, attribution and source reading independently.
+  features:
+  - fmt.editorial-accidentals
+  - fmt.responsibility
+- id: fx.voices
+  title: Whole-note bass against four upper quarter notes
+  acceptance: Preserve both onsets and durations, one staff and two independent voices.
+  features:
+  - fmt.two-voices
+- id: fx.five-voices
+  title: Five concurrent lines on one staff
+  acceptance: Identify whether the target rejects, splits, merges or discards a voice.
+  features:
+  - fmt.voice-limit
+- id: fx.polymetre
+  title: 3/4 against 4/4 for 12 quarter notes
+  acceptance: Local boundaries remain 0/3/6/9/12 and 0/4/8/12 with the same quarter-note pulse.
+  features:
+  - fmt.independent-bars
+- id: fx.ratio-metre
+  title: 18/16 against 3/4 with common bar span
+  acceptance: Distinguish visual duration from performed ratio.
+  features:
+  - fmt.equal-span-polymetre
+- id: fx.tuplet
+  title: Nested tuplet crossing a barline
+  acceptance: Preserve durations, nesting and bracket endpoints separately.
+  features:
+  - fmt.tuplet-across-bars
+- id: fx.pitch
+  title: Transposing instrument with a courtesy microtonal accidental
+  acceptance: Check written spelling, sounding pitch, glyph and courtesy status.
+  features:
+  - fmt.microtones
+  - fmt.written-sounding
+- id: fx.cross-staff
+  title: Shared-stem chord split over two staves
+  acceptance: Check note ownership, displayed staff, stems and beams.
+  features:
+  - fmt.split-chord
+- id: fx.apparatus
+  title: Two witness readings, one supplied note and one illegible note
+  acceptance: Do not flatten alternatives into simultaneous events or turn a gap into a rest.
+  features:
+  - fmt.critical-apparatus
+  - fmt.gaps-damage
+- id: fx.facsimile
+  title: A note linked to a manuscript image region
+  acceptance: Preserve the image URI, region coordinates and durable note identity.
+  features:
+  - fmt.facsimile-zones
+- id: fx.performance
+  title: Voice-specific dynamics with pedal and grace notes
+  acceptance: Check target voice, controller behaviour and realised grace timing independently.
+  features:
+  - fmt.voice-dynamics
+  - fmt.grace-timing
+  - fmt.pedal-continuous
+- id: fx.parts
+  title: Linked parts with individual layout changes
+  acceptance: Compare native linkage, part inclusion, page breaks and full-score consistency.
+  features:
+  - fmt.linked-parts
+  - fmt.part-layout
+- id: fx.slur-ambiguity
+  title: A curve that may be a slur, a tie or a smudge
+  acceptance: The encoded object is the one the source convention fixes; where none is fixed, a slur between the
+    notes nearest the printed endpoints, with an observation naming the alternatives. The curve shape is not encoded.
+  features:
+  - fmt.phrase-slur-tie
+  - fmt.spanner-geometry
+  rules:
+  - read.ambiguous-marks
+  - read.preserve-distinctions
+  - declare.observations
+  - encode.defaults-not-overrides
+  paper: true
+  positions:
+    sos-2026-11: A tie if the curve joins adjacent notes of the same pitch, otherwise a slur on the notes nearest
+      its printed endpoints (`read.ambiguous-marks`). An observation names the alternative readings (`declare.observations`).
+      The default curve is used (`encode.defaults-not-overrides`).
+    openscore-2026-11: The same reading rule applies. The curve follows the MuseScore default (`encode.defaults-not-overrides`).
+- id: fx.beaming-6-8
+  title: 'Beaming in 6/8: composer-led or house style'
+  acceptance: An edition-wide habit is normalised and stated once. A grouping that departs from the default only
+    in one passage, or recurs with its material, is kept. If the two cannot be told apart, the printed grouping
+    is kept and an observation is recorded.
+  features:
+  - fmt.beam-geometry
+  rules:
+  - normalise.beam-grouping
+  - read.composer-led-grouping
+  - stance.doubt-means-preserve
+  paper: true
+  positions:
+    sos-2026-11: 'Edition-wide habit: normalised to the time-signature default and stated once (`normalise.beam-grouping`).
+      Composer-led grouping: kept (`read.composer-led-grouping`). Cannot tell: kept as printed, with an observation
+      (`stance.doubt-means-preserve`).'
+    openscore-2026-11: The same three outcomes. The default is the MuseScore time-signature default.
+- id: fx.stem-direction
+  title: 'Stem direction: default or override'
+  acceptance: Stem directions are automatic. No explicit direction is entered, so a later transposition or clef
+    change recomputes them.
+  features:
+  - fmt.stem-direction
+  rules:
+  - normalise.stem-placement
+  - encode.defaults-not-overrides
+  paper: true
+  positions:
+    sos-2026-11: 'Automatic (`normalise.stem-placement`): no / or \ signifier is entered in the KRN.'
+    openscore-2026-11: 'Automatic: the MuseScore stem direction stays on Auto (`normalise.stem-placement`).'
+- id: fx.bar-does-not-add-up
+  title: A bar that does not add up
+  acceptance: The clear-error test is applied. If it fails, the bar is kept as printed and an observation is recorded.
+    If it passes, the correction is made where the profile directs and recorded.
+  features:
+  - fmt.irregular-measures
+  - fmt.editorial-status
+  - fmt.annotations
+  rules:
+  - read.preserve-errors
+  - correct.error-test
+  - correct.in-place
+  - correct.layer
+  - correct.record
+  - declare.observations
+  paper: true
+  positions:
+    sos-2026-11: 'Test fails: kept as printed, with an observation. Test passes: kept as printed in the transcription
+      (`correct.in-place` is OFF) and the correction is recorded in the separate layer (`correct.layer`, `correct.record`).'
+    openscore-2026-11: 'Test fails: kept as printed, with an observation. Test passes: corrected in the transcription
+      and recorded (`correct.in-place`, `correct.record`).'
+- id: fx.fingering
+  title: Printed fingering
+  acceptance: The mark is either encoded or covered by the report statement for the unsupported category.
+  features:
+  - fmt.fingering
+  rules:
+  - read.transcribe-all-marks
+  paper: true
+  expect_treatment:
+    mark_category: fingering
+    sos-2026-11: unsupported
+    openscore-2026-11: transcribe
+  positions:
+    sos-2026-11: 'Unsupported: KRN has no fingering in its core vocabulary and this profile accepts no extension
+      for it. The category is left out and stated once in each report (`read.transcribe-all-marks`).'
+    openscore-2026-11: 'Transcribed: MuseScore expresses fingering directly (`read.transcribe-all-marks`).'

@@ -23,9 +23,12 @@ DOCS = [  # (file, section id, nav label, deepest heading level shown in the con
     ("start-here.md", "doc-start", "Start here", 2),
     ("principles-framework.md", "doc-framework", "Principles framework", 2),
     ("principles-rules.md", "doc-rules", "Rules table", 3),
+    ("format-support.md", "doc-formats", "Format support", 2),
     ("notes-for-transcribers.md", "doc-notes", "Notes for Transcribers", 2),
+    ("glossary.md", "doc-glossary", "Glossary", 1),
 ]
-DOWNLOADS = [("principles.json", "application/json"), ("principles.csv", "text/csv"), ("notes.json", "application/json")]
+DOWNLOADS = [("principles.json", "application/json"), ("principles.csv", "text/csv"), ("notes.json", "application/json"),
+             ("formats.json", "application/json"), ("formats.csv", "text/csv")]
 FILE_TO_SECTION = {f: s for f, s, _, _ in DOCS}
 STRENGTH = {"MUST": "must", "SHOULD": "should", "MAY": "may", "OFF": "off"}
 
@@ -45,12 +48,13 @@ def render(md_file, prefix):
     return body, md.toc_tokens
 
 
-def fix_links(body, ids):
+def fix_links(body, ids, feats=frozenset()):
     def href(m):
         target, frag = m.group(1), m.group(3)
         if target in FILE_TO_SECTION:
             return f'href="#{frag or FILE_TO_SECTION[target]}"'
         return m.group(0)
+    body = body.replace('href="../site/formats.html"', 'href="formats.html"')
     body = re.sub(r'href="([\w.-]+\.md)(#([^"]+))?"', href, body)
     body = re.sub(r'href="([\w.-]+\.md)#', 'href="#', body)
 
@@ -73,16 +77,17 @@ def fix_links(body, ids):
             depth_h += 1
         elif re.match(r"</h[1-6]>", t):
             depth_h = max(0, depth_h - 1)
-        if (t == "<code>" and i + 2 < len(toks) and toks[i + 1] in ids and toks[i + 2] == "</code>"
+        if (t == "<code>" and i + 2 < len(toks) and (toks[i + 1] in ids or toks[i + 1] in feats) and toks[i + 2] == "</code>"
                 and not depth_a and not depth_h and not (out and out[-1] == "</a>")):
-            out.append(f'<a class="ref" href="#{toks[i + 1]}"><code>{toks[i + 1]}</code></a>')
+            target = f"formats.html#feature-{toks[i + 1]}" if toks[i + 1] in feats else f"#{toks[i + 1]}"
+            out.append(f'<a class="ref" href="{target}"><code>{toks[i + 1]}</code></a>')
             i += 3
             continue
         out.append(t)
         i += 1
     body = "".join(out)
     # let IDs wrap only after a dot or hyphen
-    body = re.sub(r"<code>([^<]+)</code>", lambda m: "<code>" + re.sub(r"([.-])", r"\1<wbr>", m.group(1)) + "</code>" if m.group(1) in ids else m.group(0), body)
+    body = re.sub(r"<code>([^<]+)</code>", lambda m: "<code>" + re.sub(r"([.-])", r"\1<wbr>", m.group(1)) + "</code>" if m.group(1) in ids or m.group(1) in feats else m.group(0), body)
     body = re.sub(r"<td>(MUST|SHOULD|MAY|OFF)</td>", lambda m: f'<td><span class="st st-{STRENGTH[m.group(1)]}">{m.group(1)}</span></td>', body)
     return body.replace("<table>", '<div class="tw"><table>').replace("</table>", "</table></div>")
 
@@ -139,25 +144,29 @@ footer{font:.85rem var(--sans);color:var(--muted);border-top:1px solid var(--lin
 
 
 def main():
-    core = yaml.safe_load((ROOT / "principles" / "registry.yaml").read_text(encoding="utf-8"))
-    prof = yaml.safe_load((ROOT / "profiles" / "sos-2026-11.yaml").read_text(encoding="utf-8"))
+    core = yaml.safe_load((ROOT / "core" / "principles.yaml").read_text(encoding="utf-8"))
     notes = yaml.safe_load((ROOT / "notes" / "registry.yaml").read_text(encoding="utf-8"))
+    profiles = sorted(p.stem for p in (ROOT / "profiles").glob("*.yaml"))
+    feats = []
+    for f in (ROOT / "formats" / "features").glob("*.yaml"):
+        feats += [x["id"] for x in yaml.safe_load(f.read_text(encoding="utf-8"))]
     ids = {r["id"] for r in core["rules"]} | {n["id"] for n in notes["notes"]}
+    feats = set(feats)
     sections, tokens = [], []
     for f, sid, label, _ in DOCS:
         body, toks = render(f, sid.replace("doc-", ""))
         tokens.append(toks)
-        sections.append(f'<section id="{sid}">{fix_links(body, ids)}</section>')
+        sections.append(f'<section id="{sid}">{fix_links(body, ids, feats)}</section>')
     dl = " &middot; ".join(f'<a download="{n}" href="{data_uri(ROOT / "build" / n, m)}">{n}</a>' for n, m in DOWNLOADS)
     ver = core["principles_version"]
     page = f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Transcription Principles and Notes for Transcribers, version {ver} (draft)</title>
+<title>Transcription Principles and Notes for Transcribers, version {ver}</title>
 <meta name="description" content="Rules for an exact, citable digital transcription of a printed score, for editorial projects and others to build on.">
 <style>{CSS}</style></head><body>
 <header class="top"><p class="brand">Transcription Principles and Notes</p><div class="staff" aria-hidden="true"></div>
-<p class="meta">Scores of Scores &middot; version {ver} (draft) &middot; profile <code>{prof['profile']}</code></p>
+<p class="meta">Scores of Scores &middot; version {ver} &middot; profiles {', '.join('<code>' + x + '</code>' for x in profiles)} &middot; <a href="formats.html">Format reader</a></p>
 <p class="meta">Data: {dl}</p></header>
 <div class="layout"><nav class="toc" aria-label="Contents"><details open><summary>Contents</summary>{nav_html(tokens)}</details></nav>
 <main>{''.join(sections)}

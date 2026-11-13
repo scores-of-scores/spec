@@ -1,0 +1,128 @@
+# Worked comparisons of one situation across the four formats. Snippets are illustrative, not validated interchange files.
+- id: case-editorial
+  title: An editorial sharp with a responsible editor
+  subtitle: A displayed bracket is only the beginning.
+  rows:
+  - fmt.editorial-accidentals
+  - fmt.editorial-status
+  - fmt.responsibility
+  - fmt.critical-apparatus
+  introduction: Suppose a manuscript has an F, and an editor proposes F-sharp for performance. Preserve the proposed
+    pitch, the absence of the accidental in the source, who supplied it, and the reason. Do not confuse an editorial
+    sharp with a courtesy sharp.
+  notes:
+  - 'KRN: in a VHV profile, declare an RDF editorial-accidental signifier. Add a separate responsibility/comment
+    convention if that information must be queryable.'
+  - 'MusicXML: encode the altered pitch and an editorial accidental; level/footnote can explain the act. A witness-based
+    apparatus requires additional conventions or external data.'
+  - 'MuseScore: create the intended notation and visible editorial treatment. Preserve responsibility and evidence
+    in an apparatus instead of expecting the bracket to carry them.'
+  - 'MEI: retain the supplied accidental and attribution, and use choice or app when the original and alternative
+    reading must both remain available.'
+  sources:
+  - krn-editorial
+  - mx-accidental
+  - mei-supplied
+  snippets:
+  - format: KRN / VHV convention
+    code: '**kern
+
+      *clefG2
+
+      4f#i
+
+      *-
+
+      !!!RDF**kern: i = editorial accidental, bracket'
+    note: Small original example. The declaration gives i its meaning; responsibility is still absent.
+  - format: MusicXML note fragment
+    code: "<note>\n  <pitch><step>F</step><alter>1</alter><octave>4</octave></pitch>\n  <duration>1</duration>\n\
+      \  <type>quarter</type>\n  <accidental editorial=\"yes\" bracket=\"yes\">sharp</accidental>\n</note>"
+    note: 'Fragment only: assumes divisions=1 and a surrounding part/measure. It encodes editorial appearance but
+      not a full apparatus.'
+- id: case-voices
+  title: Two rhythms on one stave
+  subtitle: Voice identity is separate from chord membership and stem direction.
+  rows:
+  - fmt.two-voices
+  - fmt.voice-limit
+  - fmt.unequal-chord-durations
+  - fmt.cross-staff
+  introduction: Take one 4/4 bar with a whole-note bass and four quarter notes above it. The sustained bass and
+    moving line must retain independent durations and voice identity.
+  notes:
+  - 'KRN: split one spine into subspines. A dot in the sustained branch is a null token, not a rest or a repeated
+    attack.'
+  - 'MusicXML: encode one voice, move the cursor back four quarter-note units, then encode the other voice on the
+    same staff.'
+  - 'MuseScore: use separate voice slots, usually 1 and 2. Flipping a stem is insufficient.'
+  - 'MEI: use two layers in a staff. Independent durations belong to those layers rather than one uniform-duration
+    chord.'
+  sources:
+  - krn-syntax
+  - mx-backup
+  - ms-voices
+  - mei-cmn
+  snippets:
+  - format: KRN split-spine sketch
+    code: "**kern\n*clefG2\n*M4/4\n*^\n1c\t4g\n.\t4a\n.\t4b\n.\t4cc\n*v\t*v\n==\n*-"
+    note: Original sketch using literal tabs. VHV staff/voice rendering is a consumer convention; this example was
+      not run through a music renderer.
+  - format: MEI staff fragment
+    code: "<staff n=\"1\">\n  <layer n=\"1\">\n    <note pname=\"g\" oct=\"4\" dur=\"4\"/>\n    <note pname=\"a\"\
+      \ oct=\"4\" dur=\"4\"/>\n    <note pname=\"b\" oct=\"4\" dur=\"4\"/>\n    <note pname=\"c\" oct=\"5\" dur=\"\
+      4\"/>\n  </layer>\n  <layer n=\"2\">\n    <note pname=\"c\" oct=\"4\" dur=\"1\"/>\n  </layer>\n</staff>"
+    note: Fragment only. Supply the MEI namespace, score definition and enclosing measure/document.
+- id: case-bars
+  title: 3/4 against 4/4, at the same pulse
+  subtitle: Independent bar boundaries, not just different printed signatures.
+  rows:
+  - fmt.independent-bars
+  - fmt.equal-span-polymetre
+  - fmt.polytempo
+  - fmt.unmeasured
+  introduction: On a common quarter-note timeline, the 3/4 part has boundaries at 0, 3, 6, 9, 12; the 4/4 part at
+    0, 4, 8, 12. Their first common endpoint is 12. Contrast this with differently written metres whose entire bars
+    are stretched to the same duration.
+  timeline:
+    quarters:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    three:
+    - 0
+    - 3
+    - 6
+    - 9
+    - 12
+    four:
+    - 0
+    - 4
+    - 8
+    - 12
+  notes:
+  - 'KRN/VHV: use the union of boundary times, with invisible bar markers in the staff that does not actually start
+    a new bar. Count local measures independently.'
+  - 'MusicXML: partwise non-controlling measures are designed for non-aligned left boundaries. Test whether the
+    destination preserves them or forces a shared bar grid.'
+  - 'MuseScore: local signatures rescale to the global bar span. A common-grid workaround can produce the picture,
+    but it changes structural measures and may affect numbering, rests, repeats and export.'
+  - 'MEI: preserve non-controlling barlines in a suitable part-oriented or unmeasured organisation. Do not assume
+    that marking an ordinary shared measure as non-controlling automatically creates independent local bar containers.
+    On a measure, MEI control describes the right boundary; MusicXML non-controlling describes the left.'
+  sources:
+  - krn-poly
+  - mx-measure
+  - ms-timesig
+  - mei-bar
+  snippets: []

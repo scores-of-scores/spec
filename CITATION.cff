@@ -1,8 +1,9 @@
 cff-version: 1.2.0
-message: "If you use these Principles or Notes, please cite them as below."
-title: "Scores of Scores: Transcription Principles and Notes for Transcribers"
+message: "If you use these Principles, the format evidence or the Notes, please cite them as below."
+title: "Scores of Scores: Transcription Principles, Format Evidence and Notes for Transcribers"
 type: dataset
 version: "2026-11"
+license: CC-BY-4.0
 authors:
   - name: "Mark Gotham"
 #   - name: Others?

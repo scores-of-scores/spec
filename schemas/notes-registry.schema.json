@@ -55,7 +55,7 @@
         }
       }
     },
-    "not_yet_covered": {
+    "outside_this_version": {
       "type": "array",
       "items": {
         "type": "string"
